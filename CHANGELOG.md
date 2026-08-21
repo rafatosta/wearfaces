@@ -58,9 +58,14 @@ arquivo.
     mostradores ainda não vinculadas a um módulo Gradle.
 -   Generalizada a validação estática e oficial WFF para conferir todos os
     módulos de mostrador, em vez de somente o Aurora.
+-   Redesenhados os ponteiros de hora e minuto do **Flow** com corpo claro,
+    extremidade externa arredondada e afilamento em direção ao pivô, conforme o
+    mockup aprovado.
 
 ### Fixed
 
 -   Corrigida a construção da imagem Podman ao reutilizar o UID/GID 1000 já
     presente na base Temurin, com `HOME` gravável e referência completa ao
     registry oficial.
+-   Corrigido o avanço e retorno perceptível do ponteiro de segundos do
+    **Flow**, substituindo o impulso discreto por varredura contínua a 15 Hz.

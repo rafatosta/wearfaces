@@ -127,7 +127,7 @@ em hardware.
 | Data inferior | `PartText` | `[DAY]` e `[MONTH_S]` | dois tamanhos no círculo inferior |
 | Células laterais | `ComplicationSlot` | slots `200` e `201` | conteúdo escolhido pelo usuário |
 | Anéis | `PartDraw` | arco/anel decorativo, sem representar progresso | cores por `ColorConfiguration` |
-| Ponteiros | `AnalogClock` | PNGs originais para hora, minuto e segundos | segundos ocultos em `AMBIENT` |
+| Ponteiros | `AnalogClock` | PNGs originais para hora, minuto e segundos | segundos em varredura contínua a 15 Hz e ocultos em `AMBIENT` |
 
 - Relógio: `analógico`
 - Data: `EEE, d MMM` no topo e `d`/`MMM` no círculo inferior, respeitando a

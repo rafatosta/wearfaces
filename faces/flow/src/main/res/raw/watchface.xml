@@ -174,15 +174,15 @@
         </PartText>
 
         <AnalogClock x="0" y="0" width="450" height="450">
-            <HourHand resource="hour_hand" x="213" y="79" width="24" height="156" pivotX="0.5" pivotY="0.9359" tintColor="[CONFIGURATION.palette.2]">
+            <HourHand resource="hour_hand" x="213" y="79" width="24" height="156" pivotX="0.5" pivotY="0.9359">
                 <Variant mode="AMBIENT" target="alpha" value="180" />
             </HourHand>
-            <MinuteHand resource="minute_hand" x="216" y="39" width="18" height="196" pivotX="0.5" pivotY="0.9490" tintColor="[CONFIGURATION.palette.2]">
+            <MinuteHand resource="minute_hand" x="216" y="39" width="18" height="196" pivotX="0.5" pivotY="0.9490">
                 <Variant mode="AMBIENT" target="alpha" value="180" />
             </MinuteHand>
             <SecondHand resource="second_hand" x="222" y="29" width="6" height="230" pivotX="0.5" pivotY="0.8522" tintColor="[CONFIGURATION.palette.0]">
                 <Variant mode="AMBIENT" target="alpha" value="0" />
-                <Tick duration="0.2" strength="0.8" />
+                <Sweep frequency="15" />
             </SecondHand>
         </AnalogClock>
 
