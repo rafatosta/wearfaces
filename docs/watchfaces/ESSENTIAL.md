@@ -73,7 +73,7 @@ Canvas WFF: `450 × 450`; centro: `(225, 225)`.
 | ---: | --- | ---: | ---: | ---: | ---: | --- |
 | 1 | Fundo | 0 | 0 | 450 | 450 | preto AMOLED `#FF000000`, sem imagem ou efeito |
 | 2 | Marcadores analógicos | 0 | 0 | 450 | 450 | opção selecionada, próxima ao raio `205`, ausente no Digital |
-| 3 | Hora Digital | 35 | 135 | 380 | 105 | `hh:mm` com `mm` sobreposto em `x=238`; `82 px`, peso normal |
+| 3 | Hora Digital | 35 | 135 | 380 | 105 | `hh:mm` integralmente na Main Color; `82 px`, peso normal |
 | 4 | Data Digital | 100 | 250 | 250 | 34 | `%s | %02d | %s`, cinza, centralizada |
 | 5 | Bateria Digital | 150 | 347 | 150 | 38 | percentual simples, cinza, sem rótulo ou contorno |
 | 6 | Ponteiros analógicos | 0 | 0 | 450 | 450 | horas/minutos claros e estreitos; segundos finos com realce |
@@ -95,14 +95,14 @@ Tipografia: `SYNC_TO_DEVICE`, peso `NORMAL`; hora Digital `82 px`, data
 | --- | --- | --- | --- |
 | Fundo | `Scene` | `backgroundColor="#FF000000"` | constante |
 | Estilo | `ListConfiguration` | opções `0` Digital e `1` Analógico | seleciona um único grupo no mesmo APK |
-| Hora Digital | `DigitalClock`/`TimeText` | `hh:mm` mais sobreposição `mm`, `SYNC_TO_DEVICE` | acompanha formato 12/24 h do dispositivo |
+| Hora Digital | `DigitalClock`/`TimeText` | `hh:mm`, `SYNC_TO_DEVICE` | acompanha formato 12/24 h do dispositivo |
 | Data | `PartText` | `[DAY_OF_WEEK_S]`, `[DAY]`, `[MONTH_S]` | locale e calendário do sistema |
 | Bateria | `PartText` | `round([BATTERY_PERCENT])` | `0%` a `100%`, sem provider externo |
 | Marcadores | `ListConfiguration` e `PartDraw` | seis conjuntos originais | somente o grupo Analógico os revela |
 | Horas/minutos | `AnalogClock` | `hour_hand`, `minute_hand` | rotação do sistema |
 | Segundos | `AnalogClock` | `second_hand` | cor depende da intensidade; oculto em AOD |
 | Cores | duas `ColorConfiguration` | `main_color`, `accent_color` | escolhas independentes |
-| Intensidade | `ListConfiguration` | None, Discrete, Full | controla minutos/segundos e detalhes mínimos |
+| Intensidade | `ListConfiguration` | None, Discrete, Full | controla segundos e detalhes mínimos |
 
 - Relógio: híbrido selecionável, com `CLOCK_TYPE="DIGITAL"` como estilo de
   preview e padrão.
@@ -110,10 +110,9 @@ Tipografia: `SYNC_TO_DEVICE`, peso `NORMAL`; hora Digital `82 px`, data
 - Ordem final: fundo, marcadores, relógio selecionado, textos secundários,
   realces de intensidade e pivô.
 - Simplificações impostas pelo WFF 2: a configuração Markers não pode ser
-  ocultada hierarquicamente no editor Digital; não há transição animada entre
-  estilos nem cor mista dentro de um único `TimeText`. A hora completa
-  `hh:mm` fica na Main Color e uma camada `mm` sincronizada aplica a Accent
-  Color somente aos minutos.
+  ocultada hierarquicamente no editor Digital e não há transição animada entre
+  estilos. A hora Digital completa permanece na Main Color, sem sobreposição
+  de Accent Color.
 
 ## 6. Complications
 
@@ -147,9 +146,10 @@ Outras configurações:
 - Accent Intensity: None (`0`), Discrete (`1`, padrão) e Full (`2`).
 - Markers: Minimal (`0`, padrão), Short Ticks (`1`), Long Ticks (`2`),
   Small Dots (`3`), Dots (`4`) e Hybrid (`5`).
-- None mantém minutos/segundos na Main Color; Discrete realça minutos no
-  Digital e segundos no Analógico; Full acrescenta quatro pontos cardinais de
-  realce no Analógico e um ponto mínimo ao lado da bateria no Digital.
+- None mantém os segundos na Main Color; Discrete realça somente os segundos
+  no Analógico e não altera a hora Digital; Full acrescenta quatro pontos
+  cardinais de realce no Analógico e um ponto mínimo ao lado da bateria no
+  Digital.
 - Data e bateria usam cinza fixo `#FF9A9A9A`, nunca a cor de realce.
 
 ## 8. AOD
@@ -157,8 +157,8 @@ Outras configurações:
 - Elementos mantidos no Digital: hora completa na Main Color e bateria.
 - Elementos mantidos no Analógico: horas, minutos, quatro referências
   cardinais mínimas e bateria.
-- Elementos ocultos: data em ambos, segundos, marcadores secundários, minutos
-  sobrepostos em Accent Color e detalhes Full.
+- Elementos ocultos: data em ambos, segundos, marcadores secundários e detalhes
+  Full.
 - Redução de brilho/alpha: hora/mãos `145–160`, bateria `105–120`, marcadores
   cardinais `80–95`.
 - Estratégia contra excesso de pixels acesos: fundo preto puro, sem escala
@@ -201,7 +201,7 @@ Use docs/watchfaces/ESSENTIAL.md como fonte de verdade. Em um único APK,
 ofereça Style Digital/Analog por ListConfiguration. Use canvas 450 x 450,
 fundo AMOLED preto, fonte SYNC_TO_DEVICE, somente hora, data e
 BATTERY_PERCENT. Não crie ComplicationSlot. O Digital usa hora grande `hh:mm`
-em Main Color e `mm` sobreposto em Accent Color nas intensidades Discrete/Full.
+integralmente em Main Color, sem Accent Color nos minutos.
 O Analógico usa mãos originais estreitas, segundos como realce e seis opções
 de marcadores. Implemente Main Color, Accent Color, Accent Intensity
 None/Discrete/Full e Markers conforme a especificação. A opção Markers pode
