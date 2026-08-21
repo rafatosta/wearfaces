@@ -32,7 +32,7 @@ RUN apt-get update \
     && rm /tmp/cmdline-tools.zip \
     && yes | sdkmanager --licenses >/dev/null \
     && sdkmanager "platform-tools" "platforms;android-34" "build-tools;36.0.0" \
-    && install -d -o 1000 -g 1000 "$HOME" "$GRADLE_USER_HOME"
+    && install -d -o 1000 -g 1000 "$HOME" "$GRADLE_USER_HOME" /home/ubuntu/.android
 
 COPY --from=wff-builder /src/watchface/third_party/wff/specification/validator/build/libs/wff-validator.jar /opt/wff-tools/wff-validator.jar
 COPY --from=wff-builder /src/watchface/play-validations/memory-footprint/build/libs/memory-footprint.jar /opt/wff-tools/memory-footprint.jar

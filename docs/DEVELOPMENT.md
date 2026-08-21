@@ -15,8 +15,11 @@ SDK e as ferramentas oficiais WFF.
 ```
 
 `dev.sh` monta somente o checkout em `/workspace` com relabel SELinux e mantém
-um volume Gradle. `rebuild` força imagem limpa; `shell` abre/roda um comando no
-ambiente. Detalhes estão em [CONTAINER.md](CONTAINER.md).
+volumes separados para o cache Gradle e para o diretório Android do usuário
+Java. O segundo preserva o `debug.keystore`, de modo que APKs de desenvolvimento
+sucessivos usem a mesma assinatura. `rebuild` força imagem limpa; `shell`
+abre/roda um comando no ambiente. Detalhes estão em
+[CONTAINER.md](CONTAINER.md).
 
 ## Fallback nativo
 

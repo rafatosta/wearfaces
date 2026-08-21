@@ -32,6 +32,14 @@ if grep -Eq 'useradd.*(--uid|-u)[ =]?1000' Containerfile; then
   echo "Container must not create a duplicate UID 1000" >&2
   exit 1
 fi
+grep -Fq 'WEARFACES_ANDROID_VOLUME:-wearfaces-android-home' tools/dev.sh || {
+  echo "Podman development builds must use a persistent Android home volume" >&2
+  exit 1
+}
+grep -Fq '"$android_volume:/home/ubuntu/.android:Z"' tools/dev.sh || {
+  echo "Podman development builds must persist the Android debug keystore" >&2
+  exit 1
+}
 
 for script in tools/*.sh; do
   [[ -x "$script" ]] || { echo "Script is not executable: $script" >&2; exit 1; }

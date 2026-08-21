@@ -67,6 +67,9 @@ arquivo.
 
 ### Fixed
 
+-   Persistida a chave de assinatura debug em um volume Podman dedicado,
+    evitando assinaturas diferentes entre builds executados em contêineres
+    efêmeros.
 -   Centralizado o conteúdo das três complications do **Flow** nos dois eixos,
     restaurando o arranjo de ícone sobre texto e a porcentagem da bateria.
 -   Ocultados completamente os três slots e seus anéis no modo AOD do **Flow**.

@@ -4,6 +4,7 @@ set -euo pipefail
 repo_root=$(cd "$(dirname "${BASH_SOURCE[0]}")/.." && pwd)
 image=${WEARFACES_IMAGE:-localhost/wearfaces-dev:0.1.0}
 gradle_volume=${WEARFACES_GRADLE_VOLUME:-wearfaces-gradle-cache}
+android_volume=${WEARFACES_ANDROID_VOLUME:-wearfaces-android-home}
 command_name=${1:-test}
 shift || true
 
@@ -38,5 +39,6 @@ exec podman run --rm \
   --userns=keep-id \
   --volume "$repo_root:/workspace:Z" \
   --volume "$gradle_volume:/home/wearfaces/.gradle:Z" \
+  --volume "$android_volume:/home/ubuntu/.android:Z" \
   --workdir /workspace \
   "$image" "${inner[@]}"
