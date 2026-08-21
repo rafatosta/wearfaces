@@ -16,6 +16,7 @@ enquanto preservarem compatibilidade com WFF 2.
 | --- | --- | --- |
 | [Aurora](faces/aurora/) | MVP 0.1.0 | Analógico, data, 2 complications, 4 paletas e AOD |
 | [Flow](faces/flow/) | MVP 0.1.0 | Analógico, data, 3 complications editáveis, 4 paletas, AMOLED preto e AOD |
+| [Stride](faces/stride/) | MVP 0.1.0 | Digital esportivo, data, 5 complications editáveis, 4 paletas, progressos e AOD |
 
 Screenshots reais serão adicionadas depois da validação no dispositivo. O
 preview vetorial do APK é ilustrativo e não substitui essa evidência.
@@ -28,6 +29,7 @@ Podman é o ambiente oficial e reproduzível:
 ./tools/dev.sh test
 ./tools/dev.sh build aurora
 ./tools/dev.sh build flow
+./tools/dev.sh build stride
 ```
 
 O fallback nativo, para quem já possui JDK 17 e Android SDK 34, é:
@@ -36,6 +38,7 @@ O fallback nativo, para quem já possui JDK 17 e Android SDK 34, é:
 ./gradlew assembleDebug
 ./gradlew :faces:aurora:assembleDebug
 ./gradlew :faces:flow:assembleDebug
+./gradlew :faces:stride:assembleDebug
 ./tools/build-all.sh
 ```
 

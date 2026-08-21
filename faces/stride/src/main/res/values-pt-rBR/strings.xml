@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="watch_face_name">Stride</string>
+    <string name="palette_label">Cor de destaque</string>
+    <string name="palette_lime">Lima</string>
+    <string name="palette_ocean">Oceano</string>
+    <string name="palette_sunset">Pôr do sol</string>
+    <string name="palette_purple">Roxo</string>
+    <string name="activity_complication">Progresso de atividade</string>
+    <string name="left_sport_complication">Complication esportiva esquerda</string>
+    <string name="center_sport_complication">Complication esportiva central</string>
+    <string name="right_sport_complication">Complication esportiva direita</string>
+    <string name="battery_complication">Complication inferior de bateria</string>
+</resources>

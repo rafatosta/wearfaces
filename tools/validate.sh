@@ -94,10 +94,14 @@ for module in faces/*; do
   [[ $(grep -c '<ComplicationSlot ' "$watchface") -ge 2 ]] || { echo "$slug needs two complication slots" >&2; exit 1; }
   [[ $(grep -c '<ColorOption ' "$watchface") -ge 3 ]] || { echo "$slug needs at least three palettes" >&2; exit 1; }
   grep -q 'mode="AMBIENT"' "$watchface" || { echo "$slug needs an ambient mode" >&2; exit 1; }
-  grep -q '<HourHand ' "$watchface" && grep -q '<MinuteHand ' "$watchface" || {
-    echo "$slug analog hands are incomplete" >&2
-    exit 1
-  }
+  if grep -q '<DigitalClock ' "$watchface"; then
+    grep -q '<TimeText ' "$watchface" || { echo "$slug digital clock is incomplete" >&2; exit 1; }
+  else
+    grep -q '<HourHand ' "$watchface" && grep -q '<MinuteHand ' "$watchface" || {
+      echo "$slug must provide a complete analog or digital clock" >&2
+      exit 1
+    }
+  fi
   grep -q '\[DAY\]' "$watchface" || { echo "$slug date is missing" >&2; exit 1; }
 
   if [[ ${SKIP_OFFICIAL_WFF_TOOLS:-0} != 1 ]]; then

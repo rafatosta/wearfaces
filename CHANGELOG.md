@@ -40,6 +40,10 @@ arquivo.
 -   Implementado o mostrador **Flow** como módulo WFF 2 independente, com data
     superior, quatro paletas, três complications configuráveis, segundos e AOD
     otimizado.
+-   Implementado o mostrador digital esportivo **Stride** como módulo WFF 2
+    independente, com hora 12/24 h sincronizada ao dispositivo, data, quatro
+    paletas, cinco complications editáveis, progressos limitados a 100% e AOD
+    simplificado.
 
 ### Changed
 
@@ -56,6 +60,8 @@ arquivo.
     mostradores ainda não vinculadas a um módulo Gradle.
 -   Generalizada a validação estática e oficial WFF para conferir todos os
     módulos de mostrador, em vez de somente o Aurora.
+-   Generalizada a validação de relógio para aceitar módulos digitais com
+    `DigitalClock`/`TimeText` e módulos analógicos com ponteiros completos.
 -   Redesenhados os ponteiros de hora e minuto do **Flow** com corpo claro,
     extremidade externa arredondada e afilamento em direção ao pivô, conforme o
     mockup aprovado.

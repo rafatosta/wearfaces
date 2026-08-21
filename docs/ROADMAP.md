@@ -6,6 +6,7 @@
 -   ambiente Podman;
 -   Aurora MVP;
 -   Flow MVP;
+-   Stride MVP;
 -   testes/CI;
 -   instalação ADB Wi-Fi.
 
@@ -14,7 +15,7 @@
 -   refinamento visual;
 -   testes visuais quando viáveis;
 -   otimização de memória/AOD;
--   refinamento dos dois mostradores em hardware.
+-   refinamento dos mostradores em hardware.
 
 ## 1.0.0
 

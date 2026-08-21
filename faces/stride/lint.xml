@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+<lint>
+    <!-- WFF references resources by declarative names that Android Lint cannot resolve. -->
+    <issue id="UnusedResources" severity="ignore" />
+    <!-- Tool versions and API 34 are deliberately pinned by the project specification. -->
+    <issue id="AndroidGradlePluginVersion" severity="ignore" />
+    <issue id="GradleDependency" severity="ignore" />
+</lint>
