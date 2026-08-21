@@ -1,7 +1,7 @@
 # Flow
 
 Flow é um mostrador analógico de fundo AMOLED preto e composição simétrica, com
-data, quatro paletas, três complications editáveis e modo ambiente reduzido.
+data, quatro paletas, três complications editáveis e modo ambiente sem slots.
 
 - Package ID: `com.rtosta.wearfaces.flow`
 - Especificação: [FLOW](../../docs/watchfaces/FLOW.md)

@@ -158,16 +158,15 @@ opções cuja função seja somente imitar os quatro pontos indefinidos do mocku
 
 ## 8. AOD
 
-- Elementos mantidos: fundo preto, índices de hora, data superior, hora/minuto
-  e conteúdo atual das três complications;
-- Elementos ocultos: pontos de minuto intermediários, ponteiro de
-  segundos e efeitos de destaque;
-- Redução de brilho/alpha: textos e ponteiros em cinza `#FF8A8F96`; anéis e
-  complications com alpha máximo aproximado de `35%`;
+- Elementos mantidos: fundo preto, índices de hora, data superior e
+  hora/minuto;
+- Elementos ocultos: os três slots de complications completos, incluindo
+  conteúdo e anéis, pontos de minuto intermediários, ponteiro de segundos e
+  efeitos de destaque;
+- Redução de brilho/alpha: data, índices de hora e ponteiros são atenuados;
 - Estratégia contra excesso de pixels acesos: fundo totalmente preto, traços
   finos e remoção dos 48 pontos menores, sem animação por segundo;
-- Legibilidade mínima: hora/minuto e data superior permanecem distinguíveis; a
-  informação das complications é secundária e pode ser mais atenuada.
+- Legibilidade mínima: hora/minuto e data superior permanecem distinguíveis.
 
 ## 9. Assets e licenças
 
@@ -222,7 +221,8 @@ saúde, cópia da identidade GNOME ou reprodução fotográfica do mockup.
 Decisões materiais já tomadas: três complications configuráveis, data somente
 no topo, quatro paletas de destaque, fundo AMOLED preto puro, nenhum glifo,
 índices usando toda a borda, omissão dos quatro pontos indefinidos e segundos
-ocultos no AOD. A eventual adoção da marca GNOME fica fora desta implementação.
+e três slots completamente ocultos no AOD. A eventual adoção da marca GNOME
+fica fora desta implementação.
 ```
 
 ## 12. Critérios de aceite

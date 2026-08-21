@@ -96,14 +96,14 @@
         </PartText>
 
         <Group x="0" y="0" width="450" height="450" name="complication_rings" alpha="215">
-            <Variant mode="AMBIENT" target="alpha" value="90" />
+            <Variant mode="AMBIENT" target="alpha" value="0" />
             <PartDraw x="50" y="170" width="118" height="118"><Ellipse x="2" y="2" width="114" height="114"><Stroke thickness="3" color="[CONFIGURATION.palette.3]" /></Ellipse><Ellipse x="5" y="5" width="108" height="108"><Stroke thickness="3" color="[CONFIGURATION.palette.1]" /></Ellipse></PartDraw>
             <PartDraw x="282" y="170" width="118" height="118"><Ellipse x="2" y="2" width="114" height="114"><Stroke thickness="3" color="[CONFIGURATION.palette.3]" /></Ellipse><Ellipse x="5" y="5" width="108" height="108"><Stroke thickness="3" color="[CONFIGURATION.palette.1]" /></Ellipse></PartDraw>
             <PartDraw x="171" y="305" width="108" height="108"><Ellipse x="2" y="2" width="104" height="104"><Stroke thickness="3" color="[CONFIGURATION.palette.3]" /></Ellipse><Ellipse x="5" y="5" width="98" height="98"><Stroke thickness="3" color="[CONFIGURATION.palette.1]" /></Ellipse></PartDraw>
         </Group>
 
         <ComplicationSlot x="50" y="170" width="118" height="118" slotId="200" displayName="left_complication" supportedTypes="SHORT_TEXT MONOCHROMATIC_IMAGE RANGED_VALUE GOAL_PROGRESS EMPTY">
-            <Variant mode="AMBIENT" target="alpha" value="90" />
+            <Variant mode="AMBIENT" target="alpha" value="0" />
             <DefaultProviderPolicy defaultSystemProvider="STEP_COUNT" defaultSystemProviderType="SHORT_TEXT" />
             <BoundingOval x="0" y="0" width="118" height="118" outlinePadding="6" />
             <Complication type="SHORT_TEXT">
@@ -124,7 +124,7 @@
         </ComplicationSlot>
 
         <ComplicationSlot x="282" y="170" width="118" height="118" slotId="201" displayName="calories_complication" supportedTypes="SHORT_TEXT MONOCHROMATIC_IMAGE RANGED_VALUE GOAL_PROGRESS EMPTY">
-            <Variant mode="AMBIENT" target="alpha" value="90" />
+            <Variant mode="AMBIENT" target="alpha" value="0" />
             <DefaultProviderPolicy defaultSystemProvider="EMPTY" defaultSystemProviderType="EMPTY" />
             <BoundingOval x="0" y="0" width="118" height="118" outlinePadding="6" />
             <Complication type="SHORT_TEXT">
@@ -145,7 +145,7 @@
         </ComplicationSlot>
 
         <ComplicationSlot x="171" y="305" width="108" height="108" slotId="202" displayName="bottom_complication" supportedTypes="SHORT_TEXT MONOCHROMATIC_IMAGE RANGED_VALUE GOAL_PROGRESS EMPTY">
-            <Variant mode="AMBIENT" target="alpha" value="90" />
+            <Variant mode="AMBIENT" target="alpha" value="0" />
             <DefaultProviderPolicy defaultSystemProvider="WATCH_BATTERY" defaultSystemProviderType="RANGED_VALUE" />
             <BoundingOval x="0" y="0" width="108" height="108" outlinePadding="6" />
             <Complication type="SHORT_TEXT">
