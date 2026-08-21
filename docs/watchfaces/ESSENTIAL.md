@@ -36,7 +36,8 @@
 
 - Usar apenas primitivas WFF, fonte do sistema e quatro imagens de mãos/preview
   criadas no projeto; não usar a imagem de referência no APK.
-- Implementar Digital e Analógico no mesmo XML por `ListConfiguration` WFF 2.
+- Implementar Digital e Analógico no mesmo XML por `ListConfiguration` e
+  reavaliar a cena com `Condition`, sem aninhar usos de configurações.
 - Mostrar somente hora, data e `[BATTERY_PERCENT]`; não criar complications.
 - Padrões: Digital, White, Green, Discrete e Minimal.
 - A opção de marcadores permanece visível no editor Digital, mas não produz
@@ -94,7 +95,7 @@ Tipografia: `SYNC_TO_DEVICE`, peso `NORMAL`; hora Digital `82 px`, data
 | Elemento visual | Construção WFF 2 | Recurso/expressão | Comportamento dinâmico |
 | --- | --- | --- | --- |
 | Fundo | `Scene` | `backgroundColor="#FF000000"` | constante |
-| Estilo | `ListConfiguration` | opções `0` Digital e `1` Analógico | seleciona um único grupo no mesmo APK |
+| Estilo | `ListConfiguration` + `Condition` | opções `0` Digital e `1` Analógico | reavalia e seleciona um único grupo no mesmo APK |
 | Hora Digital | `DigitalClock`/`TimeText` | `hh:mm`, `SYNC_TO_DEVICE` | acompanha formato 12/24 h do dispositivo |
 | Data | `PartText` | `[DAY_OF_WEEK_S]`, `[DAY]`, `[MONTH_S]` | locale e calendário do sistema |
 | Bateria | `PartText` | `round([BATTERY_PERCENT])` | `0%` a `100%`, sem provider externo |
@@ -113,6 +114,9 @@ Tipografia: `SYNC_TO_DEVICE`, peso `NORMAL`; hora Digital `82 px`, data
   ocultada hierarquicamente no editor Digital e não há transição animada entre
   estilos. A hora Digital completa permanece na Main Color, sem sobreposição
   de Accent Color.
+- Os usos de `accent_intensity` e `marker_style` ficam dentro dos grupos da
+  `Condition`, nunca dentro do uso de outra configuração; isso evita o
+  aninhamento não suportado e permite atualização imediata do estilo.
 
 ## 6. Complications
 
@@ -198,7 +202,8 @@ módulo em faces/essential/, usando package ID
 com.rtosta.wearfaces.essential, WFF 2 e API 34.
 
 Use docs/watchfaces/ESSENTIAL.md como fonte de verdade. Em um único APK,
-ofereça Style Digital/Analog por ListConfiguration. Use canvas 450 x 450,
+ofereça Style Digital/Analog por ListConfiguration e selecione a cena por
+Condition, sem aninhar usos de configurações. Use canvas 450 x 450,
 fundo AMOLED preto, fonte SYNC_TO_DEVICE, somente hora, data e
 BATTERY_PERCENT. Não crie ComplicationSlot. O Digital usa hora grande `hh:mm`
 integralmente em Main Color, sem Accent Color nos minutos.

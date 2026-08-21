@@ -75,6 +75,8 @@ arquivo.
 
 ### Fixed
 
+-   Corrigida a alternância Digital/Analógico do **Essential** ao substituir o
+    uso aninhado de configurações por uma `Condition` reativa ao estilo.
 -   Removida a camada de Accent Color dos minutos do **Essential**, mantendo a
     hora Digital integralmente na Main Color.
 -   Sincronizado o preview do **Flow** com as dimensões, posições, opacidades e

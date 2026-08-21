@@ -36,8 +36,11 @@
     </UserConfigurations>
 
     <Scene backgroundColor="#FF000000">
-        <ListConfiguration id="style">
-            <ListOption id="0">
+        <Condition>
+            <Expressions>
+                <Expression name="is_digital"><![CDATA[[CONFIGURATION.style] == "0"]]></Expression>
+            </Expressions>
+            <Compare expression="is_digital">
                 <Group x="0" y="0" width="450" height="450" name="digital_style">
                     <DigitalClock x="35" y="135" width="380" height="105">
                         <TimeText x="0" y="0" width="380" height="105" format="hh:mm" hourFormat="SYNC_TO_DEVICE" align="CENTER">
@@ -78,9 +81,9 @@
                         </Text>
                     </PartText>
                 </Group>
-            </ListOption>
+            </Compare>
 
-            <ListOption id="1">
+            <Default>
                 <Group x="0" y="0" width="450" height="450" name="analog_style">
                     <ListConfiguration id="marker_style">
                         <ListOption id="0">
@@ -256,7 +259,7 @@
                         </Text>
                     </PartText>
                 </Group>
-            </ListOption>
-        </ListConfiguration>
+            </Default>
+        </Condition>
     </Scene>
 </WatchFace>
