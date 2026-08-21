@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" width="18" height="140" viewBox="0 0 18 140">
+  <title>Essential hour hand</title>
+  <desc>Original tintable hour hand with a rounded tip.</desc>
+  <path d="M9 2c2 0 3 2 3 4v123c0 2-1 4-3 4s-3-2-3-4V6c0-2 1-4 3-4Z" fill="#ffffff"/>
+</svg>

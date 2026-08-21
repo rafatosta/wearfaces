@@ -11,6 +11,7 @@ SDK e as ferramentas oficiais WFF.
 ./tools/dev.sh validate
 ./tools/dev.sh test
 ./tools/dev.sh build aurora
+./tools/dev.sh build essential
 ./tools/dev.sh build flow
 ```
 
@@ -28,6 +29,7 @@ Defina `ANDROID_HOME`/`ANDROID_SDK_ROOT` e execute:
 
 ```bash
 ./gradlew :faces:aurora:assembleDebug
+./gradlew :faces:essential:assembleDebug
 ./gradlew :faces:flow:assembleDebug
 ./tools/build-all.sh
 ```

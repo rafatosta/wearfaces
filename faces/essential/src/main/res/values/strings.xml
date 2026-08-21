@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="watch_face_name">Essential</string>
+    <string name="style_label">Style</string>
+    <string name="style_digital">Digital</string>
+    <string name="style_analog">Analog</string>
+    <string name="main_color_label">Main color</string>
+    <string name="main_white">White</string>
+    <string name="main_silver">Silver</string>
+    <string name="main_warm">Warm</string>
+    <string name="main_soft_green">Soft green</string>
+    <string name="accent_color_label">Accent color</string>
+    <string name="accent_green">Green</string>
+    <string name="accent_blue">Blue</string>
+    <string name="accent_orange">Orange</string>
+    <string name="accent_purple">Purple</string>
+    <string name="accent_intensity_label">Accent intensity</string>
+    <string name="accent_none">None</string>
+    <string name="accent_discrete">Discrete</string>
+    <string name="accent_full">Full</string>
+    <string name="marker_style_label">Analog markers</string>
+    <string name="marker_minimal">Minimal</string>
+    <string name="marker_short_ticks">Short ticks</string>
+    <string name="marker_long_ticks">Long ticks</string>
+    <string name="marker_small_dots">Small dots</string>
+    <string name="marker_dots">Dots</string>
+    <string name="marker_hybrid">Hybrid</string>
+</resources>

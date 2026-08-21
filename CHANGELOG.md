@@ -40,6 +40,10 @@ arquivo.
 -   Implementado o mostrador **Flow** como módulo WFF 2 independente, com data
     superior, quatro paletas, três complications configuráveis, segundos e AOD
     otimizado.
+-   Adicionada a especificação e implementação do **Essential**, um módulo WFF
+    2 independente que alterna entre estilos Digital e Analógico no mesmo APK,
+    com bateria direta, duas famílias de cores, três intensidades, seis estilos
+    de marcadores e AOD próprio, sem complications.
 
 ### Changed
 
@@ -58,6 +62,8 @@ arquivo.
     módulos de mostrador, em vez de somente o Aurora.
 -   Generalizada a validação de relógio para aceitar módulos digitais com
     `DigitalClock`/`TimeText` e módulos analógicos com ponteiros completos.
+-   Tornada a regra de complications consciente do contrato de cada mostrador,
+    permitindo ao **Essential** permanecer deliberadamente sem slots.
 -   Redesenhados os ponteiros de hora e minuto do **Flow** com corpo claro,
     extremidade externa arredondada e afilamento em direção ao pivô, conforme o
     mockup aprovado.

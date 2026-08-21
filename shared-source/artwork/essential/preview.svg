@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" width="450" height="450" viewBox="0 0 450 450">
+  <title>Essential digital preview</title>
+  <desc>Original preview asset for the Essential WearFaces module.</desc>
+  <circle cx="225" cy="225" r="225" fill="#000000"/>
+  <g font-family="DejaVu Sans, sans-serif" font-weight="400">
+    <text x="225" y="222" font-size="82" text-anchor="middle" fill="#f5f5f5">
+      <tspan>10:</tspan><tspan fill="#5bd600">08</tspan>
+    </text>
+    <text x="225" y="278" font-size="19" letter-spacing="2" text-anchor="middle" fill="#9a9a9a">SÁB | 24 | MAI</text>
+    <text x="225" y="378" font-size="22" text-anchor="middle" fill="#9a9a9a">80%</text>
+  </g>
+</svg>

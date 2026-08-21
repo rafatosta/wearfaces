@@ -5,6 +5,7 @@
 -   bootstrap do monorepo;
 -   ambiente Podman;
 -   Aurora MVP;
+-   Essential MVP;
 -   Flow MVP;
 -   testes/CI;
 -   instalação ADB Wi-Fi.

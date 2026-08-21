@@ -15,6 +15,7 @@ enquanto preservarem compatibilidade com WFF 2.
 | Mostrador | Estado | Recursos |
 | --- | --- | --- |
 | [Aurora](faces/aurora/) | MVP 0.1.0 | Analógico, data, 2 complications, 4 paletas e AOD |
+| [Essential](faces/essential/) | MVP 0.1.0 | Digital/Analógico, data, bateria, cores, 6 marcadores e AOD |
 | [Flow](faces/flow/) | MVP 0.1.0 | Analógico, data, 3 complications editáveis, 4 paletas, AMOLED preto e AOD |
 
 Screenshots reais serão adicionadas depois da validação no dispositivo. O
@@ -27,6 +28,7 @@ Podman é o ambiente oficial e reproduzível:
 ```bash
 ./tools/dev.sh test
 ./tools/dev.sh build aurora
+./tools/dev.sh build essential
 ./tools/dev.sh build flow
 ```
 
@@ -35,6 +37,7 @@ O fallback nativo, para quem já possui JDK 17 e Android SDK 34, é:
 ```bash
 ./gradlew assembleDebug
 ./gradlew :faces:aurora:assembleDebug
+./gradlew :faces:essential:assembleDebug
 ./gradlew :faces:flow:assembleDebug
 ./tools/build-all.sh
 ```

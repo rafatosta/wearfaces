@@ -24,7 +24,7 @@ O WearFaces usa **Conventional Commits**.
 
 ## Escopos sugeridos
 
-`aurora`, `flow`, `aod`, `wff`, `container`, `gradle`, `adb`,
+`aurora`, `essential`, `flow`, `aod`, `wff`, `container`, `gradle`, `adb`,
 `release`.
 
 ## Exemplos

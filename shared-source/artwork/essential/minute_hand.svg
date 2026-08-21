@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" width="16" height="176" viewBox="0 0 16 176">
+  <title>Essential minute hand</title>
+  <desc>Original tintable minute hand with a rounded tip.</desc>
+  <path d="M8 2c1.7 0 2.75 1.8 2.75 4v163c0 2.2-1.05 4-2.75 4s-2.75-1.8-2.75-4V6c0-2.2 1.05-4 2.75-4Z" fill="#ffffff"/>
+</svg>

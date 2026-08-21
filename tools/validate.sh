@@ -91,7 +91,12 @@ for module in faces/*; do
   grep -Eq 'targetSdk[[:space:]]*=[[:space:]]*34' "$build_file" || { echo "$slug targetSdk must be 34" >&2; exit 1; }
   grep -q "com.rtosta.wearfaces.$slug" "$build_file" || { echo "$slug package ID is incorrect" >&2; exit 1; }
   grep -Fq "include(\":faces:$slug\")" settings.gradle.kts || { echo "$slug is missing from settings.gradle.kts" >&2; exit 1; }
-  [[ $(grep -c '<ComplicationSlot ' "$watchface") -ge 2 ]] || { echo "$slug needs two complication slots" >&2; exit 1; }
+  complication_count=$(grep -c '<ComplicationSlot ' "$watchface" || true)
+  if [[ $slug == aurora || $slug == flow ]]; then
+    [[ $complication_count -ge 2 ]] || { echo "$slug needs at least two complication slots" >&2; exit 1; }
+  elif [[ $slug == essential ]]; then
+    [[ $complication_count -eq 0 ]] || { echo "$slug must not declare complication slots" >&2; exit 1; }
+  fi
   [[ $(grep -c '<ColorOption ' "$watchface") -ge 3 ]] || { echo "$slug needs at least three palettes" >&2; exit 1; }
   grep -q 'mode="AMBIENT"' "$watchface" || { echo "$slug needs an ambient mode" >&2; exit 1; }
   if grep -q '<DigitalClock ' "$watchface"; then
