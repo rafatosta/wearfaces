@@ -129,11 +129,11 @@ Tipografia: `SYNC_TO_DEVICE`; peso `BOLD` para a hora, `MEDIUM` para valores e
 
 | Nome | Slot ID | X | Y | Largura | Altura | Tipos suportados | Padrão e estado `EMPTY` |
 | --- | ---: | ---: | ---: | ---: | ---: | --- | --- |
-| Atividade superior | 300 | 15 | 0 | 420 | 120 | `SHORT_TEXT`, `MONOCHROMATIC_IMAGE`, `RANGED_VALUE`, `GOAL_PROGRESS`, `EMPTY` | `STEP_COUNT`/`SHORT_TEXT`; vazio deixa os dois trilhos externos |
+| Atividade superior | 300 | 15 | 0 | 420 | 120 | `RANGED_VALUE`, `GOAL_PROGRESS`, `SHORT_TEXT`, `MONOCHROMATIC_IMAGE`, `EMPTY` | `STEP_COUNT`/`RANGED_VALUE`; vazio deixa os dois trilhos externos |
 | Esportivo esquerdo | 301 | 48 | 279 | 110 | 110 | `SHORT_TEXT`, `MONOCHROMATIC_IMAGE`, `RANGED_VALUE`, `GOAL_PROGRESS`, `EMPTY` | `HEART_RATE`/`SHORT_TEXT`; vazio não desenha nada |
 | Esportivo central | 302 | 170 | 292 | 110 | 110 | mesmos tipos | vazio; indicado para distância; não desenha nada |
 | Esportivo direito | 303 | 292 | 279 | 110 | 110 | mesmos tipos | vazio; indicado para calorias; não desenha nada |
-| Bateria inferior | 304 | 15 | 330 | 420 | 120 | `SHORT_TEXT`, `MONOCHROMATIC_IMAGE`, `RANGED_VALUE`, `GOAL_PROGRESS`, `EMPTY` | `WATCH_BATTERY`/`RANGED_VALUE`; vazio deixa os dois trilhos externos |
+| Bateria inferior | 304 | 15 | 330 | 420 | 120 | `RANGED_VALUE`, `GOAL_PROGRESS`, `SHORT_TEXT`, `MONOCHROMATIC_IMAGE`, `EMPTY` | `WATCH_BATTERY`/`RANGED_VALUE`; vazio deixa os dois trilhos externos |
 
 Nenhum dado é coletado pelo mostrador. Os defaults de passos, frequência
 cardíaca e bateria apenas selecionam providers de sistema portáveis; todos os
@@ -145,6 +145,12 @@ Nos tipos `GOAL_PROGRESS`, o progresso é
 `clamp((value - min) / (max - min), 0, 1)` quando `max > min`. Range ou meta
 inválida resulta em arco sem preenchimento. Valores continuam legíveis mesmo
 quando o ícone não é fornecido.
+
+Os dois slots externos priorizam tipos numéricos na seleção de providers. Isso
+mantém as barras sincronizadas e faz a porcentagem reaparecer ao selecionar
+novamente a bateria do sistema. Providers que oferecem apenas `SHORT_TEXT` ou
+`MONOCHROMATIC_IMAGE` continuam compatíveis, mas não fornecem dados numéricos
+para preencher os arcos.
 
 ## 7. Configurações e paletas
 

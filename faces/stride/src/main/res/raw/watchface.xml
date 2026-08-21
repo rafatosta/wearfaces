@@ -59,9 +59,9 @@
             <Arc centerX="210" centerY="-105" width="426" height="426" startAngle="108" endAngle="150"><Stroke thickness="7" color="[CONFIGURATION.palette.3]" /></Arc>
         </PartDraw>
 
-        <ComplicationSlot x="15" y="0" width="420" height="120" slotId="300" displayName="activity_complication" supportedTypes="SHORT_TEXT MONOCHROMATIC_IMAGE RANGED_VALUE GOAL_PROGRESS EMPTY">
+        <ComplicationSlot x="15" y="0" width="420" height="120" slotId="300" displayName="activity_complication" supportedTypes="RANGED_VALUE GOAL_PROGRESS SHORT_TEXT MONOCHROMATIC_IMAGE EMPTY">
             <Variant mode="AMBIENT" target="alpha" value="110" />
-            <DefaultProviderPolicy defaultSystemProvider="STEP_COUNT" defaultSystemProviderType="SHORT_TEXT" />
+            <DefaultProviderPolicy defaultSystemProvider="STEP_COUNT" defaultSystemProviderType="RANGED_VALUE" />
             <BoundingOval x="0" y="0" width="420" height="120" outlinePadding="5" />
             <Complication type="SHORT_TEXT">
                 <PartText x="0" y="29" width="420" height="38" tintColor="[CONFIGURATION.palette.2]"><Text align="CENTER" ellipsis="TRUE"><Font family="SYNC_TO_DEVICE" size="29" weight="MEDIUM"><Template><![CDATA[%s]]><Parameter expression="[COMPLICATION.TEXT]" /></Template></Font></Text></PartText>
@@ -136,7 +136,7 @@
             <Complication type="GOAL_PROGRESS"><PartImage x="43" y="18" width="24" height="24" tintColor="[CONFIGURATION.palette.0]"><Image resource="[COMPLICATION.MONOCHROMATIC_IMAGE]" /></PartImage><PartText x="0" y="43" width="110" height="39" tintColor="[CONFIGURATION.palette.2]"><Text align="CENTER" ellipsis="TRUE"><Font family="SYNC_TO_DEVICE" size="28" weight="MEDIUM"><Template><![CDATA[%.0f]]><Parameter expression="[COMPLICATION.GOAL_PROGRESS_VALUE]" /></Template></Font></Text></PartText><PartText x="5" y="80" width="100" height="19" tintColor="#FFAEB4BB"><Text align="CENTER" ellipsis="TRUE"><Font family="SYNC_TO_DEVICE" size="13"><Template><![CDATA[%s]]><Parameter expression="[COMPLICATION.TEXT]" /></Template></Font></Text></PartText></Complication>
         </ComplicationSlot>
 
-        <ComplicationSlot x="15" y="330" width="420" height="120" slotId="304" displayName="battery_complication" supportedTypes="SHORT_TEXT MONOCHROMATIC_IMAGE RANGED_VALUE GOAL_PROGRESS EMPTY">
+        <ComplicationSlot x="15" y="330" width="420" height="120" slotId="304" displayName="battery_complication" supportedTypes="RANGED_VALUE GOAL_PROGRESS SHORT_TEXT MONOCHROMATIC_IMAGE EMPTY">
             <Variant mode="AMBIENT" target="alpha" value="110" />
             <DefaultProviderPolicy defaultSystemProvider="WATCH_BATTERY" defaultSystemProviderType="RANGED_VALUE" />
             <BoundingOval x="0" y="0" width="420" height="120" outlinePadding="5" />

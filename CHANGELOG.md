@@ -73,6 +73,9 @@ arquivo.
 
 ### Fixed
 
+-   Priorizados providers numéricos nos slots externos do **Stride**, fazendo
+    as barras refletirem passos e bateria e restaurando a porcentagem ao
+    selecionar novamente a bateria do sistema.
 -   Removidos do **Stride** os aros decorativos dos três slots esportivos
     personalizáveis, preservando somente ícone, valor e rótulo do provider.
 -   Refinado o **Stride** para posicionar a escala no limite circular da tela e
