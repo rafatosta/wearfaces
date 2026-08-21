@@ -63,4 +63,9 @@ jobs:
       - name: Build reproducible environment
         run: docker build --file Containerfile --tag wearfaces-dev:ci .
       - name: Run suite in the built image
-        run: docker run --rm --volume "$PWD:/workspace" --workdir /workspace wearfaces-dev:ci ./tools/test.sh
+        run: |
+          docker run --rm \
+            --volume "$PWD:/source:ro" \
+            --workdir /tmp \
+            wearfaces-dev:ci \
+            bash -c 'cp --recursive /source/. /tmp/workspace && cd /tmp/workspace && ./tools/test.sh'

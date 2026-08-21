@@ -89,7 +89,8 @@ arquivo.
 ### Fixed
 
 -   Corrigidos os workflows de CI e release ao instalar `xmllint` nos runners
-    Ubuntu e indicar explicitamente o `Containerfile` no build Docker.
+    Ubuntu, indicar explicitamente o `Containerfile` no build Docker e executar
+    a suíte em uma cópia gravável do checkout dentro do contêiner.
 -   Corrigida a alternância Digital/Analógico do **Essential** ao substituir o
     uso aninhado de configurações por uma `Condition` reativa ao estilo.
 -   Removida a camada de Accent Color dos minutos do **Essential**, mantendo a
