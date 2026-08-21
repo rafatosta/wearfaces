@@ -89,7 +89,7 @@ Canvas WFF: `450 × 450`; centro: `(225, 225)`.
 | 4 | Data | 120 | 111 | 210 | 30 | dia da semana, dia e mês em caixa alta visual e cor primária |
 | 5 | Hora | 45 | 142 | 360 | 104 | hora digital `hh:mm`, branca, grande, centralizada e sincronizada com a preferência 12/24 h do dispositivo |
 | 6 | Pulso de movimento | 147 | 244 | 156 | 24 | linha original com pequeno zigue-zague central, apenas decorativa |
-| 7 | Slot esportivo esquerdo | 48 | 279 | 110 | 110 | padrão frequência cardíaca; círculo fino e conteúdo centralizado |
+| 7 | Slot esportivo esquerdo | 48 | 279 | 110 | 110 | padrão frequência cardíaca; conteúdo centralizado sem aro |
 | 8 | Slot esportivo central | 170 | 292 | 110 | 110 | padrão vazio; indicado para distância |
 | 9 | Slot esportivo direito | 292 | 279 | 110 | 110 | padrão vazio; indicado para calorias |
 | 10 | Bateria | 15 | 330 | 420 | 120 | dois arcos externos sobre a escala, com máscara preta, e porcentagem centralizada no vão inferior |
@@ -98,8 +98,8 @@ Canvas WFF: `450 × 450`; centro: `(225, 225)`.
 círculo de raio `195`; a escala alcança o limite do canvas circular. As barras
 superior e inferior usam círculo de `426 px`, são desenhadas depois da escala e
 aplicam um traço preto de `17 px` sob o trilho, cobrindo integralmente os
-índices interceptados. Slots circulares possuem margem interna mínima de `8 px`
-e seus conteúdos não se sobrepõem à hora.
+índices interceptados. Os três slots esportivos não possuem contorno visível;
+seus conteúdos usam margem interna mínima de `8 px` e não se sobrepõem à hora.
 
 Tipografia: `SYNC_TO_DEVICE`; peso `BOLD` para a hora, `MEDIUM` para valores e
 `NORMAL` para data e textos auxiliares. Tamanhos-alvo: `82 px` para hora,
@@ -130,9 +130,9 @@ Tipografia: `SYNC_TO_DEVICE`; peso `BOLD` para a hora, `MEDIUM` para valores e
 | Nome | Slot ID | X | Y | Largura | Altura | Tipos suportados | Padrão e estado `EMPTY` |
 | --- | ---: | ---: | ---: | ---: | ---: | --- | --- |
 | Atividade superior | 300 | 15 | 0 | 420 | 120 | `SHORT_TEXT`, `MONOCHROMATIC_IMAGE`, `RANGED_VALUE`, `GOAL_PROGRESS`, `EMPTY` | `STEP_COUNT`/`SHORT_TEXT`; vazio deixa os dois trilhos externos |
-| Esportivo esquerdo | 301 | 48 | 279 | 110 | 110 | `SHORT_TEXT`, `MONOCHROMATIC_IMAGE`, `RANGED_VALUE`, `GOAL_PROGRESS`, `EMPTY` | `HEART_RATE`/`SHORT_TEXT`; vazio mantém contorno |
-| Esportivo central | 302 | 170 | 292 | 110 | 110 | mesmos tipos | vazio; indicado para distância; vazio mantém contorno |
-| Esportivo direito | 303 | 292 | 279 | 110 | 110 | mesmos tipos | vazio; indicado para calorias; vazio mantém contorno |
+| Esportivo esquerdo | 301 | 48 | 279 | 110 | 110 | `SHORT_TEXT`, `MONOCHROMATIC_IMAGE`, `RANGED_VALUE`, `GOAL_PROGRESS`, `EMPTY` | `HEART_RATE`/`SHORT_TEXT`; vazio não desenha nada |
+| Esportivo central | 302 | 170 | 292 | 110 | 110 | mesmos tipos | vazio; indicado para distância; não desenha nada |
+| Esportivo direito | 303 | 292 | 279 | 110 | 110 | mesmos tipos | vazio; indicado para calorias; não desenha nada |
 | Bateria inferior | 304 | 15 | 330 | 420 | 120 | `SHORT_TEXT`, `MONOCHROMATIC_IMAGE`, `RANGED_VALUE`, `GOAL_PROGRESS`, `EMPTY` | `WATCH_BATTERY`/`RANGED_VALUE`; vazio deixa os dois trilhos externos |
 
 Nenhum dado é coletado pelo mostrador. Os defaults de passos, frequência

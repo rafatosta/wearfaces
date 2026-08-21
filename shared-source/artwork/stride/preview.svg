@@ -54,20 +54,14 @@
     </g>
 
     <g font-family="sans-serif" text-anchor="middle">
-      <circle cx="103" cy="334" r="53" fill="none" stroke="#3b4430" stroke-width="3"/>
-      <path d="M54 353 A53 53 0 0 1 87 284" fill="none" stroke="#b7f000" stroke-width="5" stroke-linecap="round"/>
       <path d="M103 308 C96 298 82 305 85 316 C88 326 103 334 103 334 C103 334 118 326 121 316 C124 305 110 298 103 308Z" fill="#b7f000"/>
       <text x="103" y="359" fill="#f4f7ed" font-size="28" font-weight="600">128</text>
       <text x="103" y="378" fill="#aeb4bb" font-size="13">BPM</text>
 
-      <circle cx="225" cy="347" r="53" fill="none" stroke="#3b4430" stroke-width="3"/>
-      <path d="M242 297 A53 53 0 0 1 272 366" fill="none" stroke="#b7f000" stroke-width="5" stroke-linecap="round"/>
       <circle cx="225" cy="315" r="7" fill="none" stroke="#b7f000" stroke-width="4"/>
       <text x="225" y="359" fill="#f4f7ed" font-size="28" font-weight="600">5,2</text>
       <text x="225" y="378" fill="#aeb4bb" font-size="13">KM</text>
 
-      <circle cx="347" cy="334" r="53" fill="none" stroke="#3b4430" stroke-width="3"/>
-      <path d="M363 284 A53 53 0 0 1 396 353" fill="none" stroke="#b7f000" stroke-width="5" stroke-linecap="round"/>
       <path d="M347 302 C359 313 361 321 355 330 C353 322 348 318 347 311 C342 319 336 324 338 332 C329 324 332 311 347 302Z" fill="#b7f000"/>
       <text x="347" y="359" fill="#f4f7ed" font-size="28" font-weight="600">432</text>
       <text x="347" y="378" fill="#aeb4bb" font-size="13">KCAL</text>

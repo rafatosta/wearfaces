@@ -73,6 +73,8 @@ arquivo.
 
 ### Fixed
 
+-   Removidos do **Stride** os aros decorativos dos três slots esportivos
+    personalizáveis, preservando somente ícone, valor e rótulo do provider.
 -   Refinado o **Stride** para posicionar a escala no limite circular da tela e
     fazer as barras de passos e bateria cobrirem os índices externos, com valor
     e porcentagem centralizados entre os respectivos segmentos.
