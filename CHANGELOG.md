@@ -72,6 +72,9 @@ arquivo.
 -   Refinado o **Flow** com fundo AMOLED preto puro, índices usando toda a borda,
     remoção do glifo e três complications editáveis; passos e bateria são
     defaults portáveis, enquanto calorias dependem de provider instalado.
+-   Ampliadas em aproximadamente 20% a hora e a data do Digital e a data do
+    Analógico no **Essential**, removendo também o ponto de realce ao lado da
+    bateria Digital.
 
 ### Fixed
 

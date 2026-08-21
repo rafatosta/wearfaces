@@ -74,12 +74,12 @@ Canvas WFF: `450 × 450`; centro: `(225, 225)`.
 | ---: | --- | ---: | ---: | ---: | ---: | --- |
 | 1 | Fundo | 0 | 0 | 450 | 450 | preto AMOLED `#FF000000`, sem imagem ou efeito |
 | 2 | Marcadores analógicos | 0 | 0 | 450 | 450 | opção selecionada, próxima ao raio `205`, ausente no Digital |
-| 3 | Hora Digital | 35 | 135 | 380 | 105 | `hh:mm` integralmente na Main Color; `82 px`, peso normal |
-| 4 | Data Digital | 100 | 250 | 250 | 34 | `%s | %02d | %s`, cinza, centralizada |
+| 3 | Hora Digital | 35 | 124 | 380 | 126 | `hh:mm` integralmente na Main Color; `98 px`, peso normal |
+| 4 | Data Digital | 100 | 247 | 250 | 41 | `%s | %02d | %s`, `23 px`, cinza e centralizada |
 | 5 | Bateria Digital | 150 | 347 | 150 | 38 | percentual simples, cinza, sem rótulo ou contorno |
 | 6 | Ponteiros analógicos | 0 | 0 | 450 | 450 | horas/minutos claros e estreitos; segundos finos com realce |
 | 7 | Pivô analógico | 217 | 217 | 16 | 16 | dois círculos pequenos, sem brilho |
-| 8 | Data Analógica | 105 | 298 | 240 | 32 | mesma data curta, abaixo do pivô |
+| 8 | Data Analógica | 105 | 295 | 240 | 38 | mesma data curta em `22 px`, abaixo do pivô |
 | 9 | Bateria Analógica | 160 | 337 | 130 | 32 | percentual simples abaixo da data |
 
 Área segura, clipping e pivôs: texto essencial fica no círculo de raio
@@ -87,8 +87,9 @@ Canvas WFF: `450 × 450`; centro: `(225, 225)`.
 `(225, 225)` e não ultrapassam o canvas. As posições inferiores evitam a
 borda curva e preservam espaço negativo.
 
-Tipografia: `SYNC_TO_DEVICE`, peso `NORMAL`; hora Digital `82 px`, data
-`18–20 px` e bateria `20–22 px`. Não incluir fonte externa.
+Tipografia: `SYNC_TO_DEVICE`, peso `NORMAL`; hora Digital `98 px`, data
+Digital `23 px`, data Analógica `22 px` e bateria `20–22 px`. Não incluir
+fonte externa.
 
 ## 5. Mapeamento WFF 2
 
@@ -103,7 +104,7 @@ Tipografia: `SYNC_TO_DEVICE`, peso `NORMAL`; hora Digital `82 px`, data
 | Horas/minutos | `AnalogClock` | `hour_hand`, `minute_hand` | rotação do sistema |
 | Segundos | `AnalogClock` | `second_hand` | cor depende da intensidade; oculto em AOD |
 | Cores | duas `ColorConfiguration` | `main_color`, `accent_color` | escolhas independentes |
-| Intensidade | `ListConfiguration` | None, Discrete, Full | controla segundos e detalhes mínimos |
+| Intensidade | `ListConfiguration` | None, Discrete, Full | controla segundos e pontos cardinais no Analógico |
 
 - Relógio: híbrido selecionável, com `CLOCK_TYPE="DIGITAL"` como estilo de
   preview e padrão.
@@ -153,9 +154,8 @@ Outras configurações:
 - None não desenha marcadores no modo interativo nem as quatro referências no
   AOD. Os IDs `0–5` foram preservados para não reinterpretar escolhas salvas.
 - None mantém os segundos na Main Color; Discrete realça somente os segundos
-  no Analógico e não altera a hora Digital; Full acrescenta quatro pontos
-  cardinais de realce no Analógico e um ponto mínimo ao lado da bateria no
-  Digital.
+  no Analógico; Full acrescenta quatro pontos cardinais de realce no Analógico.
+  As três intensidades não alteram o estilo Digital.
 - Data e bateria usam cinza fixo `#FF9A9A9A`, nunca a cor de realce.
 
 ## 8. AOD
@@ -163,8 +163,7 @@ Outras configurações:
 - Elementos mantidos no Digital: hora completa na Main Color e bateria.
 - Elementos mantidos no Analógico: horas, minutos, bateria e quatro referências
   cardinais mínimas, exceto quando Markers estiver em None.
-- Elementos ocultos: data em ambos, segundos, marcadores secundários e detalhes
-  Full.
+- Elementos ocultos: data em ambos, segundos e marcadores secundários.
 - Redução de brilho/alpha: hora/mãos `145–160`, bateria `105–120`, marcadores
   cardinais `80–95`.
 - Estratégia contra excesso de pixels acesos: fundo preto puro, sem escala

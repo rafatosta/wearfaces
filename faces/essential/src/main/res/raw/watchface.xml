@@ -43,28 +43,17 @@
             </Expressions>
             <Compare expression="is_digital">
                 <Group x="0" y="0" width="450" height="450" name="digital_style">
-                    <DigitalClock x="35" y="135" width="380" height="105">
-                        <TimeText x="0" y="0" width="380" height="105" format="hh:mm" hourFormat="SYNC_TO_DEVICE" align="CENTER">
-                            <Font family="SYNC_TO_DEVICE" size="82" weight="NORMAL" color="[CONFIGURATION.main_color.0]" />
+                    <DigitalClock x="35" y="124" width="380" height="126">
+                        <TimeText x="0" y="0" width="380" height="126" format="hh:mm" hourFormat="SYNC_TO_DEVICE" align="CENTER">
+                            <Font family="SYNC_TO_DEVICE" size="98" weight="NORMAL" color="[CONFIGURATION.main_color.0]" />
                         </TimeText>
                         <Variant mode="AMBIENT" target="alpha" value="155" />
                     </DigitalClock>
 
-                    <ListConfiguration id="accent_intensity">
-                        <ListOption id="0"><Group name="essential_group_1" x="0" y="0" width="450" height="450" /></ListOption>
-                        <ListOption id="1"><Group name="essential_group_2" x="0" y="0" width="450" height="450" /></ListOption>
-                        <ListOption id="2">
-                            <PartDraw x="173" y="360" width="8" height="8">
-                                <Variant mode="AMBIENT" target="alpha" value="0" />
-                                <Ellipse x="0" y="0" width="8" height="8"><Fill color="[CONFIGURATION.accent_color.0]" /></Ellipse>
-                            </PartDraw>
-                        </ListOption>
-                    </ListConfiguration>
-
-                    <PartText x="100" y="250" width="250" height="34" alpha="225">
+                    <PartText x="100" y="247" width="250" height="41" alpha="225">
                         <Variant mode="AMBIENT" target="alpha" value="0" />
                         <Text align="CENTER" ellipsis="TRUE">
-                            <Font family="SYNC_TO_DEVICE" size="19" weight="NORMAL" color="#FF9A9A9A">
+                            <Font family="SYNC_TO_DEVICE" size="23" weight="NORMAL" color="#FF9A9A9A">
                                 <Template><![CDATA[%s | %02d | %s]]>
                                     <Parameter expression="[DAY_OF_WEEK_S]" />
                                     <Parameter expression="[DAY]" />
@@ -250,10 +239,10 @@
                         <Ellipse x="0" y="0" width="16" height="16"><Fill color="#FF606368" /></Ellipse>
                         <Ellipse x="4" y="4" width="8" height="8"><Fill color="[CONFIGURATION.main_color.0]" /></Ellipse>
                     </PartDraw>
-                    <PartText x="105" y="298" width="240" height="32" alpha="220">
+                    <PartText x="105" y="295" width="240" height="38" alpha="220">
                         <Variant mode="AMBIENT" target="alpha" value="0" />
                         <Text align="CENTER" ellipsis="TRUE">
-                            <Font family="SYNC_TO_DEVICE" size="18" weight="NORMAL" color="#FF9A9A9A">
+                            <Font family="SYNC_TO_DEVICE" size="22" weight="NORMAL" color="#FF9A9A9A">
                                 <Template><![CDATA[%s | %02d | %s]]>
                                     <Parameter expression="[DAY_OF_WEEK_S]" />
                                     <Parameter expression="[DAY]" />
