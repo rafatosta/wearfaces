@@ -73,7 +73,7 @@ Canvas WFF: `450 × 450`; centro: `(225, 225)`.
 | ---: | --- | ---: | ---: | ---: | ---: | --- |
 | 1 | Fundo | 0 | 0 | 450 | 450 | preto AMOLED `#FF000000`, sem imagem ou efeito |
 | 2 | Marcadores analógicos | 0 | 0 | 450 | 450 | opção selecionada, próxima ao raio `205`, ausente no Digital |
-| 3 | Hora Digital | 35 | 135 | 380 | 105 | `hh:mm` com `mm` sobreposto em `x=241`; `82 px`, peso normal |
+| 3 | Hora Digital | 35 | 135 | 380 | 105 | `hh:mm` com `mm` sobreposto em `x=237`; `82 px`, peso normal |
 | 4 | Data Digital | 100 | 250 | 250 | 34 | `%s | %02d | %s`, cinza, centralizada |
 | 5 | Bateria Digital | 150 | 347 | 150 | 38 | percentual simples, cinza, sem rótulo ou contorno |
 | 6 | Ponteiros analógicos | 0 | 0 | 450 | 450 | horas/minutos claros e estreitos; segundos finos com realce |
