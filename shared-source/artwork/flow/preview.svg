@@ -1,8 +1,31 @@
 <svg xmlns="http://www.w3.org/2000/svg" width="450" height="450" viewBox="0 0 450 450">
   <circle cx="225" cy="225" r="225" fill="#000"/>
-  <circle cx="225" cy="225" r="218" fill="none" stroke="#aab3bf" stroke-width="3" stroke-linecap="round" stroke-dasharray="1 21.829" opacity=".72"/>
-  <circle cx="225" cy="225" r="212" fill="none" stroke="#c7cdd5" stroke-width="8" stroke-linecap="round" stroke-dasharray="10 101.003" transform="rotate(-3 225 225)"/>
-  <circle cx="225" cy="7" r="4" fill="#4a9bff"/>
+  <defs>
+    <circle id="minor-marker" cx="225" cy="10" r="2" fill="#b8c0ca" opacity=".608"/>
+    <rect id="hour-marker" x="221" y="7" width="8" height="19" rx="4" fill="#c7cdd5" opacity=".882"/>
+    <rect id="accent-hour-marker" x="221" y="7" width="8" height="19" rx="4" fill="#4a9bff" opacity=".882"/>
+  </defs>
+  <g>
+    <use href="#minor-marker" transform="rotate(6 225 225)"/><use href="#minor-marker" transform="rotate(12 225 225)"/><use href="#minor-marker" transform="rotate(18 225 225)"/><use href="#minor-marker" transform="rotate(24 225 225)"/>
+    <use href="#minor-marker" transform="rotate(36 225 225)"/><use href="#minor-marker" transform="rotate(42 225 225)"/><use href="#minor-marker" transform="rotate(48 225 225)"/><use href="#minor-marker" transform="rotate(54 225 225)"/>
+    <use href="#minor-marker" transform="rotate(66 225 225)"/><use href="#minor-marker" transform="rotate(72 225 225)"/><use href="#minor-marker" transform="rotate(78 225 225)"/><use href="#minor-marker" transform="rotate(84 225 225)"/>
+    <use href="#minor-marker" transform="rotate(96 225 225)"/><use href="#minor-marker" transform="rotate(102 225 225)"/><use href="#minor-marker" transform="rotate(108 225 225)"/><use href="#minor-marker" transform="rotate(114 225 225)"/>
+    <use href="#minor-marker" transform="rotate(126 225 225)"/><use href="#minor-marker" transform="rotate(132 225 225)"/><use href="#minor-marker" transform="rotate(138 225 225)"/><use href="#minor-marker" transform="rotate(144 225 225)"/>
+    <use href="#minor-marker" transform="rotate(156 225 225)"/><use href="#minor-marker" transform="rotate(162 225 225)"/><use href="#minor-marker" transform="rotate(168 225 225)"/><use href="#minor-marker" transform="rotate(174 225 225)"/>
+    <use href="#minor-marker" transform="rotate(186 225 225)"/><use href="#minor-marker" transform="rotate(192 225 225)"/><use href="#minor-marker" transform="rotate(198 225 225)"/><use href="#minor-marker" transform="rotate(204 225 225)"/>
+    <use href="#minor-marker" transform="rotate(216 225 225)"/><use href="#minor-marker" transform="rotate(222 225 225)"/><use href="#minor-marker" transform="rotate(228 225 225)"/><use href="#minor-marker" transform="rotate(234 225 225)"/>
+    <use href="#minor-marker" transform="rotate(246 225 225)"/><use href="#minor-marker" transform="rotate(252 225 225)"/><use href="#minor-marker" transform="rotate(258 225 225)"/><use href="#minor-marker" transform="rotate(264 225 225)"/>
+    <use href="#minor-marker" transform="rotate(276 225 225)"/><use href="#minor-marker" transform="rotate(282 225 225)"/><use href="#minor-marker" transform="rotate(288 225 225)"/><use href="#minor-marker" transform="rotate(294 225 225)"/>
+    <use href="#minor-marker" transform="rotate(306 225 225)"/><use href="#minor-marker" transform="rotate(312 225 225)"/><use href="#minor-marker" transform="rotate(318 225 225)"/><use href="#minor-marker" transform="rotate(324 225 225)"/>
+    <use href="#minor-marker" transform="rotate(336 225 225)"/><use href="#minor-marker" transform="rotate(342 225 225)"/><use href="#minor-marker" transform="rotate(348 225 225)"/><use href="#minor-marker" transform="rotate(354 225 225)"/>
+  </g>
+  <g>
+    <use href="#accent-hour-marker"/>
+    <use href="#hour-marker" transform="rotate(30 225 225)"/><use href="#hour-marker" transform="rotate(60 225 225)"/><use href="#hour-marker" transform="rotate(90 225 225)"/>
+    <use href="#hour-marker" transform="rotate(120 225 225)"/><use href="#hour-marker" transform="rotate(150 225 225)"/><use href="#hour-marker" transform="rotate(180 225 225)"/>
+    <use href="#hour-marker" transform="rotate(210 225 225)"/><use href="#hour-marker" transform="rotate(240 225 225)"/><use href="#hour-marker" transform="rotate(270 225 225)"/>
+    <use href="#hour-marker" transform="rotate(300 225 225)"/><use href="#hour-marker" transform="rotate(330 225 225)"/>
+  </g>
   <text x="225" y="126" fill="#eaf3ff" font-family="sans-serif" font-size="21" text-anchor="middle">Sat, 24 May</text>
   <g fill="none" stroke="#215a96" stroke-width="3">
     <circle cx="109" cy="229" r="57"/><circle cx="341" cy="229" r="57"/><circle cx="225" cy="359" r="52"/>

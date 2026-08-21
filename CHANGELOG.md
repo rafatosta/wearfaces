@@ -67,6 +67,8 @@ arquivo.
 
 ### Fixed
 
+-   Sincronizado o preview do **Flow** com as dimensões, posições, opacidades e
+    intervalos dos pontos e índices externos definidos no XML WFF.
 -   Persistida a chave de assinatura debug em um volume Podman dedicado,
     evitando assinaturas diferentes entre builds executados em contêineres
     efêmeros.
