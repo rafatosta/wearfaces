@@ -75,6 +75,8 @@ arquivo.
 
 ### Fixed
 
+-   Alinhada a camada de minutos em Accent Color do **Essential** sobre os
+    minutos correspondentes do relógio Digital completo.
 -   Sincronizado o preview do **Flow** com as dimensões, posições, opacidades e
     intervalos dos pontos e índices externos definidos no XML WFF.
 -   Persistida a chave de assinatura debug em um volume Podman dedicado,
