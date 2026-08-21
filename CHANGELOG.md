@@ -43,7 +43,7 @@ arquivo.
 -   Adicionada a especificação e implementação do **Essential**, um módulo WFF
     2 independente que alterna entre estilos Digital e Analógico no mesmo APK,
     com bateria direta, duas famílias de cores, três intensidades, sete opções
-    de marcadores — incluindo Nenhum —, dois campos superiores editáveis sem
+    de marcadores — incluindo Nenhum —, quatro campos radiais editáveis sem
     aro ou provider padrão e AOD próprio.
 
 ### Changed
@@ -64,7 +64,7 @@ arquivo.
 -   Generalizada a validação de relógio para aceitar módulos digitais com
     `DigitalClock`/`TimeText` e módulos analógicos com ponteiros completos.
 -   Tornada a regra de complications consciente do contrato de cada mostrador,
-    permitindo ao **Essential** permanecer deliberadamente sem slots.
+    exigindo no **Essential** seus quatro slots radiais.
 -   Redesenhados os ponteiros de hora e minuto do **Flow** com corpo claro,
     extremidade externa arredondada e afilamento em direção ao pivô, conforme o
     mockup aprovado.
@@ -79,6 +79,9 @@ arquivo.
 -   Ampliados os ponteiros analógicos do **Essential** e deslocados todos os
     marcadores para o limite útil da tela; segundos alcançam a escala, minutos
     mantêm folga e horas preservam a proporção.
+-   Reorganizados os campos editáveis do **Essential** em quatro posições
+    diagonais: dois alinhados às direções dos botões físicos à direita e dois
+    espelhados à esquerda, todos compactos, vazios por padrão e sem aro.
 
 ### Fixed
 

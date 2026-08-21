@@ -15,7 +15,7 @@ enquanto preservarem compatibilidade com WFF 2.
 | Mostrador | Estado | Recursos |
 | --- | --- | --- |
 | [Aurora](faces/aurora/) | MVP 0.1.0 | Analógico, data, 2 complications, 4 paletas e AOD |
-| [Essential](faces/essential/) | MVP 0.1.0 | Digital/Analógico, data, bateria, 2 campos editáveis sem aro, cores, marcadores e AOD |
+| [Essential](faces/essential/) | MVP 0.1.0 | Digital/Analógico, data, bateria, 4 campos radiais editáveis sem aro, cores, marcadores e AOD |
 | [Flow](faces/flow/) | MVP 0.1.0 | Analógico, data, 3 complications editáveis, 4 paletas, AMOLED preto e AOD |
 
 Screenshots reais serão adicionadas depois da validação no dispositivo. O

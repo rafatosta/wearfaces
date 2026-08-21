@@ -95,7 +95,7 @@ for module in faces/*; do
   if [[ $slug == aurora || $slug == flow ]]; then
     [[ $complication_count -ge 2 ]] || { echo "$slug needs at least two complication slots" >&2; exit 1; }
   elif [[ $slug == essential ]]; then
-    [[ $complication_count -eq 2 ]] || { echo "$slug must declare exactly two complication slots" >&2; exit 1; }
+    [[ $complication_count -eq 4 ]] || { echo "$slug must declare exactly four complication slots" >&2; exit 1; }
   fi
   [[ $(grep -c '<ColorOption ' "$watchface") -ge 3 ]] || { echo "$slug needs at least three palettes" >&2; exit 1; }
   grep -q 'mode="AMBIENT"' "$watchface" || { echo "$slug needs an ambient mode" >&2; exit 1; }

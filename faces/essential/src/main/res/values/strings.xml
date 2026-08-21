@@ -28,4 +28,6 @@
     <string name="marker_none">None</string>
     <string name="top_left_complication">Top left item</string>
     <string name="top_right_complication">Top right item</string>
+    <string name="bottom_left_complication">Bottom left item</string>
+    <string name="bottom_right_complication">Bottom right item</string>
 </resources>
