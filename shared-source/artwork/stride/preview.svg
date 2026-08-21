@@ -2,13 +2,13 @@
 <svg xmlns="http://www.w3.org/2000/svg" width="450" height="450" viewBox="0 0 450 450">
   <defs>
     <clipPath id="dial"><circle cx="225" cy="225" r="224"/></clipPath>
-    <line id="minor" x1="225" y1="12" x2="225" y2="23" stroke="#737a82" stroke-width="4" stroke-linecap="round"/>
-    <line id="major" x1="225" y1="9" x2="225" y2="26" stroke="#aeb4bb" stroke-width="6" stroke-linecap="round"/>
+    <line id="minor" x1="225" y1="4" x2="225" y2="15" stroke="#737a82" stroke-width="4" stroke-linecap="round"/>
+    <line id="major" x1="225" y1="2" x2="225" y2="18" stroke="#aeb4bb" stroke-width="6" stroke-linecap="round"/>
   </defs>
   <g clip-path="url(#dial)">
     <rect width="450" height="450" fill="#000000"/>
     <g opacity=".88">
-      <line x1="225" y1="8" x2="225" y2="28" stroke="#b7f000" stroke-width="8" stroke-linecap="round"/>
+      <line x1="225" y1="1" x2="225" y2="20" stroke="#b7f000" stroke-width="8" stroke-linecap="round"/>
       <use href="#minor" transform="rotate(15 225 225)"/>
       <use href="#major" transform="rotate(30 225 225)"/>
       <use href="#minor" transform="rotate(45 225 225)"/>
@@ -34,11 +34,16 @@
       <use href="#minor" transform="rotate(345 225 225)"/>
     </g>
 
-    <path d="M92 86 A164 44 0 0 1 358 86" fill="none" stroke="#3b4430" stroke-width="6" stroke-linecap="round"/>
-    <path d="M92 86 A164 44 0 0 1 302 62" fill="none" stroke="#b7f000" stroke-width="8" stroke-linecap="round"/>
-    <circle cx="225" cy="48" r="8" fill="none" stroke="#b7f000" stroke-width="4"/>
-    <text x="225" y="82" text-anchor="middle" fill="#f4f7ed" font-family="sans-serif" font-size="27" font-weight="600">7.842</text>
-    <text x="225" y="103" text-anchor="middle" fill="#aeb4bb" font-family="sans-serif" font-size="14">PASSOS</text>
+    <g fill="none" stroke-linecap="round">
+      <path d="M40.5 118.5 A213 213 0 0 1 169.9 19.2" stroke="#000000" stroke-width="17"/>
+      <path d="M280.1 19.2 A213 213 0 0 1 409.5 118.5" stroke="#000000" stroke-width="17"/>
+      <path d="M40.5 118.5 A213 213 0 0 1 169.9 19.2" stroke="#3b4430" stroke-width="7"/>
+      <path d="M280.1 19.2 A213 213 0 0 1 409.5 118.5" stroke="#3b4430" stroke-width="7"/>
+      <path d="M40.5 118.5 A213 213 0 0 1 169.9 19.2" stroke="#b7f000" stroke-width="9"/>
+      <path d="M280.1 19.2 A213 213 0 0 1 361.9 61.8" stroke="#b7f000" stroke-width="9"/>
+    </g>
+    <text x="225" y="57" text-anchor="middle" fill="#f4f7ed" font-family="sans-serif" font-size="29" font-weight="600">7.842</text>
+    <text x="225" y="82" text-anchor="middle" fill="#aeb4bb" font-family="sans-serif" font-size="15">PASSOS</text>
 
     <text x="225" y="134" text-anchor="middle" fill="#b7f000" font-family="sans-serif" font-size="19" font-weight="600">SÁB, 24 MAI</text>
     <text x="225" y="221" text-anchor="middle" fill="#f4f7ed" font-family="sans-serif" font-size="83" font-weight="700" letter-spacing="-4">10:08</text>
@@ -68,10 +73,15 @@
       <text x="347" y="378" fill="#aeb4bb" font-size="13">KCAL</text>
     </g>
 
-    <path d="M122 426 A145 82 0 0 1 328 426" fill="none" stroke="#3b4430" stroke-width="8" stroke-linecap="round"/>
-    <path d="M122 426 A145 82 0 0 1 286 404" fill="none" stroke="#b7f000" stroke-width="10" stroke-linecap="round"/>
-    <path d="M188 411 L199 394 L196 407 H208 L195 426 L198 411Z" fill="#b7f000"/>
-    <text x="235" y="421" text-anchor="middle" fill="#f4f7ed" font-family="sans-serif" font-size="25" font-weight="600">80%</text>
+    <g fill="none" stroke-linecap="round">
+      <path d="M409.5 331.5 A213 213 0 0 1 290.8 427.6" stroke="#000000" stroke-width="17"/>
+      <path d="M159.2 427.6 A213 213 0 0 1 40.5 331.5" stroke="#000000" stroke-width="17"/>
+      <path d="M409.5 331.5 A213 213 0 0 1 290.8 427.6" stroke="#3b4430" stroke-width="7"/>
+      <path d="M159.2 427.6 A213 213 0 0 1 40.5 331.5" stroke="#3b4430" stroke-width="7"/>
+      <path d="M409.5 331.5 A213 213 0 0 1 290.8 427.6" stroke="#b7f000" stroke-width="9"/>
+      <path d="M159.2 427.6 A213 213 0 0 1 79.7 380.7" stroke="#b7f000" stroke-width="9"/>
+    </g>
+    <text x="225" y="414" text-anchor="middle" fill="#f4f7ed" font-family="sans-serif" font-size="27" font-weight="600">80%</text>
   </g>
   <circle cx="225" cy="225" r="223" fill="none" stroke="#252b30" stroke-width="3"/>
 </svg>

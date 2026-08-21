@@ -84,20 +84,22 @@ Canvas WFF: `450 × 450`; centro: `(225, 225)`.
 | Camada | Elemento | X | Y | Largura | Altura | Aparência/comportamento |
 | ---: | --- | ---: | ---: | ---: | ---: | --- |
 | 1 | Fundo | 0 | 0 | 450 | 450 | Preto AMOLED puro `#FF000000` |
-| 2 | Escala periférica | 0 | 0 | 450 | 450 | 24 marcas curtas, cinza e discretas; marca das 12h na cor primária |
-| 3 | Progresso de passos | 55 | 28 | 340 | 82 | slot superior com ícone/texto central e arco de 260 graus quando o provider expuser progresso |
+| 2 | Escala periférica | 0 | 0 | 450 | 450 | 24 marcas no limite circular da tela; índices maiores alternados e marca das 12h na cor primária |
+| 3 | Progresso de passos | 15 | 0 | 420 | 120 | dois arcos externos sobre a escala, com máscara preta, e valor centralizado no vão superior |
 | 4 | Data | 120 | 111 | 210 | 30 | dia da semana, dia e mês em caixa alta visual e cor primária |
 | 5 | Hora | 45 | 142 | 360 | 104 | hora digital `hh:mm`, branca, grande, centralizada e sincronizada com a preferência 12/24 h do dispositivo |
 | 6 | Pulso de movimento | 147 | 244 | 156 | 24 | linha original com pequeno zigue-zague central, apenas decorativa |
 | 7 | Slot esportivo esquerdo | 48 | 279 | 110 | 110 | padrão frequência cardíaca; círculo fino e conteúdo centralizado |
 | 8 | Slot esportivo central | 170 | 292 | 110 | 110 | padrão vazio; indicado para distância |
 | 9 | Slot esportivo direito | 292 | 279 | 110 | 110 | padrão vazio; indicado para calorias |
-| 10 | Bateria | 99 | 388 | 252 | 49 | slot horizontal com porcentagem e arcos inferiores dinâmicos |
+| 10 | Bateria | 15 | 330 | 420 | 120 | dois arcos externos sobre a escala, com máscara preta, e porcentagem centralizada no vão inferior |
 
 Área segura, clipping e pivôs: conteúdo textual essencial fica dentro do
-círculo de raio `195`; somente escala e arcos decorativos alcançam a região
-periférica. Slots circulares possuem margem interna mínima de `8 px` e seus
-conteúdos não se sobrepõem à hora.
+círculo de raio `195`; a escala alcança o limite do canvas circular. As barras
+superior e inferior usam círculo de `426 px`, são desenhadas depois da escala e
+aplicam um traço preto de `17 px` sob o trilho, cobrindo integralmente os
+índices interceptados. Slots circulares possuem margem interna mínima de `8 px`
+e seus conteúdos não se sobrepõem à hora.
 
 Tipografia: `SYNC_TO_DEVICE`; peso `BOLD` para a hora, `MEDIUM` para valores e
 `NORMAL` para data e textos auxiliares. Tamanhos-alvo: `82 px` para hora,
@@ -111,14 +113,15 @@ Tipografia: `SYNC_TO_DEVICE`; peso `BOLD` para a hora, `MEDIUM` para valores e
 | Escala | `PartDraw`/`Group` | retângulos rotacionados | oculta em `AMBIENT` |
 | Data | `PartText` | `[DAY_OF_WEEK_S]`, `[DAY]`, `[MONTH_S]` | calendário e localidade do sistema |
 | Hora | `DigitalClock`/`TimeText` | `hh:mm`, `hourFormat="SYNC_TO_DEVICE"` | relógio do sistema, atualização por minuto e preferência 12/24 h do dispositivo |
-| Progresso superior | `ComplicationSlot` | `GOAL_PROGRESS`, `RANGED_VALUE`, `SHORT_TEXT` | arcos normalizados e limitados a 100% |
+| Progresso superior | `ComplicationSlot` | dois arcos de `GOAL_PROGRESS`/`RANGED_VALUE` | progresso normalizado, dividido entre os segmentos e limitado a 100% |
 | Dados esportivos | três `ComplicationSlot` | conteúdo do provider | usuário escolhe providers disponíveis |
-| Bateria | `ComplicationSlot` | `WATCH_BATTERY`/`RANGED_VALUE` | porcentagem e arcos normalizados |
+| Bateria | `ComplicationSlot` | `WATCH_BATTERY`/`RANGED_VALUE` | porcentagem central e progresso dividido entre dois arcos externos |
 | Pulso central | `PartDraw` | linhas originais | decorativo, oculto em `AMBIENT` |
 
 - Relógio: `digital`
 - Data: `EEE, d MMM`, obtida do sistema e posicionada acima da hora.
-- Ordem final: fundo, escala, slots/progressos, data, hora e pulso decorativo.
+- Ordem final: fundo, escala, máscaras/trilhos externos, slots/progressos, data,
+  hora e pulso decorativo; as barras cobrem a escala nos trechos coincidentes.
 - Simplificações impostas pelo WFF 2: sem fonte condensada proprietária,
   gradientes, sombras, brilho, animação contínua ou ícones esportivos fixos.
 
@@ -126,11 +129,11 @@ Tipografia: `SYNC_TO_DEVICE`; peso `BOLD` para a hora, `MEDIUM` para valores e
 
 | Nome | Slot ID | X | Y | Largura | Altura | Tipos suportados | Padrão e estado `EMPTY` |
 | --- | ---: | ---: | ---: | ---: | ---: | --- | --- |
-| Atividade superior | 300 | 55 | 28 | 340 | 82 | `SHORT_TEXT`, `MONOCHROMATIC_IMAGE`, `RANGED_VALUE`, `GOAL_PROGRESS`, `EMPTY` | `STEP_COUNT`/`SHORT_TEXT`; vazio deixa somente a trilha discreta |
+| Atividade superior | 300 | 15 | 0 | 420 | 120 | `SHORT_TEXT`, `MONOCHROMATIC_IMAGE`, `RANGED_VALUE`, `GOAL_PROGRESS`, `EMPTY` | `STEP_COUNT`/`SHORT_TEXT`; vazio deixa os dois trilhos externos |
 | Esportivo esquerdo | 301 | 48 | 279 | 110 | 110 | `SHORT_TEXT`, `MONOCHROMATIC_IMAGE`, `RANGED_VALUE`, `GOAL_PROGRESS`, `EMPTY` | `HEART_RATE`/`SHORT_TEXT`; vazio mantém contorno |
 | Esportivo central | 302 | 170 | 292 | 110 | 110 | mesmos tipos | vazio; indicado para distância; vazio mantém contorno |
 | Esportivo direito | 303 | 292 | 279 | 110 | 110 | mesmos tipos | vazio; indicado para calorias; vazio mantém contorno |
-| Bateria inferior | 304 | 99 | 388 | 252 | 49 | `SHORT_TEXT`, `MONOCHROMATIC_IMAGE`, `RANGED_VALUE`, `GOAL_PROGRESS`, `EMPTY` | `WATCH_BATTERY`/`RANGED_VALUE`; vazio deixa trilha inferior discreta |
+| Bateria inferior | 304 | 15 | 330 | 420 | 120 | `SHORT_TEXT`, `MONOCHROMATIC_IMAGE`, `RANGED_VALUE`, `GOAL_PROGRESS`, `EMPTY` | `WATCH_BATTERY`/`RANGED_VALUE`; vazio deixa os dois trilhos externos |
 
 Nenhum dado é coletado pelo mostrador. Os defaults de passos, frequência
 cardíaca e bateria apenas selecionam providers de sistema portáveis; todos os

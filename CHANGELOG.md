@@ -73,6 +73,9 @@ arquivo.
 
 ### Fixed
 
+-   Refinado o **Stride** para posicionar a escala no limite circular da tela e
+    fazer as barras de passos e bateria cobrirem os índices externos, com valor
+    e porcentagem centralizados entre os respectivos segmentos.
 -   Sincronizado o preview do **Flow** com as dimensões, posições, opacidades e
     intervalos dos pontos e índices externos definidos no XML WFF.
 -   Persistida a chave de assinatura debug em um volume Podman dedicado,
