@@ -5,6 +5,7 @@
 -   bootstrap do monorepo;
 -   ambiente Podman;
 -   Aurora MVP;
+-   Flow MVP;
 -   testes/CI;
 -   instalação ADB Wi-Fi.
 
@@ -13,7 +14,7 @@
 -   refinamento visual;
 -   testes visuais quando viáveis;
 -   otimização de memória/AOD;
--   segundo mostrador.
+-   refinamento dos dois mostradores em hardware.
 
 ## 1.0.0
 

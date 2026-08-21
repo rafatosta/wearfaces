@@ -14,10 +14,6 @@ required=(
   docs/RELEASE.md docs/ROADMAP.md docs/REFERENCE_TO_SPEC.md
   docs/watchfaces/TEMPLATE.md docs/watchfaces/SUNLIGHT.md
   tools/validate-face-specs.sh
-  faces/aurora/README.md faces/aurora/build.gradle.kts
-  faces/aurora/src/main/AndroidManifest.xml
-  faces/aurora/src/main/res/raw/watchface.xml
-  faces/aurora/src/main/res/xml/watch_face_info.xml
 )
 
 for path in "${required[@]}"; do
@@ -52,42 +48,60 @@ while IFS= read -r -d '' xml; do
   xmllint --noout "$xml"
 done < <(find faces -path '*/build' -prune -o -type f -name '*.xml' -print0)
 
-manifest=faces/aurora/src/main/AndroidManifest.xml
-build_file=faces/aurora/build.gradle.kts
-watchface=faces/aurora/src/main/res/raw/watchface.xml
-
-grep -q 'android:hasCode="false"' "$manifest" || { echo "Aurora must be resource-only" >&2; exit 1; }
-grep -q 'com.google.wear.watchface.format.version' "$manifest" || { echo "WFF property missing" >&2; exit 1; }
-grep -A2 'com.google.wear.watchface.format.version' "$manifest" | grep -q 'android:value="2"' || {
-  echo "Aurora must declare WFF 2" >&2
-  exit 1
-}
-grep -Eq 'minSdk[[:space:]]*=[[:space:]]*34' "$build_file" || { echo "Aurora minSdk must be 34" >&2; exit 1; }
-grep -Eq 'compileSdk[[:space:]]*=[[:space:]]*34' "$build_file" || { echo "Aurora compileSdk must be 34" >&2; exit 1; }
-grep -q 'com.rtosta.wearfaces.aurora' "$build_file" || { echo "Aurora package ID is incorrect" >&2; exit 1; }
-[[ $(grep -c '<ComplicationSlot ' "$watchface") -ge 2 ]] || { echo "Aurora needs two complication slots" >&2; exit 1; }
-[[ $(grep -c '<ColorOption ' "$watchface") -ge 3 ]] || { echo "Aurora needs at least three palettes" >&2; exit 1; }
-grep -q 'mode="AMBIENT"' "$watchface" || { echo "Aurora needs an ambient mode" >&2; exit 1; }
-grep -q '<HourHand ' "$watchface" && grep -q '<MinuteHand ' "$watchface" || {
-  echo "Aurora analog hands are incomplete" >&2
-  exit 1
-}
-grep -q '\[DAY\]' "$watchface" || { echo "Aurora date is missing" >&2; exit 1; }
-
 validator=${WFF_VALIDATOR_JAR:-/opt/wff-tools/wff-validator.jar}
 if [[ ${SKIP_OFFICIAL_WFF_TOOLS:-0} == 1 ]]; then
   echo "WARNING: official WFF schema validation explicitly skipped" >&2
-elif [[ -f "$validator" ]]; then
-  validator_output=$(java -jar "$validator" 2 "$watchface" 2>&1)
-  printf '%s\n' "$validator_output"
-  if grep -Eq '❌|NOT valid|SEVERE:' <<<"$validator_output"; then
-    echo "Official WFF validation failed." >&2
-    exit 1
-  fi
-else
+elif [[ ! -f "$validator" ]]; then
   echo "Official WFF validator not found at $validator." >&2
   echo "Use ./tools/dev.sh validate or set WFF_VALIDATOR_JAR." >&2
   exit 1
 fi
+
+module_count=0
+for module in faces/*; do
+  [[ -d "$module" && -f "$module/build.gradle.kts" ]] || continue
+  ((module_count += 1))
+  slug=${module##*/}
+  manifest=$module/src/main/AndroidManifest.xml
+  build_file=$module/build.gradle.kts
+  watchface=$module/src/main/res/raw/watchface.xml
+  info=$module/src/main/res/xml/watch_face_info.xml
+  readme=$module/README.md
+
+  for path in "$manifest" "$watchface" "$info" "$readme"; do
+    [[ -f "$path" ]] || { echo "Missing required module path: $path" >&2; exit 1; }
+  done
+
+  grep -q 'android:hasCode="false"' "$manifest" || { echo "$slug must be resource-only" >&2; exit 1; }
+  grep -q 'com.google.wear.watchface.format.version' "$manifest" || { echo "$slug WFF property is missing" >&2; exit 1; }
+  grep -A2 'com.google.wear.watchface.format.version' "$manifest" | grep -q 'android:value="2"' || {
+    echo "$slug must declare WFF 2" >&2
+    exit 1
+  }
+  grep -Eq 'minSdk[[:space:]]*=[[:space:]]*34' "$build_file" || { echo "$slug minSdk must be 34" >&2; exit 1; }
+  grep -Eq 'compileSdk[[:space:]]*=[[:space:]]*34' "$build_file" || { echo "$slug compileSdk must be 34" >&2; exit 1; }
+  grep -Eq 'targetSdk[[:space:]]*=[[:space:]]*34' "$build_file" || { echo "$slug targetSdk must be 34" >&2; exit 1; }
+  grep -q "com.rtosta.wearfaces.$slug" "$build_file" || { echo "$slug package ID is incorrect" >&2; exit 1; }
+  grep -Fq "include(\":faces:$slug\")" settings.gradle.kts || { echo "$slug is missing from settings.gradle.kts" >&2; exit 1; }
+  [[ $(grep -c '<ComplicationSlot ' "$watchface") -ge 2 ]] || { echo "$slug needs two complication slots" >&2; exit 1; }
+  [[ $(grep -c '<ColorOption ' "$watchface") -ge 3 ]] || { echo "$slug needs at least three palettes" >&2; exit 1; }
+  grep -q 'mode="AMBIENT"' "$watchface" || { echo "$slug needs an ambient mode" >&2; exit 1; }
+  grep -q '<HourHand ' "$watchface" && grep -q '<MinuteHand ' "$watchface" || {
+    echo "$slug analog hands are incomplete" >&2
+    exit 1
+  }
+  grep -q '\[DAY\]' "$watchface" || { echo "$slug date is missing" >&2; exit 1; }
+
+  if [[ ${SKIP_OFFICIAL_WFF_TOOLS:-0} != 1 ]]; then
+    validator_output=$(java -jar "$validator" 2 "$watchface" 2>&1)
+    printf '%s\n' "$validator_output"
+    if grep -Eq '❌|NOT valid|SEVERE:' <<<"$validator_output"; then
+      echo "Official WFF validation failed for $slug." >&2
+      exit 1
+    fi
+  fi
+done
+
+((module_count > 0)) || { echo "No watch face modules found" >&2; exit 1; }
 
 echo "Static and WFF validation passed."

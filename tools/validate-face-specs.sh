@@ -37,6 +37,10 @@ validate_sections() {
 validate_sections "$template"
 docs_root=$(realpath docs/watchfaces)
 
+while IFS= read -r -d '' spec; do
+  validate_sections "$spec"
+done < <(find docs/watchfaces -maxdepth 1 -type f -name '*.md' ! -name 'TEMPLATE.md' -print0)
+
 for module in faces/*; do
   [[ -d "$module" && -f "$module/build.gradle.kts" ]] || continue
   slug=${module##*/}
@@ -56,7 +60,6 @@ for module in faces/*; do
     exit 1
   }
 
-  validate_sections "$spec"
   grep -Fq -- "- Slug: \`$slug\`" "$spec" || { echo "$spec has an incorrect slug" >&2; exit 1; }
   package_id="com.rtosta.wearfaces.$slug"
   grep -Fq -- "- Package ID: \`$package_id\`" "$spec" || { echo "$spec has an incorrect package ID" >&2; exit 1; }

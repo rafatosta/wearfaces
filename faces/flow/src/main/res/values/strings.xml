@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="watch_face_name">Flow</string>
+    <string name="palette_label">Accent color</string>
+    <string name="palette_blue">Blue</string>
+    <string name="palette_green">Green</string>
+    <string name="palette_purple">Purple</string>
+    <string name="palette_orange">Orange</string>
+    <string name="left_complication">Left complication</string>
+    <string name="right_complication">Right complication</string>
+</resources>

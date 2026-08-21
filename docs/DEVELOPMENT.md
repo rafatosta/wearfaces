@@ -11,6 +11,7 @@ SDK e as ferramentas oficiais WFF.
 ./tools/dev.sh validate
 ./tools/dev.sh test
 ./tools/dev.sh build aurora
+./tools/dev.sh build flow
 ```
 
 `dev.sh` monta somente o checkout em `/workspace` com relabel SELinux e mantém
@@ -24,6 +25,7 @@ Defina `ANDROID_HOME`/`ANDROID_SDK_ROOT` e execute:
 
 ```bash
 ./gradlew :faces:aurora:assembleDebug
+./gradlew :faces:flow:assembleDebug
 ./tools/build-all.sh
 ```
 

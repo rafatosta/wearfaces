@@ -34,6 +34,14 @@ arquivo.
     assets originais/licenciados.
 -   Adicionado template obrigatório e fluxo auditável para converter fotos ou
     mockups em especificações e prompts implementáveis pelo Codex.
+-   Adicionada a especificação do mostrador **Flow**, extraída de mockup, com
+    quatro paletas, duas complications, AOD e limites explícitos para identidade
+    e assets GNOME.
+-   Aprovado o glifo provisório do **Flow** para implementação e avaliação,
+    mantendo qualquer adoção futura da marca GNOME condicionada à autorização.
+-   Implementado o mostrador **Flow** como módulo WFF 2 independente, com data
+    em dois níveis, quatro paletas, duas complications configuráveis, segundos,
+    glifo provisório próprio e AOD otimizado.
 
 ### Changed
 
@@ -46,6 +54,10 @@ arquivo.
     derivados de erros de transcrição.
 -   Adotado Build Tools 36.0.0 por exigência do AGP 9.0.0, preservando API 34 e
     WFF 2 como baseline de execução.
+-   Ampliada a validação documental para abranger também especificações de
+    mostradores ainda não vinculadas a um módulo Gradle.
+-   Generalizada a validação estática e oficial WFF para conferir todos os
+    módulos de mostrador, em vez de somente o Aurora.
 
 ### Fixed
 
