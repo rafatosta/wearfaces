@@ -262,5 +262,45 @@
                 </Group>
             </Default>
         </Condition>
+
+        <ComplicationSlot x="57" y="45" width="104" height="72" slotId="400" displayName="top_left_complication" supportedTypes="SHORT_TEXT MONOCHROMATIC_IMAGE RANGED_VALUE GOAL_PROGRESS EMPTY">
+            <Variant mode="AMBIENT" target="alpha" value="0" />
+            <BoundingBox x="0" y="0" width="104" height="72" outlinePadding="4" />
+            <Complication type="SHORT_TEXT">
+                <PartImage x="40" y="2" width="24" height="24" tintColor="[CONFIGURATION.main_color.0]"><Image resource="[COMPLICATION.MONOCHROMATIC_IMAGE]" /></PartImage>
+                <PartText x="0" y="27" width="104" height="36" tintColor="[CONFIGURATION.main_color.0]"><Text align="CENTER" ellipsis="TRUE"><Font family="SYNC_TO_DEVICE" size="22" weight="NORMAL"><Template><![CDATA[%s]]><Parameter expression="[COMPLICATION.TEXT]" /></Template></Font></Text></PartText>
+            </Complication>
+            <Complication type="MONOCHROMATIC_IMAGE">
+                <PartImage x="32" y="12" width="40" height="40" tintColor="[CONFIGURATION.main_color.0]"><Image resource="[COMPLICATION.MONOCHROMATIC_IMAGE]" /></PartImage>
+            </Complication>
+            <Complication type="RANGED_VALUE">
+                <PartImage x="40" y="2" width="24" height="24" tintColor="[CONFIGURATION.main_color.0]"><Image resource="[COMPLICATION.MONOCHROMATIC_IMAGE]" /></PartImage>
+                <PartText x="0" y="27" width="104" height="36" tintColor="[CONFIGURATION.main_color.0]"><Text align="CENTER" ellipsis="TRUE"><Font family="SYNC_TO_DEVICE" size="22" weight="NORMAL"><Template><![CDATA[%.0f]]><Parameter expression="[COMPLICATION.RANGED_VALUE_VALUE]" /></Template></Font></Text></PartText>
+            </Complication>
+            <Complication type="GOAL_PROGRESS">
+                <PartImage x="40" y="2" width="24" height="24" tintColor="[CONFIGURATION.main_color.0]"><Image resource="[COMPLICATION.MONOCHROMATIC_IMAGE]" /></PartImage>
+                <PartText x="0" y="27" width="104" height="36" tintColor="[CONFIGURATION.main_color.0]"><Text align="CENTER" ellipsis="TRUE"><Font family="SYNC_TO_DEVICE" size="22" weight="NORMAL"><Template><![CDATA[%.0f]]><Parameter expression="[COMPLICATION.GOAL_PROGRESS_VALUE]" /></Template></Font></Text></PartText>
+            </Complication>
+        </ComplicationSlot>
+
+        <ComplicationSlot x="289" y="45" width="104" height="72" slotId="401" displayName="top_right_complication" supportedTypes="SHORT_TEXT MONOCHROMATIC_IMAGE RANGED_VALUE GOAL_PROGRESS EMPTY">
+            <Variant mode="AMBIENT" target="alpha" value="0" />
+            <BoundingBox x="0" y="0" width="104" height="72" outlinePadding="4" />
+            <Complication type="SHORT_TEXT">
+                <PartImage x="40" y="2" width="24" height="24" tintColor="[CONFIGURATION.main_color.0]"><Image resource="[COMPLICATION.MONOCHROMATIC_IMAGE]" /></PartImage>
+                <PartText x="0" y="27" width="104" height="36" tintColor="[CONFIGURATION.main_color.0]"><Text align="CENTER" ellipsis="TRUE"><Font family="SYNC_TO_DEVICE" size="22" weight="NORMAL"><Template><![CDATA[%s]]><Parameter expression="[COMPLICATION.TEXT]" /></Template></Font></Text></PartText>
+            </Complication>
+            <Complication type="MONOCHROMATIC_IMAGE">
+                <PartImage x="32" y="12" width="40" height="40" tintColor="[CONFIGURATION.main_color.0]"><Image resource="[COMPLICATION.MONOCHROMATIC_IMAGE]" /></PartImage>
+            </Complication>
+            <Complication type="RANGED_VALUE">
+                <PartImage x="40" y="2" width="24" height="24" tintColor="[CONFIGURATION.main_color.0]"><Image resource="[COMPLICATION.MONOCHROMATIC_IMAGE]" /></PartImage>
+                <PartText x="0" y="27" width="104" height="36" tintColor="[CONFIGURATION.main_color.0]"><Text align="CENTER" ellipsis="TRUE"><Font family="SYNC_TO_DEVICE" size="22" weight="NORMAL"><Template><![CDATA[%.0f]]><Parameter expression="[COMPLICATION.RANGED_VALUE_VALUE]" /></Template></Font></Text></PartText>
+            </Complication>
+            <Complication type="GOAL_PROGRESS">
+                <PartImage x="40" y="2" width="24" height="24" tintColor="[CONFIGURATION.main_color.0]"><Image resource="[COMPLICATION.MONOCHROMATIC_IMAGE]" /></PartImage>
+                <PartText x="0" y="27" width="104" height="36" tintColor="[CONFIGURATION.main_color.0]"><Text align="CENTER" ellipsis="TRUE"><Font family="SYNC_TO_DEVICE" size="22" weight="NORMAL"><Template><![CDATA[%.0f]]><Parameter expression="[COMPLICATION.GOAL_PROGRESS_VALUE]" /></Template></Font></Text></PartText>
+            </Complication>
+        </ComplicationSlot>
     </Scene>
 </WatchFace>

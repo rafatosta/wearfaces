@@ -26,4 +26,6 @@
     <string name="marker_dots">Dots</string>
     <string name="marker_hybrid">Hybrid</string>
     <string name="marker_none">None</string>
+    <string name="top_left_complication">Top left item</string>
+    <string name="top_right_complication">Top right item</string>
 </resources>

@@ -26,4 +26,6 @@
     <string name="marker_dots">Pontos</string>
     <string name="marker_hybrid">Híbrido</string>
     <string name="marker_none">Nenhum</string>
+    <string name="top_left_complication">Item superior esquerdo</string>
+    <string name="top_right_complication">Item superior direito</string>
 </resources>

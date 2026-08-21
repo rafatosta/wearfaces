@@ -38,7 +38,8 @@
   criadas no projeto; não usar a imagem de referência no APK.
 - Implementar Digital e Analógico no mesmo XML por `ListConfiguration` e
   reavaliar a cena com `Condition`, sem aninhar usos de configurações.
-- Mostrar somente hora, data e `[BATTERY_PERCENT]`; não criar complications.
+- Mostrar hora, data e `[BATTERY_PERCENT]`, além de dois `ComplicationSlot`
+  superiores opcionais, inicialmente vazios e sem aro.
 - Padrões: Digital, White, Green, Discrete e Minimal.
 - A opção de marcadores permanece visível no editor Digital, mas não produz
   efeito nele. Ocultá-la condicionalmente exigiria hierarquia de configurações,
@@ -53,17 +54,18 @@
 
 ### Intenção
 
-Oferecer somente hora, data e bateria, aproveitando o canvas circular com alto
-contraste e poucos pixels permanentemente acesos. Digital e Analógico são duas
-expressões do mesmo produto e compartilham cores, intensidade e AOD.
+Oferecer hora, data e bateria com dois campos opcionais discretos, aproveitando
+o canvas circular com alto contraste e poucos pixels permanentemente acesos.
+Digital e Analógico são duas expressões do mesmo produto e compartilham cores,
+campos editáveis, intensidade e AOD.
 
 ### Não objetivos
 
 - não copiar carcaça, fontes, controles, ícones ou geometria proprietária;
 - não elevar WFF/API nem adicionar renderer legado;
 - não adicionar rede, telemetria ou coleta própria de saúde;
-- não oferecer passos, frequência cardíaca, clima, agenda ou atalhos;
-- não criar complication slots, barras, arcos, cards, gradientes ou glow;
+- não definir passos, frequência cardíaca, clima, agenda ou atalhos como padrão;
+- não criar aros, barras, arcos, cards, gradientes ou glow para os campos;
 - não alegar economia percentual de bateria sem medição.
 
 ## 4. Especificação visual
@@ -81,6 +83,8 @@ Canvas WFF: `450 × 450`; centro: `(225, 225)`.
 | 7 | Pivô analógico | 217 | 217 | 16 | 16 | dois círculos pequenos, sem brilho |
 | 8 | Data Analógica | 105 | 295 | 240 | 38 | mesma data curta em `22 px`, abaixo do pivô |
 | 9 | Bateria Analógica | 160 | 337 | 130 | 32 | percentual simples abaixo da data |
+| 10 | Campo superior esquerdo | 57 | 45 | 104 | 72 | editável, vazio por padrão e sem aro |
+| 11 | Campo superior direito | 289 | 45 | 104 | editável, vazio por padrão e sem aro |
 
 Área segura, clipping e pivôs: texto essencial fica no círculo de raio
 `185`; marcadores alcançam no máximo o raio `221`; mãos têm pivô em
@@ -104,6 +108,7 @@ fonte externa.
 | Marcadores | `ListConfiguration` e `PartDraw` | seis conjuntos originais e opção vazia | somente o grupo Analógico os revela |
 | Horas/minutos | `AnalogClock` | `hour_hand` raio `145`, `minute_hand` raio `189` | rotação do sistema |
 | Segundos | `AnalogClock` | `second_hand`, raio `221` | sobrepõe o maior marcador; oculto em AOD |
+| Campos superiores | dois `ComplicationSlot` | IDs `400` e `401`, `BoundingBox` sem desenho | editáveis, compartilhados pelos dois estilos e vazios por padrão |
 | Cores | duas `ColorConfiguration` | `main_color`, `accent_color` | escolhas independentes |
 | Intensidade | `ListConfiguration` | None, Discrete, Full | controla segundos e pontos cardinais no Analógico |
 
@@ -111,7 +116,7 @@ fonte externa.
   preview e padrão.
 - Data: Digital em `y=250`; Analógico em `y=298`.
 - Ordem final: fundo, marcadores, relógio selecionado, textos secundários,
-  realces de intensidade e pivô.
+  realces, pivô e campos superiores.
 - Simplificações impostas pelo WFF 2: a configuração Markers não pode ser
   ocultada hierarquicamente no editor Digital e não há transição animada entre
   estilos. A hora Digital completa permanece na Main Color, sem sobreposição
@@ -122,9 +127,20 @@ fonte externa.
 
 ## 6. Complications
 
-Essential não possui `ComplicationSlot`. A bateria usa diretamente
-`[BATTERY_PERCENT]`; nenhum provider é fixado e nenhuma informação externa é
-coletada ou configurável.
+Essential possui dois `ComplicationSlot` editáveis e compartilhados pelos
+estilos Digital e Analógico:
+
+| Slot | ID | Área | Tipos | Padrão |
+| --- | ---: | --- | --- | --- |
+| Superior esquerdo | `400` | `57,45,104,72` | `SHORT_TEXT`, `MONOCHROMATIC_IMAGE`, `RANGED_VALUE`, `GOAL_PROGRESS`, `EMPTY` | nenhum |
+| Superior direito | `401` | `289,45,104,72` | `SHORT_TEXT`, `MONOCHROMATIC_IMAGE`, `RANGED_VALUE`, `GOAL_PROGRESS`, `EMPTY` | nenhum |
+
+Os slots não possuem `DefaultProviderPolicy`; aceitar `EMPTY` permite que
+iniciem realmente sem provider. `BoundingBox` define somente seleção e clipping
+no editor: nenhum aro, contorno ou fundo é desenhado. Ícone e texto ficam
+centralizados, usam Main Color e dependem exclusivamente do provider escolhido
+pelo usuário. A bateria inferior continua usando diretamente
+`[BATTERY_PERCENT]`.
 
 ## 7. Configurações e paletas
 
@@ -165,6 +181,7 @@ Outras configurações:
 - Elementos mantidos no Analógico: horas, minutos, bateria e quatro referências
   cardinais mínimas, exceto quando Markers estiver em None.
 - Elementos ocultos: data em ambos, segundos e marcadores secundários.
+- Os dois campos superiores ficam completamente ocultos no AOD.
 - Redução de brilho/alpha: hora/mãos `145–160`, bateria `105–120`, marcadores
   cardinais `80–95`.
 - Estratégia contra excesso de pixels acesos: fundo preto puro, sem escala
@@ -193,6 +210,7 @@ fonte não identificada do mockup.
 - estilo e informação não dependem somente de cor;
 - fonte do sistema e tamanhos mínimos de `18 px` para conteúdo secundário;
 - data segue locale do dispositivo, sem texto estático não traduzido no visor;
+- os campos têm nomes localizados, área de toque ampla e conteúdo centralizado;
 - o editor expõe Markers também no Digital por limitação documentada do WFF 2.
 
 ## 11. Prompt normalizado para o Codex
@@ -206,8 +224,9 @@ com.rtosta.wearfaces.essential, WFF 2 e API 34.
 Use docs/watchfaces/ESSENTIAL.md como fonte de verdade. Em um único APK,
 ofereça Style Digital/Analog por ListConfiguration e selecione a cena por
 Condition, sem aninhar usos de configurações. Use canvas 450 x 450,
-fundo AMOLED preto, fonte SYNC_TO_DEVICE, somente hora, data e
-BATTERY_PERCENT. Não crie ComplicationSlot. O Digital usa hora grande `hh:mm`
+fundo AMOLED preto, fonte SYNC_TO_DEVICE, hora, data e BATTERY_PERCENT. Crie
+dois ComplicationSlot editáveis no topo, sem aro e sem provider padrão; aceite
+EMPTY e oculte ambos no AOD. O Digital usa hora grande `hh:mm`
 integralmente em Main Color, sem Accent Color nos minutos.
 O Analógico usa mãos originais estreitas, segundos como realce e sete opções
 de marcadores. Implemente Main Color, Accent Color, Accent Intensity
@@ -239,7 +258,7 @@ renderer legado, efeitos decorativos e alegações não medidas de economia.
 - [x] package ID e módulo independentes;
 - [x] Digital e Analógico no mesmo APK;
 - [x] hora, data e bateria conforme especificação;
-- [x] nenhuma complication;
+- [x] dois campos editáveis, vazios por padrão e sem aro;
 - [x] Main Color, Accent Color e três intensidades;
 - [x] sete opções de marcadores analógicos, incluindo Nenhum;
 - [x] AOD próprio preservando o estilo;
@@ -256,6 +275,7 @@ Digital/Analógico e persistência da alternância; horários Digital `00:00`,
 `01:01`, `08:08`, `10:08`, `11:11`, `12:59`, `20:00`, `23:59`; horários
 Analógicos `00:00`, `03:15`, `06:30`, `09:45`, `10:08`, `12:30`, `18:30`,
 `23:59`; bateria de `0%` a `100%`; sete opções de marcadores; todas as cores e
-intensidades; entrada/saída do AOD; clipping, brilho, reboot, troca/retorno e
-atualização/reinstalação. A adequação dos marcadores à carcaça física também
-depende dessa avaliação.
+intensidades; seleção, troca, limpeza e centralização dos dois campos; entrada e
+saída do AOD; clipping, brilho, reboot, troca/retorno e atualização/reinstalação.
+A adequação dos marcadores e campos à carcaça física também depende dessa
+avaliação.
