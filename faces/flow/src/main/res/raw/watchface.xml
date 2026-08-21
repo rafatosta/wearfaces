@@ -107,22 +107,19 @@
             <DefaultProviderPolicy defaultSystemProvider="STEP_COUNT" defaultSystemProviderType="SHORT_TEXT" />
             <BoundingOval x="0" y="0" width="118" height="118" outlinePadding="6" />
             <Complication type="SHORT_TEXT">
-                <PartImage x="48" y="19" width="22" height="22" tintColor="[CONFIGURATION.palette.2]"><Image resource="[COMPLICATION.MONOCHROMATIC_IMAGE]" /></PartImage>
-                <PartText x="12" y="42" width="94" height="34" tintColor="[CONFIGURATION.palette.2]"><Text align="CENTER" ellipsis="TRUE"><Font family="SYNC_TO_DEVICE" size="27" weight="MEDIUM"><Template><![CDATA[%s]]><Parameter expression="[COMPLICATION.TEXT]" /></Template></Font></Text></PartText>
-                <PartText x="14" y="76" width="90" height="22" tintColor="[CONFIGURATION.palette.2]"><Text align="CENTER" ellipsis="TRUE"><Font family="SYNC_TO_DEVICE" size="15"><Template><![CDATA[%s]]><Parameter expression="[COMPLICATION.TITLE]" /></Template></Font></Text></PartText>
+                <PartText x="0" y="31" width="118" height="36" tintColor="[CONFIGURATION.palette.2]"><Text align="CENTER" ellipsis="TRUE"><Font family="SYNC_TO_DEVICE" size="27" weight="MEDIUM"><Template><![CDATA[%s]]><Parameter expression="[COMPLICATION.TEXT]" /></Template></Font></Text></PartText>
+                <PartText x="0" y="67" width="118" height="22" tintColor="[CONFIGURATION.palette.2]"><Text align="CENTER" ellipsis="TRUE"><Font family="SYNC_TO_DEVICE" size="15"><Template><![CDATA[%s]]><Parameter expression="[COMPLICATION.TITLE]" /></Template></Font></Text></PartText>
             </Complication>
             <Complication type="MONOCHROMATIC_IMAGE">
                 <PartImage x="35" y="35" width="48" height="48" tintColor="[CONFIGURATION.palette.2]"><Image resource="[COMPLICATION.MONOCHROMATIC_IMAGE]" /></PartImage>
             </Complication>
             <Complication type="RANGED_VALUE">
-                <PartImage x="48" y="19" width="22" height="22" tintColor="[CONFIGURATION.palette.2]"><Image resource="[COMPLICATION.MONOCHROMATIC_IMAGE]" /></PartImage>
-                <PartText x="12" y="42" width="94" height="34" tintColor="[CONFIGURATION.palette.2]"><Text align="CENTER" ellipsis="TRUE"><Font family="SYNC_TO_DEVICE" size="27" weight="MEDIUM"><Template><![CDATA[%.0f]]><Parameter expression="[COMPLICATION.RANGED_VALUE_VALUE]" /></Template></Font></Text></PartText>
-                <PartText x="14" y="76" width="90" height="22" tintColor="[CONFIGURATION.palette.2]"><Text align="CENTER" ellipsis="TRUE"><Font family="SYNC_TO_DEVICE" size="15"><Template><![CDATA[%s]]><Parameter expression="[COMPLICATION.TITLE]" /></Template></Font></Text></PartText>
+                <PartText x="0" y="31" width="118" height="36" tintColor="[CONFIGURATION.palette.2]"><Text align="CENTER" ellipsis="TRUE"><Font family="SYNC_TO_DEVICE" size="27" weight="MEDIUM"><Template><![CDATA[%.0f]]><Parameter expression="[COMPLICATION.RANGED_VALUE_VALUE]" /></Template></Font></Text></PartText>
+                <PartText x="0" y="67" width="118" height="22" tintColor="[CONFIGURATION.palette.2]"><Text align="CENTER" ellipsis="TRUE"><Font family="SYNC_TO_DEVICE" size="15"><Template><![CDATA[%s]]><Parameter expression="[COMPLICATION.TITLE]" /></Template></Font></Text></PartText>
             </Complication>
             <Complication type="GOAL_PROGRESS">
-                <PartImage x="48" y="19" width="22" height="22" tintColor="[CONFIGURATION.palette.2]"><Image resource="[COMPLICATION.MONOCHROMATIC_IMAGE]" /></PartImage>
-                <PartText x="12" y="42" width="94" height="34" tintColor="[CONFIGURATION.palette.2]"><Text align="CENTER" ellipsis="TRUE"><Font family="SYNC_TO_DEVICE" size="27" weight="MEDIUM"><Template><![CDATA[%.0f]]><Parameter expression="[COMPLICATION.GOAL_PROGRESS_VALUE]" /></Template></Font></Text></PartText>
-                <PartText x="14" y="76" width="90" height="22" tintColor="[CONFIGURATION.palette.2]"><Text align="CENTER" ellipsis="TRUE"><Font family="SYNC_TO_DEVICE" size="15"><Template><![CDATA[%s]]><Parameter expression="[COMPLICATION.TITLE]" /></Template></Font></Text></PartText>
+                <PartText x="0" y="31" width="118" height="36" tintColor="[CONFIGURATION.palette.2]"><Text align="CENTER" ellipsis="TRUE"><Font family="SYNC_TO_DEVICE" size="27" weight="MEDIUM"><Template><![CDATA[%.0f]]><Parameter expression="[COMPLICATION.GOAL_PROGRESS_VALUE]" /></Template></Font></Text></PartText>
+                <PartText x="0" y="67" width="118" height="22" tintColor="[CONFIGURATION.palette.2]"><Text align="CENTER" ellipsis="TRUE"><Font family="SYNC_TO_DEVICE" size="15"><Template><![CDATA[%s]]><Parameter expression="[COMPLICATION.TITLE]" /></Template></Font></Text></PartText>
             </Complication>
         </ComplicationSlot>
 
@@ -131,22 +128,19 @@
             <DefaultProviderPolicy defaultSystemProvider="EMPTY" defaultSystemProviderType="EMPTY" />
             <BoundingOval x="0" y="0" width="118" height="118" outlinePadding="6" />
             <Complication type="SHORT_TEXT">
-                <PartImage x="48" y="19" width="22" height="22" tintColor="[CONFIGURATION.palette.2]"><Image resource="[COMPLICATION.MONOCHROMATIC_IMAGE]" /></PartImage>
-                <PartText x="12" y="42" width="94" height="34" tintColor="[CONFIGURATION.palette.2]"><Text align="CENTER" ellipsis="TRUE"><Font family="SYNC_TO_DEVICE" size="27" weight="MEDIUM"><Template><![CDATA[%s]]><Parameter expression="[COMPLICATION.TEXT]" /></Template></Font></Text></PartText>
-                <PartText x="14" y="76" width="90" height="22" tintColor="[CONFIGURATION.palette.2]"><Text align="CENTER" ellipsis="TRUE"><Font family="SYNC_TO_DEVICE" size="15"><Template><![CDATA[%s]]><Parameter expression="[COMPLICATION.TITLE]" /></Template></Font></Text></PartText>
+                <PartText x="0" y="31" width="118" height="36" tintColor="[CONFIGURATION.palette.2]"><Text align="CENTER" ellipsis="TRUE"><Font family="SYNC_TO_DEVICE" size="27" weight="MEDIUM"><Template><![CDATA[%s]]><Parameter expression="[COMPLICATION.TEXT]" /></Template></Font></Text></PartText>
+                <PartText x="0" y="67" width="118" height="22" tintColor="[CONFIGURATION.palette.2]"><Text align="CENTER" ellipsis="TRUE"><Font family="SYNC_TO_DEVICE" size="15"><Template><![CDATA[%s]]><Parameter expression="[COMPLICATION.TITLE]" /></Template></Font></Text></PartText>
             </Complication>
             <Complication type="MONOCHROMATIC_IMAGE">
                 <PartImage x="35" y="35" width="48" height="48" tintColor="[CONFIGURATION.palette.2]"><Image resource="[COMPLICATION.MONOCHROMATIC_IMAGE]" /></PartImage>
             </Complication>
             <Complication type="RANGED_VALUE">
-                <PartImage x="48" y="19" width="22" height="22" tintColor="[CONFIGURATION.palette.2]"><Image resource="[COMPLICATION.MONOCHROMATIC_IMAGE]" /></PartImage>
-                <PartText x="12" y="42" width="94" height="34" tintColor="[CONFIGURATION.palette.2]"><Text align="CENTER" ellipsis="TRUE"><Font family="SYNC_TO_DEVICE" size="27" weight="MEDIUM"><Template><![CDATA[%.0f]]><Parameter expression="[COMPLICATION.RANGED_VALUE_VALUE]" /></Template></Font></Text></PartText>
-                <PartText x="14" y="76" width="90" height="22" tintColor="[CONFIGURATION.palette.2]"><Text align="CENTER" ellipsis="TRUE"><Font family="SYNC_TO_DEVICE" size="15"><Template><![CDATA[%s]]><Parameter expression="[COMPLICATION.TITLE]" /></Template></Font></Text></PartText>
+                <PartText x="0" y="31" width="118" height="36" tintColor="[CONFIGURATION.palette.2]"><Text align="CENTER" ellipsis="TRUE"><Font family="SYNC_TO_DEVICE" size="27" weight="MEDIUM"><Template><![CDATA[%.0f]]><Parameter expression="[COMPLICATION.RANGED_VALUE_VALUE]" /></Template></Font></Text></PartText>
+                <PartText x="0" y="67" width="118" height="22" tintColor="[CONFIGURATION.palette.2]"><Text align="CENTER" ellipsis="TRUE"><Font family="SYNC_TO_DEVICE" size="15"><Template><![CDATA[%s]]><Parameter expression="[COMPLICATION.TITLE]" /></Template></Font></Text></PartText>
             </Complication>
             <Complication type="GOAL_PROGRESS">
-                <PartImage x="48" y="19" width="22" height="22" tintColor="[CONFIGURATION.palette.2]"><Image resource="[COMPLICATION.MONOCHROMATIC_IMAGE]" /></PartImage>
-                <PartText x="12" y="42" width="94" height="34" tintColor="[CONFIGURATION.palette.2]"><Text align="CENTER" ellipsis="TRUE"><Font family="SYNC_TO_DEVICE" size="27" weight="MEDIUM"><Template><![CDATA[%.0f]]><Parameter expression="[COMPLICATION.GOAL_PROGRESS_VALUE]" /></Template></Font></Text></PartText>
-                <PartText x="14" y="76" width="90" height="22" tintColor="[CONFIGURATION.palette.2]"><Text align="CENTER" ellipsis="TRUE"><Font family="SYNC_TO_DEVICE" size="15"><Template><![CDATA[%s]]><Parameter expression="[COMPLICATION.TITLE]" /></Template></Font></Text></PartText>
+                <PartText x="0" y="31" width="118" height="36" tintColor="[CONFIGURATION.palette.2]"><Text align="CENTER" ellipsis="TRUE"><Font family="SYNC_TO_DEVICE" size="27" weight="MEDIUM"><Template><![CDATA[%.0f]]><Parameter expression="[COMPLICATION.GOAL_PROGRESS_VALUE]" /></Template></Font></Text></PartText>
+                <PartText x="0" y="67" width="118" height="22" tintColor="[CONFIGURATION.palette.2]"><Text align="CENTER" ellipsis="TRUE"><Font family="SYNC_TO_DEVICE" size="15"><Template><![CDATA[%s]]><Parameter expression="[COMPLICATION.TITLE]" /></Template></Font></Text></PartText>
             </Complication>
         </ComplicationSlot>
 
@@ -155,22 +149,19 @@
             <DefaultProviderPolicy defaultSystemProvider="WATCH_BATTERY" defaultSystemProviderType="RANGED_VALUE" />
             <BoundingOval x="0" y="0" width="108" height="108" outlinePadding="6" />
             <Complication type="SHORT_TEXT">
-                <PartImage x="43" y="14" width="22" height="22" tintColor="[CONFIGURATION.palette.2]"><Image resource="[COMPLICATION.MONOCHROMATIC_IMAGE]" /></PartImage>
-                <PartText x="10" y="38" width="88" height="34" tintColor="[CONFIGURATION.palette.2]"><Text align="CENTER" ellipsis="TRUE"><Font family="SYNC_TO_DEVICE" size="26" weight="MEDIUM"><Template><![CDATA[%s]]><Parameter expression="[COMPLICATION.TEXT]" /></Template></Font></Text></PartText>
-                <PartText x="12" y="72" width="84" height="21" tintColor="[CONFIGURATION.palette.2]"><Text align="CENTER" ellipsis="TRUE"><Font family="SYNC_TO_DEVICE" size="14"><Template><![CDATA[%s]]><Parameter expression="[COMPLICATION.TITLE]" /></Template></Font></Text></PartText>
+                <PartText x="0" y="27" width="108" height="36" tintColor="[CONFIGURATION.palette.2]"><Text align="CENTER" ellipsis="TRUE"><Font family="SYNC_TO_DEVICE" size="26" weight="MEDIUM"><Template><![CDATA[%s]]><Parameter expression="[COMPLICATION.TEXT]" /></Template></Font></Text></PartText>
+                <PartText x="0" y="63" width="108" height="21" tintColor="[CONFIGURATION.palette.2]"><Text align="CENTER" ellipsis="TRUE"><Font family="SYNC_TO_DEVICE" size="14"><Template><![CDATA[%s]]><Parameter expression="[COMPLICATION.TITLE]" /></Template></Font></Text></PartText>
             </Complication>
             <Complication type="MONOCHROMATIC_IMAGE">
                 <PartImage x="30" y="30" width="48" height="48" tintColor="[CONFIGURATION.palette.2]"><Image resource="[COMPLICATION.MONOCHROMATIC_IMAGE]" /></PartImage>
             </Complication>
             <Complication type="RANGED_VALUE">
-                <PartImage x="43" y="14" width="22" height="22" tintColor="[CONFIGURATION.palette.2]"><Image resource="[COMPLICATION.MONOCHROMATIC_IMAGE]" /></PartImage>
-                <PartText x="10" y="38" width="88" height="34" tintColor="[CONFIGURATION.palette.2]"><Text align="CENTER" ellipsis="TRUE"><Font family="SYNC_TO_DEVICE" size="26" weight="MEDIUM"><Template><![CDATA[%.0f%%]]><Parameter expression="[COMPLICATION.RANGED_VALUE_VALUE]" /></Template></Font></Text></PartText>
-                <PartText x="12" y="72" width="84" height="21" tintColor="[CONFIGURATION.palette.2]"><Text align="CENTER" ellipsis="TRUE"><Font family="SYNC_TO_DEVICE" size="14"><Template><![CDATA[%s]]><Parameter expression="[COMPLICATION.TITLE]" /></Template></Font></Text></PartText>
+                <PartText x="0" y="27" width="108" height="36" tintColor="[CONFIGURATION.palette.2]"><Text align="CENTER" ellipsis="TRUE"><Font family="SYNC_TO_DEVICE" size="26" weight="MEDIUM"><Template><![CDATA[%.0f%%]]><Parameter expression="[COMPLICATION.RANGED_VALUE_VALUE]" /></Template></Font></Text></PartText>
+                <PartText x="0" y="63" width="108" height="21" tintColor="[CONFIGURATION.palette.2]"><Text align="CENTER" ellipsis="TRUE"><Font family="SYNC_TO_DEVICE" size="14"><Template><![CDATA[%s]]><Parameter expression="[COMPLICATION.TITLE]" /></Template></Font></Text></PartText>
             </Complication>
             <Complication type="GOAL_PROGRESS">
-                <PartImage x="43" y="14" width="22" height="22" tintColor="[CONFIGURATION.palette.2]"><Image resource="[COMPLICATION.MONOCHROMATIC_IMAGE]" /></PartImage>
-                <PartText x="10" y="38" width="88" height="34" tintColor="[CONFIGURATION.palette.2]"><Text align="CENTER" ellipsis="TRUE"><Font family="SYNC_TO_DEVICE" size="26" weight="MEDIUM"><Template><![CDATA[%.0f]]><Parameter expression="[COMPLICATION.GOAL_PROGRESS_VALUE]" /></Template></Font></Text></PartText>
-                <PartText x="12" y="72" width="84" height="21" tintColor="[CONFIGURATION.palette.2]"><Text align="CENTER" ellipsis="TRUE"><Font family="SYNC_TO_DEVICE" size="14"><Template><![CDATA[%s]]><Parameter expression="[COMPLICATION.TITLE]" /></Template></Font></Text></PartText>
+                <PartText x="0" y="27" width="108" height="36" tintColor="[CONFIGURATION.palette.2]"><Text align="CENTER" ellipsis="TRUE"><Font family="SYNC_TO_DEVICE" size="26" weight="MEDIUM"><Template><![CDATA[%.0f]]><Parameter expression="[COMPLICATION.GOAL_PROGRESS_VALUE]" /></Template></Font></Text></PartText>
+                <PartText x="0" y="63" width="108" height="21" tintColor="[CONFIGURATION.palette.2]"><Text align="CENTER" ellipsis="TRUE"><Font family="SYNC_TO_DEVICE" size="14"><Template><![CDATA[%s]]><Parameter expression="[COMPLICATION.TITLE]" /></Template></Font></Text></PartText>
             </Complication>
         </ComplicationSlot>
 

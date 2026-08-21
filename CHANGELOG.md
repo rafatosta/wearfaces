@@ -67,6 +67,8 @@ arquivo.
 
 ### Fixed
 
+-   Centralizado o conteúdo textual das três complications do **Flow**, sem
+    reservar espaço vertical para ícones opcionais ausentes nos providers.
 -   Corrigida a construção da imagem Podman ao reutilizar o UID/GID 1000 já
     presente na base Temurin, com `HOME` gravável e referência completa ao
     registry oficial.

@@ -53,8 +53,8 @@ implementação atual.
 - preservar a hierarquia, o contraste, a grade circular e as quatro famílias
   cromáticas, mas redesenhar todos os recursos gráficos;
 - remover o logotipo e o glifo do topo, mantendo somente a data nesse eixo;
-- usar ícones monocromáticos fornecidos pelo provider nas complications, sem o
-  ícone de pegada GNOME mostrado no exemplo;
+- centralizar valor e título das complications sem reservar espaço para ícones
+  opcionais; providers exclusivamente gráficos continuam centralizados;
 - omitir os quatro pontos inferiores no MVP, pois não há função comprovada;
 - usar preto AMOLED `#FF000000` sem gradiente em todas as paletas; elas alteram apenas
   destaques, anéis, segundos e pivô.
