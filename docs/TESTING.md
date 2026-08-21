@@ -5,10 +5,16 @@ manifest resource-only, WFF 2, API 34, package ID, data, paletas, complications,
 AOD, schema WFF oficial, Conventional Commits, changelog, Gradle checks, build
 debug e limites oficiais de memória (10 MB ambiente, 100 MB interativo).
 
+`tools/validate-face-specs.sh` também verifica o template obrigatório e exige
+que cada módulo vincule uma especificação completa sob `docs/watchfaces/`, com
+slug e package ID coerentes. Isso impede que uma foto/mockup seja transformada
+diretamente em código sem decisões auditáveis.
+
 Comandos úteis:
 
 ```bash
 ./tools/dev.sh validate
+./tools/validate-face-specs.sh
 ./tools/dev.sh test
 ./tools/validate-commit.sh --self-test
 ./tools/validate-commit.sh 'fix(wff): correct slot bounds'

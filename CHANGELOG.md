@@ -32,6 +32,8 @@ arquivo.
     oficiais, além dos workflows de CI e release assinada.
 -   Criadas a documentação permanente, templates de contribuição e política de
     assets originais/licenciados.
+-   Adicionado template obrigatório e fluxo auditável para converter fotos ou
+    mockups em especificações e prompts implementáveis pelo Codex.
 
 ### Changed
 

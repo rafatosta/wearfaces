@@ -5,6 +5,7 @@ original com halo difuso, data, quatro paletas, duas complications e um
 modo ambiente reduzido.
 
 - Package ID: `com.rtosta.wearfaces.aurora`
+- Especificação: [SUNLIGHT](../../docs/watchfaces/SUNLIGHT.md)
 - Baseline: Wear OS 5 / API 34 / WFF 2
 - Rede e telemetria: nenhuma
 - Dados externos: somente por providers de complications escolhidos pelo usuário

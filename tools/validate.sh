@@ -11,7 +11,9 @@ required=(
   Containerfile .containerignore containers/README.md
   docs/ARCHITECTURE.md docs/DEVELOPMENT.md docs/TESTING.md
   docs/CONTAINER.md docs/ADB_WIFI.md docs/DESIGN_GUIDELINES.md
-  docs/RELEASE.md docs/ROADMAP.md docs/watchfaces/SUNLIGHT.md
+  docs/RELEASE.md docs/ROADMAP.md docs/REFERENCE_TO_SPEC.md
+  docs/watchfaces/TEMPLATE.md docs/watchfaces/SUNLIGHT.md
+  tools/validate-face-specs.sh
   faces/aurora/README.md faces/aurora/build.gradle.kts
   faces/aurora/src/main/AndroidManifest.xml
   faces/aurora/src/main/res/raw/watchface.xml
@@ -42,6 +44,8 @@ for script in tools/*.sh; do
     exit 1
   }
 done
+
+./tools/validate-face-specs.sh
 
 command -v xmllint >/dev/null || { echo "xmllint is required" >&2; exit 1; }
 while IFS= read -r -d '' xml; do

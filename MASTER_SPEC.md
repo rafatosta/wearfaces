@@ -1576,3 +1576,109 @@ Wear OS 6   / API 36 → suportado enquanto compatível com WFF 2
 ```
 
 Nenhum recurso novo pode elevar silenciosamente o baseline global.
+
+------------------------------------------------------------------------
+
+## 32. Conversão obrigatória de referência visual em especificação
+
+Toda proposta de novo mostrador baseada em foto, screenshot, desenho ou mockup
+deve ser convertida em uma especificação textual implementável **antes** de o
+Codex criar ou alterar o módulo Android correspondente.
+
+### 32.1 Fontes de verdade
+
+Usar obrigatoriamente:
+
+``` text
+docs/REFERENCE_TO_SPEC.md
+docs/watchfaces/TEMPLATE.md
+```
+
+O primeiro documento define o processo de interpretação. O segundo define a
+estrutura mínima e os campos da especificação resultante.
+
+### 32.2 Artefato obrigatório
+
+Para um mostrador chamado `<NOME>`, criar:
+
+``` text
+docs/watchfaces/<NOME>.md
+```
+
+e vinculá-lo no `faces/<slug>/README.md` por meio do campo:
+
+``` markdown
+- Especificação: [<NOME>](../../docs/watchfaces/<NOME>.md)
+```
+
+O arquivo não pode ser apenas uma descrição estética. Deve registrar, no
+mínimo:
+
+1. identidade, slug, package ID e proveniência da referência;
+2. observações visuais separadas de inferências;
+3. intenção do design e não objetivos;
+4. composição em canvas WFF 450 × 450;
+5. mapeamento dos elementos para recursos WFF 2;
+6. complications e comportamento vazio;
+7. configurações e pelo menos três paletas quando aplicável;
+8. AOD;
+9. assets, autoria e licenças;
+10. acessibilidade e localização;
+11. prompt normalizado para implementação pelo Codex;
+12. critérios de aceite automatizados;
+13. testes físicos pendentes.
+
+### 32.3 Regras de interpretação
+
+- A referência visual é evidência, não autorização para copiar propriedade
+  intelectual.
+- Não presumir fonte, ícone, marca, geometria exata ou licença que não possam
+  ser identificados com segurança.
+- Separar explicitamente o que é observado, inferido e decidido para a nova
+  criação.
+- Não commitar a referência original sem autorização e licença compatível.
+- Quando houver ambiguidade que altere materialmente o resultado, registrar a
+  dúvida e obter decisão do mantenedor antes da implementação.
+- Adaptar a composição às limitações WFF 2/API 34; não elevar o baseline para
+  reproduzir um efeito da imagem.
+- O novo resultado deve ser original, preservando apenas conceitos abstratos e
+  requisitos autorizados da referência.
+
+### 32.4 Procedimento obrigatório do Codex
+
+``` text
+receber referência
+    ↓
+identificar proveniência e limites de uso
+    ↓
+descrever evidências e incertezas
+    ↓
+traduzir para canvas, camadas e recursos WFF 2
+    ↓
+preencher docs/watchfaces/TEMPLATE.md
+    ↓
+produzir o prompt normalizado dentro da especificação
+    ↓
+validar a especificação
+    ↓
+implementar o módulo
+    ↓
+executar validações, testes e build
+```
+
+O Codex não deve implementar diretamente a partir da imagem pulando a
+especificação. Alterações posteriores de direção visual devem atualizar
+primeiro o documento do mostrador e depois o módulo.
+
+### 32.5 Validação automática
+
+`tools/validate-face-specs.sh` deve verificar que:
+
+- o template contém todas as seções obrigatórias;
+- cada módulo possui README com link para uma especificação real;
+- a especificação vinculada está dentro de `docs/watchfaces/`;
+- slug e package ID são coerentes com o módulo;
+- nenhuma seção obrigatória foi omitida.
+
+`tools/validate.sh` e, consequentemente, `tools/test.sh` e a CI devem executar
+essa validação.

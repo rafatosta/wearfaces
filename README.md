@@ -58,6 +58,15 @@ Releases seguem SemVer coordenado e publicam um APK por módulo com checksums;
 veja [RELEASE.md](docs/RELEASE.md). Contribuições são bem-vindas conforme
 [CONTRIBUTING.md](CONTRIBUTING.md).
 
+## Novo mostrador a partir de foto ou mockup
+
+Toda referência visual passa primeiro pelo processo
+[da referência à especificação](docs/REFERENCE_TO_SPEC.md) e pelo
+[template obrigatório](docs/watchfaces/TEMPLATE.md). O Codex deve persistir uma
+especificação autocontida — incluindo proveniência, observações, coordenadas,
+WFF 2, paletas, complications, AOD, assets, prompt normalizado e aceite — antes
+de implementar o novo módulo.
+
 O código é GPL-3.0-only. Assets precisam ter autoria e licença próprias
 documentadas; nenhum material proprietário da Xiaomi, Google ou terceiros é
 aceito sem autorização compatível.

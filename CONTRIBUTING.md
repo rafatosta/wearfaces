@@ -17,8 +17,19 @@ uma linha `Changelog: not required - MOTIVO`. A CI verifica esse contrato.
 
 ## Novo mostrador
 
-Crie `faces/<slug>/`, `shared-source/artwork/<slug>/` e
-`docs/watchfaces/<NOME>.md`; inclua `:faces:<slug>` em
+Antes de criar o módulo, copie
+[`docs/watchfaces/TEMPLATE.md`](docs/watchfaces/TEMPLATE.md), preencha
+`docs/watchfaces/<NOME>.md` e siga
+[`docs/REFERENCE_TO_SPEC.md`](docs/REFERENCE_TO_SPEC.md). Foto, screenshot,
+desenho ou mockup não pode ser implementado diretamente sem essa tradução. O
+README do módulo deve conter:
+
+```markdown
+- Especificação: [<NOME>](../../docs/watchfaces/<NOME>.md)
+```
+
+Depois, crie `faces/<slug>/` e `shared-source/artwork/<slug>/`; inclua
+`:faces:<slug>` em
 `settings.gradle.kts`, adicione-o à tabela do README e mantenha package ID
 `com.rtosta.wearfaces.<slug>`. O módulo deve continuar resource-only,
 `android:hasCode="false"`, WFF 2 e `minSdk = 34`, salvo decisão anterior no
@@ -26,6 +37,7 @@ Crie `faces/<slug>/`, `shared-source/artwork/<slug>/` e
 
 Não copie configurações, imagens, fontes ou geometria proprietária. Documente
 origem/licença de cada asset e preserve o funcionamento offline, sem telemetria.
+Execute `./tools/validate-face-specs.sh` antes de começar o build.
 
 ## Validação local
 

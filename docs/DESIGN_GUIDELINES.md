@@ -27,3 +27,11 @@ Crie geometria e arte originais. Não extraia APKs, firmware, imagens, fontes ou
 Dados de saúde, clima, agenda ou atividade vêm exclusivamente de complications
 compatíveis escolhidas pelo usuário. O mostrador não coleta dados, não usa rede
 e não inclui telemetria.
+
+## Referências visuais
+
+Foto, screenshot, desenho ou mockup deve passar por
+[`REFERENCE_TO_SPEC.md`](REFERENCE_TO_SPEC.md) e gerar uma especificação baseada
+em [`watchfaces/TEMPLATE.md`](watchfaces/TEMPLATE.md) antes da implementação.
+Separe conteúdo observado, inferido e decidido; registre proveniência e converta
+a direção visual em uma criação original compatível com WFF 2.
