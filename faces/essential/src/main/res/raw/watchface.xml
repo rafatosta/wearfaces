@@ -49,7 +49,7 @@
                     <ListConfiguration id="accent_intensity">
                         <ListOption id="0"><Group name="essential_group_1" x="0" y="0" width="450" height="450" /></ListOption>
                         <ListOption id="1">
-                            <DigitalClock x="237" y="135" width="178" height="105">
+                            <DigitalClock x="238" y="135" width="178" height="105">
                                 <TimeText x="0" y="0" width="178" height="105" format="mm" hourFormat="SYNC_TO_DEVICE" align="START">
                                     <Font family="SYNC_TO_DEVICE" size="82" weight="NORMAL" color="[CONFIGURATION.accent_color.0]" />
                                 </TimeText>
@@ -58,7 +58,7 @@
                         </ListOption>
                         <ListOption id="2">
                             <Group name="essential_group_2" x="0" y="0" width="450" height="450">
-                                <DigitalClock x="237" y="135" width="178" height="105">
+                                <DigitalClock x="238" y="135" width="178" height="105">
                                     <TimeText x="0" y="0" width="178" height="105" format="mm" hourFormat="SYNC_TO_DEVICE" align="START">
                                         <Font family="SYNC_TO_DEVICE" size="82" weight="NORMAL" color="[CONFIGURATION.accent_color.0]" />
                                     </TimeText>
