@@ -88,6 +88,8 @@ arquivo.
 
 ### Fixed
 
+-   Corrigidos os workflows de CI e release ao instalar `xmllint` nos runners
+    Ubuntu e indicar explicitamente o `Containerfile` no build Docker.
 -   Corrigida a alternância Digital/Analógico do **Essential** ao substituir o
     uso aninhado de configurações por uma `Condition` reativa ao estilo.
 -   Removida a camada de Accent Color dos minutos do **Essential**, mantendo a
