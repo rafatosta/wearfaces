@@ -22,6 +22,19 @@ for path in "${required[@]}"; do
   [[ -e "$path" ]] || { echo "Missing required path: $path" >&2; exit 1; }
 done
 
+grep -q '^FROM docker.io/library/eclipse-temurin:17.0.16_8-jdk-noble' Containerfile || {
+  echo "Container base image must be fully qualified and pinned" >&2
+  exit 1
+}
+grep -q '^USER 1000:1000$' Containerfile || {
+  echo "Container must reuse numeric UID/GID 1000 for keep-id" >&2
+  exit 1
+}
+if grep -Eq 'useradd.*(--uid|-u)[ =]?1000' Containerfile; then
+  echo "Container must not create a duplicate UID 1000" >&2
+  exit 1
+fi
+
 for script in tools/*.sh; do
   [[ -x "$script" ]] || { echo "Script is not executable: $script" >&2; exit 1; }
   head -n 5 "$script" | grep -q 'set -euo pipefail' || {

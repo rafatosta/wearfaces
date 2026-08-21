@@ -44,3 +44,9 @@ arquivo.
     derivados de erros de transcrição.
 -   Adotado Build Tools 36.0.0 por exigência do AGP 9.0.0, preservando API 34 e
     WFF 2 como baseline de execução.
+
+### Fixed
+
+-   Corrigida a construção da imagem Podman ao reutilizar o UID/GID 1000 já
+    presente na base Temurin, com `HOME` gravável e referência completa ao
+    registry oficial.

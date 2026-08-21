@@ -1,4 +1,4 @@
-FROM eclipse-temurin:17.0.16_8-jdk-noble AS wff-builder
+FROM docker.io/library/eclipse-temurin:17.0.16_8-jdk-noble AS wff-builder
 
 ARG WATCHFACE_COMMIT=44b1855d445686ac8de5dbc95003d6f8e6623643
 RUN apt-get update \
@@ -11,11 +11,12 @@ RUN apt-get update \
     && cd /src/watchface/play-validations \
     && ./gradlew --no-daemon :memory-footprint:executable-jar
 
-FROM eclipse-temurin:17.0.16_8-jdk-noble
+FROM docker.io/library/eclipse-temurin:17.0.16_8-jdk-noble
 
 ARG ANDROID_COMMAND_LINE_TOOLS=13114758
 ENV ANDROID_HOME=/opt/android-sdk \
     ANDROID_SDK_ROOT=/opt/android-sdk \
+    HOME=/home/wearfaces \
     PATH=/opt/android-sdk/cmdline-tools/latest/bin:/opt/android-sdk/platform-tools:/opt/android-sdk/build-tools/36.0.0:$PATH \
     WFF_VALIDATOR_JAR=/opt/wff-tools/wff-validator.jar \
     WFF_MEMORY_JAR=/opt/wff-tools/memory-footprint.jar \
@@ -31,11 +32,11 @@ RUN apt-get update \
     && rm /tmp/cmdline-tools.zip \
     && yes | sdkmanager --licenses >/dev/null \
     && sdkmanager "platform-tools" "platforms;android-34" "build-tools;36.0.0" \
-    && useradd --create-home --uid 1000 wearfaces
+    && install -d -o 1000 -g 1000 "$HOME" "$GRADLE_USER_HOME"
 
 COPY --from=wff-builder /src/watchface/third_party/wff/specification/validator/build/libs/wff-validator.jar /opt/wff-tools/wff-validator.jar
 COPY --from=wff-builder /src/watchface/play-validations/memory-footprint/build/libs/memory-footprint.jar /opt/wff-tools/memory-footprint.jar
 
-USER wearfaces
+USER 1000:1000
 WORKDIR /workspace
 CMD ["./tools/test.sh"]

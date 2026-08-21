@@ -26,9 +26,12 @@ Podman após conferir os nomes.
 ## SELinux, usuário e cache
 
 O checkout é montado com `:Z`, `--userns=keep-id` mantém a autoria dos arquivos
-de build e nenhum diretório amplo do home é exposto. Não use `--privileged` nem
-desative SELinux. Apenas o cache Gradle fica num volume nomeado; apagar o volume
-deve continuar produzindo um build correto, apenas mais lento.
+de build e nenhum diretório amplo do home é exposto. A imagem-base Ubuntu já
+reserva o UID/GID 1000; por isso o container reutiliza numericamente
+`USER 1000:1000` e prepara `/home/wearfaces`, em vez de tentar criar um usuário
+duplicado. Não use `--privileged` nem desative SELinux. Apenas o cache Gradle
+fica num volume nomeado; apagar o volume deve continuar produzindo um build
+correto, apenas mais lento.
 
 ADB/Wireless debugging fica no host. Isso reduz permissões do container e evita
 encaminhar USB/rede de desenvolvimento sem necessidade.
@@ -39,6 +42,8 @@ encaminhar USB/rede de desenvolvimento sem necessidade.
 - erro de relabel: confirme que o checkout pode ser rotulado e não remova `:Z`.
 - download/SDK: verifique proxy, DNS e espaço; use `rebuild` após falha parcial.
 - permissão em `build/`: confira `--userns=keep-id` e o UID do host.
+- `UID 1000 is not unique`: reconstrua a imagem atual; versões antigas do
+  `Containerfile` tentavam criar novamente o UID já fornecido pela imagem-base.
 - cache suspeito: remova somente o volume nomeado e reconstrua.
 
 A CI configura versões equivalentes para a suíte nativa e também constrói o
