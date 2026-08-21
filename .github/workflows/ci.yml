@@ -1,0 +1,62 @@
+name: CI
+
+on:
+  push:
+  pull_request:
+
+permissions:
+  contents: read
+
+jobs:
+  test:
+    runs-on: ubuntu-24.04
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: '17'
+      - uses: android-actions/setup-android@v3
+      - name: Install pinned Android SDK
+        run: sdkmanager 'platforms;android-34' 'build-tools;36.0.0'
+      - uses: gradle/actions/setup-gradle@v4
+      - name: Build official WFF tools
+        env:
+          WATCHFACE_COMMIT: 44b1855d445686ac8de5dbc95003d6f8e6623643
+        run: |
+          git clone https://github.com/google/watchface.git "$RUNNER_TEMP/watchface"
+          git -C "$RUNNER_TEMP/watchface" checkout "$WATCHFACE_COMMIT"
+          (cd "$RUNNER_TEMP/watchface/third_party/wff" && ./gradlew --no-daemon :specification:validator:executable-jar)
+          (cd "$RUNNER_TEMP/watchface/play-validations" && ./gradlew --no-daemon :memory-footprint:executable-jar)
+          echo "WFF_VALIDATOR_JAR=$RUNNER_TEMP/watchface/third_party/wff/specification/validator/build/libs/wff-validator.jar" >> "$GITHUB_ENV"
+          echo "WFF_MEMORY_JAR=$RUNNER_TEMP/watchface/play-validations/memory-footprint/build/libs/memory-footprint.jar" >> "$GITHUB_ENV"
+      - name: Validate commit messages
+        env:
+          COMMIT_RANGE: ${{ github.event_name == 'pull_request' && format('{0}..HEAD', github.event.pull_request.base.sha) || format('{0}..{1}', github.event.before, github.sha) }}
+        run: |
+          if [[ "$COMMIT_RANGE" == 0000000000000000000000000000000000000000..* ]]; then
+            unset COMMIT_RANGE
+          fi
+          ./tools/validate-commit.sh
+      - name: Run canonical suite
+        env:
+          CHANGELOG_BASE: ${{ github.event_name == 'pull_request' && github.event.pull_request.base.sha || '' }}
+          PR_BODY: ${{ github.event.pull_request.body || '' }}
+        run: ./tools/test.sh
+      - name: Upload debug APKs
+        uses: actions/upload-artifact@v4
+        with:
+          name: debug-apks
+          path: faces/*/build/outputs/apk/debug/*.apk
+          if-no-files-found: error
+
+  container:
+    runs-on: ubuntu-24.04
+    steps:
+      - uses: actions/checkout@v4
+      - name: Build reproducible environment
+        run: docker build --tag wearfaces-dev:ci .
+      - name: Run suite in the built image
+        run: docker run --rm --volume "$PWD:/workspace" --workdir /workspace wearfaces-dev:ci ./tools/test.sh

@@ -1,0 +1,36 @@
+name: Bug report
+description: Report a reproducible WearFaces problem
+title: "bug: "
+labels: [bug]
+body:
+  - type: dropdown
+    id: face
+    attributes:
+      label: Watch face
+      options: [Aurora, Other]
+    validations:
+      required: true
+  - type: input
+    id: device
+    attributes:
+      label: Device and Wear OS build
+      placeholder: Xiaomi Watch 2, Wear OS 5, API 34
+    validations:
+      required: true
+  - type: textarea
+    id: steps
+    attributes:
+      label: Reproduction steps
+    validations:
+      required: true
+  - type: textarea
+    id: expected
+    attributes:
+      label: Expected and actual behavior
+    validations:
+      required: true
+  - type: textarea
+    id: logs
+    attributes:
+      label: Logs or screenshots
+      description: Remove personal data, pairing codes, IPs and secrets.

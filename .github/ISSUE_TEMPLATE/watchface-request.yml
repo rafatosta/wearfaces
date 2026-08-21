@@ -1,0 +1,30 @@
+name: Watch face proposal
+description: Propose an original design for the collection
+title: "feat(face): "
+labels: [enhancement]
+body:
+  - type: input
+    id: name
+    attributes:
+      label: Proposed name
+    validations:
+      required: true
+  - type: textarea
+    id: concept
+    attributes:
+      label: Original concept and layout
+    validations:
+      required: true
+  - type: textarea
+    id: features
+    attributes:
+      label: Complications, palettes and AOD
+    validations:
+      required: true
+  - type: textarea
+    id: licensing
+    attributes:
+      label: Asset origins and licenses
+      description: Do not attach extracted or proprietary materials.
+    validations:
+      required: true

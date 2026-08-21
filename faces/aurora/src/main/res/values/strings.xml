@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="watch_face_name">Aurora</string>
+    <string name="palette_label">Palette</string>
+    <string name="palette_solar">Solar</string>
+    <string name="palette_nebula">Nebula</string>
+    <string name="palette_aurora">Aurora</string>
+    <string name="palette_mono">Mono</string>
+    <string name="left_complication">Left complication</string>
+    <string name="right_complication">Right complication</string>
+</resources>

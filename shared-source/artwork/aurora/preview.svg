@@ -1,0 +1,23 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="450" height="450" viewBox="0 0 450 450">
+  <circle cx="225" cy="225" r="225" fill="#000"/>
+  <circle cx="225" cy="225" r="135" fill="#21d4a7" opacity=".2"/>
+  <circle cx="225" cy="225" r="95" fill="#67f5c8" opacity=".34"/>
+  <g fill="#9bffe8">
+    <rect x="221" y="28" width="8" height="34" rx="4"/>
+    <rect x="388" y="221" width="34" height="8" rx="4"/>
+    <rect x="221" y="388" width="8" height="34" rx="4"/>
+    <rect x="28" y="221" width="34" height="8" rx="4"/>
+  </g>
+  <g fill="none" stroke="#17483e" stroke-width="3">
+    <circle cx="108" cy="224" r="49"/>
+    <circle cx="342" cy="224" r="49"/>
+  </g>
+  <g fill="#9bffe8" font-family="sans-serif" text-anchor="middle">
+    <text x="108" y="232" font-size="22">72%</text>
+    <text x="342" y="232" font-size="22">18°</text>
+    <text x="225" y="348" font-size="24">21 AUG</text>
+  </g>
+  <path fill="#fff" d="m219 225 5-143 6 143Z"/>
+  <path fill="#9bffe8" d="m219 225 89-71-79 78Z"/>
+  <circle cx="225" cy="225" r="9" fill="#fff"/>
+</svg>

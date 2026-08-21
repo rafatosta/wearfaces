@@ -1,0 +1,142 @@
+<?xml version="1.0" encoding="utf-8"?>
+<WatchFace width="450" height="450">
+    <Metadata key="CLOCK_TYPE" value="ANALOG" />
+    <Metadata key="PREVIEW_TIME" value="10:08:00" />
+
+    <UserConfigurations>
+        <ColorConfiguration id="palette" defaultValue="2" displayName="palette_label" screenReaderText="palette_label">
+            <ColorOption id="0" displayName="palette_solar" colors="#FFFFB347 #FFFF6B35 #FFFFD166 #FF704525" />
+            <ColorOption id="1" displayName="palette_nebula" colors="#FFC8A2FF #FF7457FF #FFFF7AE5 #FF3D315F" />
+            <ColorOption id="2" displayName="palette_aurora" colors="#FF9BFFE8 #FF21D4A7 #FF67F5C8 #FF17483E" />
+            <ColorOption id="3" displayName="palette_mono" colors="#FFFFFFFF #FFB8B8B8 #FFE0E0E0 #FF3A3A3A" />
+        </ColorConfiguration>
+    </UserConfigurations>
+
+    <Scene backgroundColor="#FF000000">
+        <!-- Original diffuse-light motif, removed entirely in ambient mode. -->
+        <Group x="0" y="0" width="450" height="450" name="diffuse_halo" alpha="255">
+            <Variant mode="AMBIENT" target="alpha" value="0" />
+            <PartDraw x="70" y="70" width="310" height="310" alpha="32">
+                <Ellipse x="0" y="0" width="310" height="310">
+                    <Fill color="[CONFIGURATION.palette.2]" />
+                </Ellipse>
+            </PartDraw>
+            <PartDraw x="105" y="105" width="240" height="240" alpha="52">
+                <Ellipse x="0" y="0" width="240" height="240">
+                    <Fill color="[CONFIGURATION.palette.1]" />
+                </Ellipse>
+            </PartDraw>
+            <PartDraw x="143" y="143" width="164" height="164" alpha="76">
+                <Ellipse x="0" y="0" width="164" height="164">
+                    <Fill color="[CONFIGURATION.palette.0]" />
+                </Ellipse>
+            </PartDraw>
+            <PartDraw x="178" y="178" width="94" height="94" alpha="110">
+                <Ellipse x="0" y="0" width="94" height="94">
+                    <Fill color="[CONFIGURATION.palette.2]" />
+                </Ellipse>
+            </PartDraw>
+        </Group>
+
+        <!-- Sparse cardinal markers keep the dial legible without lighting the full rim. -->
+        <Group x="0" y="0" width="450" height="450" name="dial_markers" alpha="220">
+            <Variant mode="AMBIENT" target="alpha" value="105" />
+            <PartDraw x="218" y="28" width="14" height="34">
+                <RoundRectangle x="3" y="0" width="8" height="34" cornerRadiusX="4" cornerRadiusY="4">
+                    <Fill color="[CONFIGURATION.palette.0]" />
+                </RoundRectangle>
+            </PartDraw>
+            <PartDraw x="388" y="218" width="34" height="14">
+                <RoundRectangle x="0" y="3" width="34" height="8" cornerRadiusX="4" cornerRadiusY="4">
+                    <Fill color="[CONFIGURATION.palette.0]" />
+                </RoundRectangle>
+            </PartDraw>
+            <PartDraw x="218" y="388" width="14" height="34">
+                <RoundRectangle x="3" y="0" width="8" height="34" cornerRadiusX="4" cornerRadiusY="4">
+                    <Fill color="[CONFIGURATION.palette.0]" />
+                </RoundRectangle>
+            </PartDraw>
+            <PartDraw x="28" y="218" width="34" height="14">
+                <RoundRectangle x="0" y="3" width="34" height="8" cornerRadiusX="4" cornerRadiusY="4">
+                    <Fill color="[CONFIGURATION.palette.0]" />
+                </RoundRectangle>
+            </PartDraw>
+        </Group>
+
+        <PartText x="150" y="315" width="150" height="42" alpha="230">
+            <Variant mode="AMBIENT" target="alpha" value="150" />
+            <Text align="CENTER" ellipsis="TRUE">
+                <Font family="SYNC_TO_DEVICE" size="26" weight="MEDIUM" color="[CONFIGURATION.palette.0]">
+                    <Template><![CDATA[%02d %s]]>
+                        <Parameter expression="[DAY]" />
+                        <Parameter expression="[MONTH_S]" />
+                    </Template>
+                </Font>
+            </Text>
+        </PartText>
+
+        <!-- Configurable slots intentionally consume provider data only. -->
+        <ComplicationSlot x="55" y="171" width="106" height="106" slotId="100" displayName="left_complication" supportedTypes="SHORT_TEXT MONOCHROMATIC_IMAGE EMPTY">
+            <Variant mode="AMBIENT" target="alpha" value="0" />
+            <BoundingOval x="0" y="0" width="106" height="106" outlinePadding="3" />
+            <Complication type="SHORT_TEXT">
+                <PartDraw x="4" y="4" width="98" height="98" alpha="90">
+                    <Ellipse x="0" y="0" width="98" height="98">
+                        <Stroke thickness="3" color="[CONFIGURATION.palette.3]" />
+                    </Ellipse>
+                </PartDraw>
+                <PartText x="10" y="31" width="86" height="44" tintColor="[CONFIGURATION.palette.0]">
+                    <Text align="CENTER" ellipsis="TRUE">
+                        <Font family="SYNC_TO_DEVICE" size="24">
+                            <Template><![CDATA[%s]]><Parameter expression="[COMPLICATION.TEXT]" /></Template>
+                        </Font>
+                    </Text>
+                </PartText>
+            </Complication>
+            <Complication type="MONOCHROMATIC_IMAGE">
+                <PartImage x="29" y="29" width="48" height="48" tintColor="[CONFIGURATION.palette.0]">
+                    <Image resource="[COMPLICATION.MONOCHROMATIC_IMAGE]" />
+                </PartImage>
+            </Complication>
+        </ComplicationSlot>
+
+        <ComplicationSlot x="289" y="171" width="106" height="106" slotId="101" displayName="right_complication" supportedTypes="SHORT_TEXT MONOCHROMATIC_IMAGE EMPTY">
+            <Variant mode="AMBIENT" target="alpha" value="0" />
+            <BoundingOval x="0" y="0" width="106" height="106" outlinePadding="3" />
+            <Complication type="SHORT_TEXT">
+                <PartDraw x="4" y="4" width="98" height="98" alpha="90">
+                    <Ellipse x="0" y="0" width="98" height="98">
+                        <Stroke thickness="3" color="[CONFIGURATION.palette.3]" />
+                    </Ellipse>
+                </PartDraw>
+                <PartText x="10" y="31" width="86" height="44" tintColor="[CONFIGURATION.palette.0]">
+                    <Text align="CENTER" ellipsis="TRUE">
+                        <Font family="SYNC_TO_DEVICE" size="24">
+                            <Template><![CDATA[%s]]><Parameter expression="[COMPLICATION.TEXT]" /></Template>
+                        </Font>
+                    </Text>
+                </PartText>
+            </Complication>
+            <Complication type="MONOCHROMATIC_IMAGE">
+                <PartImage x="29" y="29" width="48" height="48" tintColor="[CONFIGURATION.palette.0]">
+                    <Image resource="[COMPLICATION.MONOCHROMATIC_IMAGE]" />
+                </PartImage>
+            </Complication>
+        </ComplicationSlot>
+
+        <!-- Hands are last to preserve visibility and reduce ambient layer cost. -->
+        <AnalogClock x="0" y="0" width="450" height="450">
+            <Variant mode="AMBIENT" target="alpha" value="190" />
+            <HourHand resource="hour_hand" x="215" y="75" width="20" height="160" pivotX="0.5" pivotY="0.9375" tintColor="[CONFIGURATION.palette.0]" />
+            <MinuteHand resource="minute_hand" x="218" y="37" width="14" height="198" pivotX="0.5" pivotY="0.9495" tintColor="[CONFIGURATION.palette.2]" />
+        </AnalogClock>
+        <PartDraw x="216" y="216" width="18" height="18">
+            <Ellipse x="0" y="0" width="18" height="18">
+                <Fill color="[CONFIGURATION.palette.0]" />
+            </Ellipse>
+            <Ellipse x="6" y="6" width="6" height="6">
+                <Fill color="#FF000000" />
+            </Ellipse>
+        </PartDraw>
+    </Scene>
+</WatchFace>
