@@ -160,14 +160,13 @@ opções cuja função seja somente imitar os quatro pontos indefinidos do mocku
 
 ## 8. AOD
 
-- Elementos mantidos: fundo preto, índices de hora, data superior e
-  hora/minuto;
+- Elementos mantidos: fundo preto, data superior e hora/minuto;
 - Elementos ocultos: os três slots de complications completos, incluindo
-  conteúdo e anéis, pontos de minuto intermediários, ponteiro de segundos e
+  conteúdo e anéis, todos os pontos e índices externos, ponteiro de segundos e
   efeitos de destaque;
-- Redução de brilho/alpha: data, índices de hora e ponteiros são atenuados;
-- Estratégia contra excesso de pixels acesos: fundo totalmente preto, traços
-  finos e remoção dos 48 pontos menores, sem animação por segundo;
+- Redução de brilho/alpha: data e ponteiros são atenuados;
+- Estratégia contra excesso de pixels acesos: fundo totalmente preto, somente
+  data e ponteiros de hora/minuto, sem animação por segundo;
 - Legibilidade mínima: hora/minuto e data superior permanecem distinguíveis.
 
 ## 9. Assets e licenças

@@ -75,6 +75,8 @@ arquivo.
 -   Ocultados completamente os três slots e seus anéis no modo AOD do **Flow**.
 -   Reforçada a ocultação dos aros do **Flow** no AOD diretamente em cada
     elemento gráfico, sem depender apenas da transparência herdada pelo grupo.
+-   Removido do AOD do **Flow** o anel externo completo de pontos e índices,
+    mantendo somente data e ponteiros de hora/minuto sobre o fundo preto.
 -   Corrigida a construção da imagem Podman ao reutilizar o UID/GID 1000 já
     presente na base Temurin, com `HOME` gravável e referência completa ao
     registry oficial.

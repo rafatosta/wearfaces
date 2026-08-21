@@ -67,7 +67,7 @@
         </Group>
 
         <Group x="0" y="0" width="450" height="450" name="hour_markers" alpha="225">
-            <Variant mode="AMBIENT" target="alpha" value="105" />
+            <Variant mode="AMBIENT" target="alpha" value="0" />
             <Group x="200" y="0" width="50" height="450" name="dial_marker_0" angle="0"><PartDraw x="21" y="7" width="8" height="19"><RoundRectangle x="0" y="0" width="8" height="19" cornerRadiusX="4" cornerRadiusY="4"><Fill color="[CONFIGURATION.palette.0]" /></RoundRectangle></PartDraw></Group>
             <Group x="200" y="0" width="50" height="450" name="dial_marker_30" angle="30"><PartDraw x="21" y="7" width="8" height="19"><RoundRectangle x="0" y="0" width="8" height="19" cornerRadiusX="4" cornerRadiusY="4"><Fill color="#FFC7CDD5" /></RoundRectangle></PartDraw></Group>
             <Group x="200" y="0" width="50" height="450" name="dial_marker_60" angle="60"><PartDraw x="21" y="7" width="8" height="19"><RoundRectangle x="0" y="0" width="8" height="19" cornerRadiusX="4" cornerRadiusY="4"><Fill color="#FFC7CDD5" /></RoundRectangle></PartDraw></Group>
