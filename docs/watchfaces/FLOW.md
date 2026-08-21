@@ -53,8 +53,10 @@ implementação atual.
 - preservar a hierarquia, o contraste, a grade circular e as quatro famílias
   cromáticas, mas redesenhar todos os recursos gráficos;
 - remover o logotipo e o glifo do topo, mantendo somente a data nesse eixo;
-- centralizar valor e título das complications sem reservar espaço para ícones
-  opcionais; providers exclusivamente gráficos continuam centralizados;
+- centralizar nos dois eixos o conteúdo das complications por caixas e
+  coordenadas compatíveis com WFF 2; nos tipos compostos, usar ícone
+  monocromático acima do texto principal, e nos providers exclusivamente
+  gráficos, manter o ícone isolado ao centro;
 - omitir os quatro pontos inferiores no MVP, pois não há função comprovada;
 - usar preto AMOLED `#FF000000` sem gradiente em todas as paletas; elas alteram apenas
   destaques, anéis, segundos e pivô.
