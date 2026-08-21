@@ -62,7 +62,7 @@
         <ComplicationSlot x="15" y="0" width="420" height="120" slotId="300" displayName="activity_complication" supportedTypes="RANGED_VALUE GOAL_PROGRESS SHORT_TEXT MONOCHROMATIC_IMAGE EMPTY">
             <Variant mode="AMBIENT" target="alpha" value="110" />
             <DefaultProviderPolicy defaultSystemProvider="STEP_COUNT" defaultSystemProviderType="RANGED_VALUE" />
-            <BoundingOval x="0" y="0" width="420" height="120" outlinePadding="5" />
+            <BoundingBox x="0" y="0" width="420" height="120" outlinePadding="5" />
             <Complication type="SHORT_TEXT">
                 <PartText x="0" y="29" width="420" height="38" tintColor="[CONFIGURATION.palette.2]"><Text align="CENTER" ellipsis="TRUE"><Font family="SYNC_TO_DEVICE" size="29" weight="MEDIUM"><Template><![CDATA[%s]]><Parameter expression="[COMPLICATION.TEXT]" /></Template></Font></Text></PartText>
                 <PartText x="0" y="67" width="420" height="22" tintColor="#FFAEB4BB"><Text align="CENTER" ellipsis="TRUE"><Font family="SYNC_TO_DEVICE" size="15" weight="NORMAL"><Template><![CDATA[%s]]><Parameter expression="[COMPLICATION.TITLE]" /></Template></Font></Text></PartText>
@@ -139,7 +139,7 @@
         <ComplicationSlot x="15" y="330" width="420" height="120" slotId="304" displayName="battery_complication" supportedTypes="RANGED_VALUE GOAL_PROGRESS SHORT_TEXT MONOCHROMATIC_IMAGE EMPTY">
             <Variant mode="AMBIENT" target="alpha" value="110" />
             <DefaultProviderPolicy defaultSystemProvider="WATCH_BATTERY" defaultSystemProviderType="RANGED_VALUE" />
-            <BoundingOval x="0" y="0" width="420" height="120" outlinePadding="5" />
+            <BoundingBox x="0" y="0" width="420" height="120" outlinePadding="5" />
             <Complication type="SHORT_TEXT"><PartText x="0" y="57" width="420" height="40" tintColor="[CONFIGURATION.palette.2]"><Text align="CENTER" ellipsis="TRUE"><Font family="SYNC_TO_DEVICE" size="27" weight="MEDIUM"><Template><![CDATA[%s]]><Parameter expression="[COMPLICATION.TEXT]" /></Template></Font></Text></PartText></Complication>
             <Complication type="MONOCHROMATIC_IMAGE"><PartImage x="188" y="55" width="44" height="44" tintColor="[CONFIGURATION.palette.0]"><Variant mode="AMBIENT" target="alpha" value="0" /><Image resource="[COMPLICATION.MONOCHROMATIC_IMAGE]" /></PartImage></Complication>
             <Complication type="RANGED_VALUE">

@@ -98,8 +98,11 @@ Canvas WFF: `450 × 450`; centro: `(225, 225)`.
 círculo de raio `195`; a escala alcança o limite do canvas circular. As barras
 superior e inferior usam círculo de `426 px`, são desenhadas depois da escala e
 aplicam um traço preto de `17 px` sob o trilho, cobrindo integralmente os
-índices interceptados. Os três slots esportivos não possuem contorno visível;
-seus conteúdos usam margem interna mínima de `8 px` e não se sobrepõem à hora.
+índices interceptados. Seus slots usam `BoundingBox` retangular para não
+recortar os arcos externos; uma elipse achatada de `420 x 120 px` deixaria os
+valores visíveis, mas eliminaria o preenchimento próximo à borda. Os três slots
+esportivos não possuem contorno visível; seus conteúdos usam margem interna
+mínima de `8 px` e não se sobrepõem à hora.
 
 Tipografia: `SYNC_TO_DEVICE`; peso `BOLD` para a hora, `MEDIUM` para valores e
 `NORMAL` para data e textos auxiliares. Tamanhos-alvo: `82 px` para hora,

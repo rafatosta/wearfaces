@@ -73,6 +73,9 @@ arquivo.
 
 ### Fixed
 
+-   Corrigido o recorte das barras dinâmicas do **Stride** pelos limites
+    elípticos dos slots, permitindo que os arcos de passos e bateria sejam
+    renderizados de acordo com os valores recebidos.
 -   Priorizados providers numéricos nos slots externos do **Stride**, fazendo
     as barras refletirem passos e bateria e restaurando a porcentagem ao
     selecionar novamente a bateria do sistema.
