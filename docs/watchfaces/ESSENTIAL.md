@@ -99,7 +99,7 @@ Tipografia: `SYNC_TO_DEVICE`, peso `NORMAL`; hora Digital `82 px`, data
 | Hora Digital | `DigitalClock`/`TimeText` | `hh:mm`, `SYNC_TO_DEVICE` | acompanha formato 12/24 h do dispositivo |
 | Data | `PartText` | `[DAY_OF_WEEK_S]`, `[DAY]`, `[MONTH_S]` | locale e calendário do sistema |
 | Bateria | `PartText` | `round([BATTERY_PERCENT])` | `0%` a `100%`, sem provider externo |
-| Marcadores | `ListConfiguration` e `PartDraw` | seis conjuntos originais | somente o grupo Analógico os revela |
+| Marcadores | `ListConfiguration` e `PartDraw` | seis conjuntos originais e opção vazia | somente o grupo Analógico os revela |
 | Horas/minutos | `AnalogClock` | `hour_hand`, `minute_hand` | rotação do sistema |
 | Segundos | `AnalogClock` | `second_hand` | cor depende da intensidade; oculto em AOD |
 | Cores | duas `ColorConfiguration` | `main_color`, `accent_color` | escolhas independentes |
@@ -149,7 +149,9 @@ Outras configurações:
 - Style: Digital (`0`, padrão) e Analog (`1`).
 - Accent Intensity: None (`0`), Discrete (`1`, padrão) e Full (`2`).
 - Markers: Minimal (`0`, padrão), Short Ticks (`1`), Long Ticks (`2`),
-  Small Dots (`3`), Dots (`4`) e Hybrid (`5`).
+  Small Dots (`3`), Dots (`4`), Hybrid (`5`) e None (`6`).
+- None não desenha marcadores no modo interativo nem as quatro referências no
+  AOD. Os IDs `0–5` foram preservados para não reinterpretar escolhas salvas.
 - None mantém os segundos na Main Color; Discrete realça somente os segundos
   no Analógico e não altera a hora Digital; Full acrescenta quatro pontos
   cardinais de realce no Analógico e um ponto mínimo ao lado da bateria no
@@ -159,8 +161,8 @@ Outras configurações:
 ## 8. AOD
 
 - Elementos mantidos no Digital: hora completa na Main Color e bateria.
-- Elementos mantidos no Analógico: horas, minutos, quatro referências
-  cardinais mínimas e bateria.
+- Elementos mantidos no Analógico: horas, minutos, bateria e quatro referências
+  cardinais mínimas, exceto quando Markers estiver em None.
 - Elementos ocultos: data em ambos, segundos, marcadores secundários e detalhes
   Full.
 - Redução de brilho/alpha: hora/mãos `145–160`, bateria `105–120`, marcadores
@@ -207,14 +209,15 @@ Condition, sem aninhar usos de configurações. Use canvas 450 x 450,
 fundo AMOLED preto, fonte SYNC_TO_DEVICE, somente hora, data e
 BATTERY_PERCENT. Não crie ComplicationSlot. O Digital usa hora grande `hh:mm`
 integralmente em Main Color, sem Accent Color nos minutos.
-O Analógico usa mãos originais estreitas, segundos como realce e seis opções
+O Analógico usa mãos originais estreitas, segundos como realce e sete opções
 de marcadores. Implemente Main Color, Accent Color, Accent Intensity
 None/Discrete/Full e Markers conforme a especificação. A opção Markers pode
 permanecer visível no editor Digital porque hierarquia condicional não pertence
 ao baseline WFF 2.
 
 No AOD, preserve o estilo: Digital mantém hora e bateria; Analógico mantém
-horas/minutos, quatro referências cardinais e bateria. Oculte data, segundos,
+horas/minutos, bateria e quatro referências cardinais quando Markers não for
+None. Oculte data, segundos,
 realces e marcadores secundários. Produza assets originais em
 shared-source/artwork/essential/ e seus PNGs no módulo; não incorpore o mockup
 ou a carcaça.
@@ -238,7 +241,7 @@ renderer legado, efeitos decorativos e alegações não medidas de economia.
 - [x] hora, data e bateria conforme especificação;
 - [x] nenhuma complication;
 - [x] Main Color, Accent Color e três intensidades;
-- [x] seis opções de marcadores analógicos;
+- [x] sete opções de marcadores analógicos, incluindo Nenhum;
 - [x] AOD próprio preservando o estilo;
 - [x] assets originais/licenciados;
 - [x] Android Lint e schema WFF aprovados;
@@ -252,7 +255,7 @@ Até execução real no Xiaomi Watch 2, permanecem pendentes: instalação, pick
 Digital/Analógico e persistência da alternância; horários Digital `00:00`,
 `01:01`, `08:08`, `10:08`, `11:11`, `12:59`, `20:00`, `23:59`; horários
 Analógicos `00:00`, `03:15`, `06:30`, `09:45`, `10:08`, `12:30`, `18:30`,
-`23:59`; bateria de `0%` a `100%`; seis marcadores; todas as cores e
+`23:59`; bateria de `0%` a `100%`; sete opções de marcadores; todas as cores e
 intensidades; entrada/saída do AOD; clipping, brilho, reboot, troca/retorno e
 atualização/reinstalação. A adequação dos marcadores à carcaça física também
 depende dessa avaliação.

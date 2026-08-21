@@ -42,8 +42,8 @@ arquivo.
     otimizado.
 -   Adicionada a especificação e implementação do **Essential**, um módulo WFF
     2 independente que alterna entre estilos Digital e Analógico no mesmo APK,
-    com bateria direta, duas famílias de cores, três intensidades, seis estilos
-    de marcadores e AOD próprio, sem complications.
+    com bateria direta, duas famílias de cores, três intensidades, sete opções
+    de marcadores — incluindo Nenhum — e AOD próprio, sem complications.
 
 ### Changed
 

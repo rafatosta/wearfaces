@@ -25,4 +25,5 @@
     <string name="marker_small_dots">Pontos pequenos</string>
     <string name="marker_dots">Pontos</string>
     <string name="marker_hybrid">Híbrido</string>
+    <string name="marker_none">Nenhum</string>
 </resources>

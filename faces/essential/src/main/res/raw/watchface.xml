@@ -32,6 +32,7 @@
             <ListOption id="3" displayName="marker_small_dots" screenReaderText="marker_small_dots" />
             <ListOption id="4" displayName="marker_dots" screenReaderText="marker_dots" />
             <ListOption id="5" displayName="marker_hybrid" screenReaderText="marker_hybrid" />
+            <ListOption id="6" displayName="marker_none" screenReaderText="marker_none" />
         </ListConfiguration>
     </UserConfigurations>
 
@@ -180,16 +181,27 @@
                                 <Group name="essential_group_72" x="200" y="0" width="50" height="450" angle="330"><PartDraw x="23" y="20" width="4" height="11"><RoundRectangle x="0" y="0" width="4" height="11" cornerRadiusX="2" cornerRadiusY="2"><Fill color="[CONFIGURATION.main_color.0]" /></RoundRectangle></PartDraw></Group>
                             </Group>
                         </ListOption>
+                        <ListOption id="6"><Group name="marker_none" x="0" y="0" width="450" height="450" /></ListOption>
                     </ListConfiguration>
 
                     <!-- Four low-alpha references replace the selected scale in AOD. -->
-                    <Group name="essential_group_73" x="0" y="0" width="450" height="450" alpha="0">
-                        <Variant mode="AMBIENT" target="alpha" value="90" />
-                        <Group name="essential_group_74" x="200" y="0" width="50" height="450" angle="0"><PartDraw x="23" y="18" width="4" height="17"><RoundRectangle x="0" y="0" width="4" height="17" cornerRadiusX="2" cornerRadiusY="2"><Fill color="[CONFIGURATION.main_color.0]" /></RoundRectangle></PartDraw></Group>
-                        <Group name="essential_group_75" x="200" y="0" width="50" height="450" angle="90"><PartDraw x="23" y="18" width="4" height="17"><RoundRectangle x="0" y="0" width="4" height="17" cornerRadiusX="2" cornerRadiusY="2"><Fill color="[CONFIGURATION.main_color.0]" /></RoundRectangle></PartDraw></Group>
-                        <Group name="essential_group_76" x="200" y="0" width="50" height="450" angle="180"><PartDraw x="23" y="18" width="4" height="17"><RoundRectangle x="0" y="0" width="4" height="17" cornerRadiusX="2" cornerRadiusY="2"><Fill color="[CONFIGURATION.main_color.0]" /></RoundRectangle></PartDraw></Group>
-                        <Group name="essential_group_77" x="200" y="0" width="50" height="450" angle="270"><PartDraw x="23" y="18" width="4" height="17"><RoundRectangle x="0" y="0" width="4" height="17" cornerRadiusX="2" cornerRadiusY="2"><Fill color="[CONFIGURATION.main_color.0]" /></RoundRectangle></PartDraw></Group>
-                    </Group>
+                    <Condition>
+                        <Expressions>
+                            <Expression name="markers_disabled"><![CDATA[[CONFIGURATION.marker_style] == "6"]]></Expression>
+                        </Expressions>
+                        <Compare expression="markers_disabled">
+                            <Group name="marker_none_aod" x="0" y="0" width="450" height="450" />
+                        </Compare>
+                        <Default>
+                            <Group name="essential_group_73" x="0" y="0" width="450" height="450" alpha="0">
+                                <Variant mode="AMBIENT" target="alpha" value="90" />
+                                <Group name="essential_group_74" x="200" y="0" width="50" height="450" angle="0"><PartDraw x="23" y="18" width="4" height="17"><RoundRectangle x="0" y="0" width="4" height="17" cornerRadiusX="2" cornerRadiusY="2"><Fill color="[CONFIGURATION.main_color.0]" /></RoundRectangle></PartDraw></Group>
+                                <Group name="essential_group_75" x="200" y="0" width="50" height="450" angle="90"><PartDraw x="23" y="18" width="4" height="17"><RoundRectangle x="0" y="0" width="4" height="17" cornerRadiusX="2" cornerRadiusY="2"><Fill color="[CONFIGURATION.main_color.0]" /></RoundRectangle></PartDraw></Group>
+                                <Group name="essential_group_76" x="200" y="0" width="50" height="450" angle="180"><PartDraw x="23" y="18" width="4" height="17"><RoundRectangle x="0" y="0" width="4" height="17" cornerRadiusX="2" cornerRadiusY="2"><Fill color="[CONFIGURATION.main_color.0]" /></RoundRectangle></PartDraw></Group>
+                                <Group name="essential_group_77" x="200" y="0" width="50" height="450" angle="270"><PartDraw x="23" y="18" width="4" height="17"><RoundRectangle x="0" y="0" width="4" height="17" cornerRadiusX="2" cornerRadiusY="2"><Fill color="[CONFIGURATION.main_color.0]" /></RoundRectangle></PartDraw></Group>
+                            </Group>
+                        </Default>
+                    </Condition>
 
                     <AnalogClock x="0" y="0" width="450" height="450">
                         <HourHand resource="hour_hand" x="216" y="95" width="18" height="140" pivotX="0.5" pivotY="0.9286" tintColor="[CONFIGURATION.main_color.0]">
