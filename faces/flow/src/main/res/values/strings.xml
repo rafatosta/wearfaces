@@ -7,5 +7,6 @@
     <string name="palette_purple">Purple</string>
     <string name="palette_orange">Orange</string>
     <string name="left_complication">Left complication</string>
-    <string name="right_complication">Right complication</string>
+    <string name="calories_complication">Right complication (calories)</string>
+    <string name="bottom_complication">Bottom complication (battery)</string>
 </resources>

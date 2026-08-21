@@ -15,7 +15,7 @@ enquanto preservarem compatibilidade com WFF 2.
 | Mostrador | Estado | Recursos |
 | --- | --- | --- |
 | [Aurora](faces/aurora/) | MVP 0.1.0 | Analógico, data, 2 complications, 4 paletas e AOD |
-| [Flow](faces/flow/) | MVP 0.1.0 | Analógico, data dupla, 2 complications, 4 paletas, glifo provisório e AOD |
+| [Flow](faces/flow/) | MVP 0.1.0 | Analógico, data, 3 complications editáveis, 4 paletas, AMOLED preto e AOD |
 
 Screenshots reais serão adicionadas depois da validação no dispositivo. O
 preview vetorial do APK é ilustrativo e não substitui essa evidência.

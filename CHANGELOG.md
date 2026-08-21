@@ -37,11 +37,9 @@ arquivo.
 -   Adicionada a especificação do mostrador **Flow**, extraída de mockup, com
     quatro paletas, duas complications, AOD e limites explícitos para identidade
     e assets GNOME.
--   Aprovado o glifo provisório do **Flow** para implementação e avaliação,
-    mantendo qualquer adoção futura da marca GNOME condicionada à autorização.
 -   Implementado o mostrador **Flow** como módulo WFF 2 independente, com data
-    em dois níveis, quatro paletas, duas complications configuráveis, segundos,
-    glifo provisório próprio e AOD otimizado.
+    superior, quatro paletas, três complications configuráveis, segundos e AOD
+    otimizado.
 
 ### Changed
 
@@ -63,6 +61,9 @@ arquivo.
     mockup aprovado.
 -   Tornada obrigatória uma mensagem Conventional Commit sugerida em toda
     resposta final do Codex que suceda modificações em arquivos do repositório.
+-   Refinado o **Flow** com fundo AMOLED preto puro, índices usando toda a borda,
+    remoção do glifo e três complications editáveis; passos e bateria são
+    defaults portáveis, enquanto calorias dependem de provider instalado.
 
 ### Fixed
 

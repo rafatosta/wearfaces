@@ -13,90 +13,74 @@
     </UserConfigurations>
 
     <Scene backgroundColor="#FF000000">
-        <Group x="0" y="0" width="450" height="450" name="active_background">
-            <Variant mode="AMBIENT" target="alpha" value="0" />
-            <PartDraw x="0" y="0" width="450" height="450">
-                <Ellipse x="0" y="0" width="450" height="450">
-                    <Fill color="#FF05080D">
-                        <RadialGradient centerX="225" centerY="205" radius="270" colors="#FF172230 #FF05080D" positions="0 1" />
-                    </Fill>
-                </Ellipse>
-            </PartDraw>
-        </Group>
-
         <!-- The 48 minor markers disappear in ambient mode. -->
         <Group x="0" y="0" width="450" height="450" name="minute_markers" alpha="155">
             <Variant mode="AMBIENT" target="alpha" value="0" />
-            <Group x="200" y="0" width="50" height="450" name="dial_marker_6" angle="6"><PartDraw x="23" y="25" width="4" height="4"><Ellipse x="0" y="0" width="4" height="4"><Fill color="#FFB8C0CA" /></Ellipse></PartDraw></Group>
-            <Group x="200" y="0" width="50" height="450" name="dial_marker_12" angle="12"><PartDraw x="23" y="25" width="4" height="4"><Ellipse x="0" y="0" width="4" height="4"><Fill color="#FFB8C0CA" /></Ellipse></PartDraw></Group>
-            <Group x="200" y="0" width="50" height="450" name="dial_marker_18" angle="18"><PartDraw x="23" y="25" width="4" height="4"><Ellipse x="0" y="0" width="4" height="4"><Fill color="#FFB8C0CA" /></Ellipse></PartDraw></Group>
-            <Group x="200" y="0" width="50" height="450" name="dial_marker_24" angle="24"><PartDraw x="23" y="25" width="4" height="4"><Ellipse x="0" y="0" width="4" height="4"><Fill color="#FFB8C0CA" /></Ellipse></PartDraw></Group>
-            <Group x="200" y="0" width="50" height="450" name="dial_marker_36" angle="36"><PartDraw x="23" y="25" width="4" height="4"><Ellipse x="0" y="0" width="4" height="4"><Fill color="#FFB8C0CA" /></Ellipse></PartDraw></Group>
-            <Group x="200" y="0" width="50" height="450" name="dial_marker_42" angle="42"><PartDraw x="23" y="25" width="4" height="4"><Ellipse x="0" y="0" width="4" height="4"><Fill color="#FFB8C0CA" /></Ellipse></PartDraw></Group>
-            <Group x="200" y="0" width="50" height="450" name="dial_marker_48" angle="48"><PartDraw x="23" y="25" width="4" height="4"><Ellipse x="0" y="0" width="4" height="4"><Fill color="#FFB8C0CA" /></Ellipse></PartDraw></Group>
-            <Group x="200" y="0" width="50" height="450" name="dial_marker_54" angle="54"><PartDraw x="23" y="25" width="4" height="4"><Ellipse x="0" y="0" width="4" height="4"><Fill color="#FFB8C0CA" /></Ellipse></PartDraw></Group>
-            <Group x="200" y="0" width="50" height="450" name="dial_marker_66" angle="66"><PartDraw x="23" y="25" width="4" height="4"><Ellipse x="0" y="0" width="4" height="4"><Fill color="#FFB8C0CA" /></Ellipse></PartDraw></Group>
-            <Group x="200" y="0" width="50" height="450" name="dial_marker_72" angle="72"><PartDraw x="23" y="25" width="4" height="4"><Ellipse x="0" y="0" width="4" height="4"><Fill color="#FFB8C0CA" /></Ellipse></PartDraw></Group>
-            <Group x="200" y="0" width="50" height="450" name="dial_marker_78" angle="78"><PartDraw x="23" y="25" width="4" height="4"><Ellipse x="0" y="0" width="4" height="4"><Fill color="#FFB8C0CA" /></Ellipse></PartDraw></Group>
-            <Group x="200" y="0" width="50" height="450" name="dial_marker_84" angle="84"><PartDraw x="23" y="25" width="4" height="4"><Ellipse x="0" y="0" width="4" height="4"><Fill color="#FFB8C0CA" /></Ellipse></PartDraw></Group>
-            <Group x="200" y="0" width="50" height="450" name="dial_marker_96" angle="96"><PartDraw x="23" y="25" width="4" height="4"><Ellipse x="0" y="0" width="4" height="4"><Fill color="#FFB8C0CA" /></Ellipse></PartDraw></Group>
-            <Group x="200" y="0" width="50" height="450" name="dial_marker_102" angle="102"><PartDraw x="23" y="25" width="4" height="4"><Ellipse x="0" y="0" width="4" height="4"><Fill color="#FFB8C0CA" /></Ellipse></PartDraw></Group>
-            <Group x="200" y="0" width="50" height="450" name="dial_marker_108" angle="108"><PartDraw x="23" y="25" width="4" height="4"><Ellipse x="0" y="0" width="4" height="4"><Fill color="#FFB8C0CA" /></Ellipse></PartDraw></Group>
-            <Group x="200" y="0" width="50" height="450" name="dial_marker_114" angle="114"><PartDraw x="23" y="25" width="4" height="4"><Ellipse x="0" y="0" width="4" height="4"><Fill color="#FFB8C0CA" /></Ellipse></PartDraw></Group>
-            <Group x="200" y="0" width="50" height="450" name="dial_marker_126" angle="126"><PartDraw x="23" y="25" width="4" height="4"><Ellipse x="0" y="0" width="4" height="4"><Fill color="#FFB8C0CA" /></Ellipse></PartDraw></Group>
-            <Group x="200" y="0" width="50" height="450" name="dial_marker_132" angle="132"><PartDraw x="23" y="25" width="4" height="4"><Ellipse x="0" y="0" width="4" height="4"><Fill color="#FFB8C0CA" /></Ellipse></PartDraw></Group>
-            <Group x="200" y="0" width="50" height="450" name="dial_marker_138" angle="138"><PartDraw x="23" y="25" width="4" height="4"><Ellipse x="0" y="0" width="4" height="4"><Fill color="#FFB8C0CA" /></Ellipse></PartDraw></Group>
-            <Group x="200" y="0" width="50" height="450" name="dial_marker_144" angle="144"><PartDraw x="23" y="25" width="4" height="4"><Ellipse x="0" y="0" width="4" height="4"><Fill color="#FFB8C0CA" /></Ellipse></PartDraw></Group>
-            <Group x="200" y="0" width="50" height="450" name="dial_marker_156" angle="156"><PartDraw x="23" y="25" width="4" height="4"><Ellipse x="0" y="0" width="4" height="4"><Fill color="#FFB8C0CA" /></Ellipse></PartDraw></Group>
-            <Group x="200" y="0" width="50" height="450" name="dial_marker_162" angle="162"><PartDraw x="23" y="25" width="4" height="4"><Ellipse x="0" y="0" width="4" height="4"><Fill color="#FFB8C0CA" /></Ellipse></PartDraw></Group>
-            <Group x="200" y="0" width="50" height="450" name="dial_marker_168" angle="168"><PartDraw x="23" y="25" width="4" height="4"><Ellipse x="0" y="0" width="4" height="4"><Fill color="#FFB8C0CA" /></Ellipse></PartDraw></Group>
-            <Group x="200" y="0" width="50" height="450" name="dial_marker_174" angle="174"><PartDraw x="23" y="25" width="4" height="4"><Ellipse x="0" y="0" width="4" height="4"><Fill color="#FFB8C0CA" /></Ellipse></PartDraw></Group>
-            <Group x="200" y="0" width="50" height="450" name="dial_marker_186" angle="186"><PartDraw x="23" y="25" width="4" height="4"><Ellipse x="0" y="0" width="4" height="4"><Fill color="#FFB8C0CA" /></Ellipse></PartDraw></Group>
-            <Group x="200" y="0" width="50" height="450" name="dial_marker_192" angle="192"><PartDraw x="23" y="25" width="4" height="4"><Ellipse x="0" y="0" width="4" height="4"><Fill color="#FFB8C0CA" /></Ellipse></PartDraw></Group>
-            <Group x="200" y="0" width="50" height="450" name="dial_marker_198" angle="198"><PartDraw x="23" y="25" width="4" height="4"><Ellipse x="0" y="0" width="4" height="4"><Fill color="#FFB8C0CA" /></Ellipse></PartDraw></Group>
-            <Group x="200" y="0" width="50" height="450" name="dial_marker_204" angle="204"><PartDraw x="23" y="25" width="4" height="4"><Ellipse x="0" y="0" width="4" height="4"><Fill color="#FFB8C0CA" /></Ellipse></PartDraw></Group>
-            <Group x="200" y="0" width="50" height="450" name="dial_marker_216" angle="216"><PartDraw x="23" y="25" width="4" height="4"><Ellipse x="0" y="0" width="4" height="4"><Fill color="#FFB8C0CA" /></Ellipse></PartDraw></Group>
-            <Group x="200" y="0" width="50" height="450" name="dial_marker_222" angle="222"><PartDraw x="23" y="25" width="4" height="4"><Ellipse x="0" y="0" width="4" height="4"><Fill color="#FFB8C0CA" /></Ellipse></PartDraw></Group>
-            <Group x="200" y="0" width="50" height="450" name="dial_marker_228" angle="228"><PartDraw x="23" y="25" width="4" height="4"><Ellipse x="0" y="0" width="4" height="4"><Fill color="#FFB8C0CA" /></Ellipse></PartDraw></Group>
-            <Group x="200" y="0" width="50" height="450" name="dial_marker_234" angle="234"><PartDraw x="23" y="25" width="4" height="4"><Ellipse x="0" y="0" width="4" height="4"><Fill color="#FFB8C0CA" /></Ellipse></PartDraw></Group>
-            <Group x="200" y="0" width="50" height="450" name="dial_marker_246" angle="246"><PartDraw x="23" y="25" width="4" height="4"><Ellipse x="0" y="0" width="4" height="4"><Fill color="#FFB8C0CA" /></Ellipse></PartDraw></Group>
-            <Group x="200" y="0" width="50" height="450" name="dial_marker_252" angle="252"><PartDraw x="23" y="25" width="4" height="4"><Ellipse x="0" y="0" width="4" height="4"><Fill color="#FFB8C0CA" /></Ellipse></PartDraw></Group>
-            <Group x="200" y="0" width="50" height="450" name="dial_marker_258" angle="258"><PartDraw x="23" y="25" width="4" height="4"><Ellipse x="0" y="0" width="4" height="4"><Fill color="#FFB8C0CA" /></Ellipse></PartDraw></Group>
-            <Group x="200" y="0" width="50" height="450" name="dial_marker_264" angle="264"><PartDraw x="23" y="25" width="4" height="4"><Ellipse x="0" y="0" width="4" height="4"><Fill color="#FFB8C0CA" /></Ellipse></PartDraw></Group>
-            <Group x="200" y="0" width="50" height="450" name="dial_marker_276" angle="276"><PartDraw x="23" y="25" width="4" height="4"><Ellipse x="0" y="0" width="4" height="4"><Fill color="#FFB8C0CA" /></Ellipse></PartDraw></Group>
-            <Group x="200" y="0" width="50" height="450" name="dial_marker_282" angle="282"><PartDraw x="23" y="25" width="4" height="4"><Ellipse x="0" y="0" width="4" height="4"><Fill color="#FFB8C0CA" /></Ellipse></PartDraw></Group>
-            <Group x="200" y="0" width="50" height="450" name="dial_marker_288" angle="288"><PartDraw x="23" y="25" width="4" height="4"><Ellipse x="0" y="0" width="4" height="4"><Fill color="#FFB8C0CA" /></Ellipse></PartDraw></Group>
-            <Group x="200" y="0" width="50" height="450" name="dial_marker_294" angle="294"><PartDraw x="23" y="25" width="4" height="4"><Ellipse x="0" y="0" width="4" height="4"><Fill color="#FFB8C0CA" /></Ellipse></PartDraw></Group>
-            <Group x="200" y="0" width="50" height="450" name="dial_marker_306" angle="306"><PartDraw x="23" y="25" width="4" height="4"><Ellipse x="0" y="0" width="4" height="4"><Fill color="#FFB8C0CA" /></Ellipse></PartDraw></Group>
-            <Group x="200" y="0" width="50" height="450" name="dial_marker_312" angle="312"><PartDraw x="23" y="25" width="4" height="4"><Ellipse x="0" y="0" width="4" height="4"><Fill color="#FFB8C0CA" /></Ellipse></PartDraw></Group>
-            <Group x="200" y="0" width="50" height="450" name="dial_marker_318" angle="318"><PartDraw x="23" y="25" width="4" height="4"><Ellipse x="0" y="0" width="4" height="4"><Fill color="#FFB8C0CA" /></Ellipse></PartDraw></Group>
-            <Group x="200" y="0" width="50" height="450" name="dial_marker_324" angle="324"><PartDraw x="23" y="25" width="4" height="4"><Ellipse x="0" y="0" width="4" height="4"><Fill color="#FFB8C0CA" /></Ellipse></PartDraw></Group>
-            <Group x="200" y="0" width="50" height="450" name="dial_marker_336" angle="336"><PartDraw x="23" y="25" width="4" height="4"><Ellipse x="0" y="0" width="4" height="4"><Fill color="#FFB8C0CA" /></Ellipse></PartDraw></Group>
-            <Group x="200" y="0" width="50" height="450" name="dial_marker_342" angle="342"><PartDraw x="23" y="25" width="4" height="4"><Ellipse x="0" y="0" width="4" height="4"><Fill color="#FFB8C0CA" /></Ellipse></PartDraw></Group>
-            <Group x="200" y="0" width="50" height="450" name="dial_marker_348" angle="348"><PartDraw x="23" y="25" width="4" height="4"><Ellipse x="0" y="0" width="4" height="4"><Fill color="#FFB8C0CA" /></Ellipse></PartDraw></Group>
-            <Group x="200" y="0" width="50" height="450" name="dial_marker_354" angle="354"><PartDraw x="23" y="25" width="4" height="4"><Ellipse x="0" y="0" width="4" height="4"><Fill color="#FFB8C0CA" /></Ellipse></PartDraw></Group>
+            <Group x="200" y="0" width="50" height="450" name="dial_marker_6" angle="6"><PartDraw x="23" y="8" width="4" height="4"><Ellipse x="0" y="0" width="4" height="4"><Fill color="#FFB8C0CA" /></Ellipse></PartDraw></Group>
+            <Group x="200" y="0" width="50" height="450" name="dial_marker_12" angle="12"><PartDraw x="23" y="8" width="4" height="4"><Ellipse x="0" y="0" width="4" height="4"><Fill color="#FFB8C0CA" /></Ellipse></PartDraw></Group>
+            <Group x="200" y="0" width="50" height="450" name="dial_marker_18" angle="18"><PartDraw x="23" y="8" width="4" height="4"><Ellipse x="0" y="0" width="4" height="4"><Fill color="#FFB8C0CA" /></Ellipse></PartDraw></Group>
+            <Group x="200" y="0" width="50" height="450" name="dial_marker_24" angle="24"><PartDraw x="23" y="8" width="4" height="4"><Ellipse x="0" y="0" width="4" height="4"><Fill color="#FFB8C0CA" /></Ellipse></PartDraw></Group>
+            <Group x="200" y="0" width="50" height="450" name="dial_marker_36" angle="36"><PartDraw x="23" y="8" width="4" height="4"><Ellipse x="0" y="0" width="4" height="4"><Fill color="#FFB8C0CA" /></Ellipse></PartDraw></Group>
+            <Group x="200" y="0" width="50" height="450" name="dial_marker_42" angle="42"><PartDraw x="23" y="8" width="4" height="4"><Ellipse x="0" y="0" width="4" height="4"><Fill color="#FFB8C0CA" /></Ellipse></PartDraw></Group>
+            <Group x="200" y="0" width="50" height="450" name="dial_marker_48" angle="48"><PartDraw x="23" y="8" width="4" height="4"><Ellipse x="0" y="0" width="4" height="4"><Fill color="#FFB8C0CA" /></Ellipse></PartDraw></Group>
+            <Group x="200" y="0" width="50" height="450" name="dial_marker_54" angle="54"><PartDraw x="23" y="8" width="4" height="4"><Ellipse x="0" y="0" width="4" height="4"><Fill color="#FFB8C0CA" /></Ellipse></PartDraw></Group>
+            <Group x="200" y="0" width="50" height="450" name="dial_marker_66" angle="66"><PartDraw x="23" y="8" width="4" height="4"><Ellipse x="0" y="0" width="4" height="4"><Fill color="#FFB8C0CA" /></Ellipse></PartDraw></Group>
+            <Group x="200" y="0" width="50" height="450" name="dial_marker_72" angle="72"><PartDraw x="23" y="8" width="4" height="4"><Ellipse x="0" y="0" width="4" height="4"><Fill color="#FFB8C0CA" /></Ellipse></PartDraw></Group>
+            <Group x="200" y="0" width="50" height="450" name="dial_marker_78" angle="78"><PartDraw x="23" y="8" width="4" height="4"><Ellipse x="0" y="0" width="4" height="4"><Fill color="#FFB8C0CA" /></Ellipse></PartDraw></Group>
+            <Group x="200" y="0" width="50" height="450" name="dial_marker_84" angle="84"><PartDraw x="23" y="8" width="4" height="4"><Ellipse x="0" y="0" width="4" height="4"><Fill color="#FFB8C0CA" /></Ellipse></PartDraw></Group>
+            <Group x="200" y="0" width="50" height="450" name="dial_marker_96" angle="96"><PartDraw x="23" y="8" width="4" height="4"><Ellipse x="0" y="0" width="4" height="4"><Fill color="#FFB8C0CA" /></Ellipse></PartDraw></Group>
+            <Group x="200" y="0" width="50" height="450" name="dial_marker_102" angle="102"><PartDraw x="23" y="8" width="4" height="4"><Ellipse x="0" y="0" width="4" height="4"><Fill color="#FFB8C0CA" /></Ellipse></PartDraw></Group>
+            <Group x="200" y="0" width="50" height="450" name="dial_marker_108" angle="108"><PartDraw x="23" y="8" width="4" height="4"><Ellipse x="0" y="0" width="4" height="4"><Fill color="#FFB8C0CA" /></Ellipse></PartDraw></Group>
+            <Group x="200" y="0" width="50" height="450" name="dial_marker_114" angle="114"><PartDraw x="23" y="8" width="4" height="4"><Ellipse x="0" y="0" width="4" height="4"><Fill color="#FFB8C0CA" /></Ellipse></PartDraw></Group>
+            <Group x="200" y="0" width="50" height="450" name="dial_marker_126" angle="126"><PartDraw x="23" y="8" width="4" height="4"><Ellipse x="0" y="0" width="4" height="4"><Fill color="#FFB8C0CA" /></Ellipse></PartDraw></Group>
+            <Group x="200" y="0" width="50" height="450" name="dial_marker_132" angle="132"><PartDraw x="23" y="8" width="4" height="4"><Ellipse x="0" y="0" width="4" height="4"><Fill color="#FFB8C0CA" /></Ellipse></PartDraw></Group>
+            <Group x="200" y="0" width="50" height="450" name="dial_marker_138" angle="138"><PartDraw x="23" y="8" width="4" height="4"><Ellipse x="0" y="0" width="4" height="4"><Fill color="#FFB8C0CA" /></Ellipse></PartDraw></Group>
+            <Group x="200" y="0" width="50" height="450" name="dial_marker_144" angle="144"><PartDraw x="23" y="8" width="4" height="4"><Ellipse x="0" y="0" width="4" height="4"><Fill color="#FFB8C0CA" /></Ellipse></PartDraw></Group>
+            <Group x="200" y="0" width="50" height="450" name="dial_marker_156" angle="156"><PartDraw x="23" y="8" width="4" height="4"><Ellipse x="0" y="0" width="4" height="4"><Fill color="#FFB8C0CA" /></Ellipse></PartDraw></Group>
+            <Group x="200" y="0" width="50" height="450" name="dial_marker_162" angle="162"><PartDraw x="23" y="8" width="4" height="4"><Ellipse x="0" y="0" width="4" height="4"><Fill color="#FFB8C0CA" /></Ellipse></PartDraw></Group>
+            <Group x="200" y="0" width="50" height="450" name="dial_marker_168" angle="168"><PartDraw x="23" y="8" width="4" height="4"><Ellipse x="0" y="0" width="4" height="4"><Fill color="#FFB8C0CA" /></Ellipse></PartDraw></Group>
+            <Group x="200" y="0" width="50" height="450" name="dial_marker_174" angle="174"><PartDraw x="23" y="8" width="4" height="4"><Ellipse x="0" y="0" width="4" height="4"><Fill color="#FFB8C0CA" /></Ellipse></PartDraw></Group>
+            <Group x="200" y="0" width="50" height="450" name="dial_marker_186" angle="186"><PartDraw x="23" y="8" width="4" height="4"><Ellipse x="0" y="0" width="4" height="4"><Fill color="#FFB8C0CA" /></Ellipse></PartDraw></Group>
+            <Group x="200" y="0" width="50" height="450" name="dial_marker_192" angle="192"><PartDraw x="23" y="8" width="4" height="4"><Ellipse x="0" y="0" width="4" height="4"><Fill color="#FFB8C0CA" /></Ellipse></PartDraw></Group>
+            <Group x="200" y="0" width="50" height="450" name="dial_marker_198" angle="198"><PartDraw x="23" y="8" width="4" height="4"><Ellipse x="0" y="0" width="4" height="4"><Fill color="#FFB8C0CA" /></Ellipse></PartDraw></Group>
+            <Group x="200" y="0" width="50" height="450" name="dial_marker_204" angle="204"><PartDraw x="23" y="8" width="4" height="4"><Ellipse x="0" y="0" width="4" height="4"><Fill color="#FFB8C0CA" /></Ellipse></PartDraw></Group>
+            <Group x="200" y="0" width="50" height="450" name="dial_marker_216" angle="216"><PartDraw x="23" y="8" width="4" height="4"><Ellipse x="0" y="0" width="4" height="4"><Fill color="#FFB8C0CA" /></Ellipse></PartDraw></Group>
+            <Group x="200" y="0" width="50" height="450" name="dial_marker_222" angle="222"><PartDraw x="23" y="8" width="4" height="4"><Ellipse x="0" y="0" width="4" height="4"><Fill color="#FFB8C0CA" /></Ellipse></PartDraw></Group>
+            <Group x="200" y="0" width="50" height="450" name="dial_marker_228" angle="228"><PartDraw x="23" y="8" width="4" height="4"><Ellipse x="0" y="0" width="4" height="4"><Fill color="#FFB8C0CA" /></Ellipse></PartDraw></Group>
+            <Group x="200" y="0" width="50" height="450" name="dial_marker_234" angle="234"><PartDraw x="23" y="8" width="4" height="4"><Ellipse x="0" y="0" width="4" height="4"><Fill color="#FFB8C0CA" /></Ellipse></PartDraw></Group>
+            <Group x="200" y="0" width="50" height="450" name="dial_marker_246" angle="246"><PartDraw x="23" y="8" width="4" height="4"><Ellipse x="0" y="0" width="4" height="4"><Fill color="#FFB8C0CA" /></Ellipse></PartDraw></Group>
+            <Group x="200" y="0" width="50" height="450" name="dial_marker_252" angle="252"><PartDraw x="23" y="8" width="4" height="4"><Ellipse x="0" y="0" width="4" height="4"><Fill color="#FFB8C0CA" /></Ellipse></PartDraw></Group>
+            <Group x="200" y="0" width="50" height="450" name="dial_marker_258" angle="258"><PartDraw x="23" y="8" width="4" height="4"><Ellipse x="0" y="0" width="4" height="4"><Fill color="#FFB8C0CA" /></Ellipse></PartDraw></Group>
+            <Group x="200" y="0" width="50" height="450" name="dial_marker_264" angle="264"><PartDraw x="23" y="8" width="4" height="4"><Ellipse x="0" y="0" width="4" height="4"><Fill color="#FFB8C0CA" /></Ellipse></PartDraw></Group>
+            <Group x="200" y="0" width="50" height="450" name="dial_marker_276" angle="276"><PartDraw x="23" y="8" width="4" height="4"><Ellipse x="0" y="0" width="4" height="4"><Fill color="#FFB8C0CA" /></Ellipse></PartDraw></Group>
+            <Group x="200" y="0" width="50" height="450" name="dial_marker_282" angle="282"><PartDraw x="23" y="8" width="4" height="4"><Ellipse x="0" y="0" width="4" height="4"><Fill color="#FFB8C0CA" /></Ellipse></PartDraw></Group>
+            <Group x="200" y="0" width="50" height="450" name="dial_marker_288" angle="288"><PartDraw x="23" y="8" width="4" height="4"><Ellipse x="0" y="0" width="4" height="4"><Fill color="#FFB8C0CA" /></Ellipse></PartDraw></Group>
+            <Group x="200" y="0" width="50" height="450" name="dial_marker_294" angle="294"><PartDraw x="23" y="8" width="4" height="4"><Ellipse x="0" y="0" width="4" height="4"><Fill color="#FFB8C0CA" /></Ellipse></PartDraw></Group>
+            <Group x="200" y="0" width="50" height="450" name="dial_marker_306" angle="306"><PartDraw x="23" y="8" width="4" height="4"><Ellipse x="0" y="0" width="4" height="4"><Fill color="#FFB8C0CA" /></Ellipse></PartDraw></Group>
+            <Group x="200" y="0" width="50" height="450" name="dial_marker_312" angle="312"><PartDraw x="23" y="8" width="4" height="4"><Ellipse x="0" y="0" width="4" height="4"><Fill color="#FFB8C0CA" /></Ellipse></PartDraw></Group>
+            <Group x="200" y="0" width="50" height="450" name="dial_marker_318" angle="318"><PartDraw x="23" y="8" width="4" height="4"><Ellipse x="0" y="0" width="4" height="4"><Fill color="#FFB8C0CA" /></Ellipse></PartDraw></Group>
+            <Group x="200" y="0" width="50" height="450" name="dial_marker_324" angle="324"><PartDraw x="23" y="8" width="4" height="4"><Ellipse x="0" y="0" width="4" height="4"><Fill color="#FFB8C0CA" /></Ellipse></PartDraw></Group>
+            <Group x="200" y="0" width="50" height="450" name="dial_marker_336" angle="336"><PartDraw x="23" y="8" width="4" height="4"><Ellipse x="0" y="0" width="4" height="4"><Fill color="#FFB8C0CA" /></Ellipse></PartDraw></Group>
+            <Group x="200" y="0" width="50" height="450" name="dial_marker_342" angle="342"><PartDraw x="23" y="8" width="4" height="4"><Ellipse x="0" y="0" width="4" height="4"><Fill color="#FFB8C0CA" /></Ellipse></PartDraw></Group>
+            <Group x="200" y="0" width="50" height="450" name="dial_marker_348" angle="348"><PartDraw x="23" y="8" width="4" height="4"><Ellipse x="0" y="0" width="4" height="4"><Fill color="#FFB8C0CA" /></Ellipse></PartDraw></Group>
+            <Group x="200" y="0" width="50" height="450" name="dial_marker_354" angle="354"><PartDraw x="23" y="8" width="4" height="4"><Ellipse x="0" y="0" width="4" height="4"><Fill color="#FFB8C0CA" /></Ellipse></PartDraw></Group>
         </Group>
 
         <Group x="0" y="0" width="450" height="450" name="hour_markers" alpha="225">
             <Variant mode="AMBIENT" target="alpha" value="105" />
-            <Group x="200" y="0" width="50" height="450" name="dial_marker_0" angle="0"><PartDraw x="21" y="24" width="8" height="19"><RoundRectangle x="0" y="0" width="8" height="19" cornerRadiusX="4" cornerRadiusY="4"><Fill color="[CONFIGURATION.palette.0]" /></RoundRectangle></PartDraw></Group>
-            <Group x="200" y="0" width="50" height="450" name="dial_marker_30" angle="30"><PartDraw x="21" y="24" width="8" height="19"><RoundRectangle x="0" y="0" width="8" height="19" cornerRadiusX="4" cornerRadiusY="4"><Fill color="#FFC7CDD5" /></RoundRectangle></PartDraw></Group>
-            <Group x="200" y="0" width="50" height="450" name="dial_marker_60" angle="60"><PartDraw x="21" y="24" width="8" height="19"><RoundRectangle x="0" y="0" width="8" height="19" cornerRadiusX="4" cornerRadiusY="4"><Fill color="#FFC7CDD5" /></RoundRectangle></PartDraw></Group>
-            <Group x="200" y="0" width="50" height="450" name="dial_marker_90" angle="90"><PartDraw x="21" y="24" width="8" height="19"><RoundRectangle x="0" y="0" width="8" height="19" cornerRadiusX="4" cornerRadiusY="4"><Fill color="#FFC7CDD5" /></RoundRectangle></PartDraw></Group>
-            <Group x="200" y="0" width="50" height="450" name="dial_marker_120" angle="120"><PartDraw x="21" y="24" width="8" height="19"><RoundRectangle x="0" y="0" width="8" height="19" cornerRadiusX="4" cornerRadiusY="4"><Fill color="#FFC7CDD5" /></RoundRectangle></PartDraw></Group>
-            <Group x="200" y="0" width="50" height="450" name="dial_marker_150" angle="150"><PartDraw x="21" y="24" width="8" height="19"><RoundRectangle x="0" y="0" width="8" height="19" cornerRadiusX="4" cornerRadiusY="4"><Fill color="#FFC7CDD5" /></RoundRectangle></PartDraw></Group>
-            <Group x="200" y="0" width="50" height="450" name="dial_marker_180" angle="180"><PartDraw x="21" y="24" width="8" height="19"><RoundRectangle x="0" y="0" width="8" height="19" cornerRadiusX="4" cornerRadiusY="4"><Fill color="#FFC7CDD5" /></RoundRectangle></PartDraw></Group>
-            <Group x="200" y="0" width="50" height="450" name="dial_marker_210" angle="210"><PartDraw x="21" y="24" width="8" height="19"><RoundRectangle x="0" y="0" width="8" height="19" cornerRadiusX="4" cornerRadiusY="4"><Fill color="#FFC7CDD5" /></RoundRectangle></PartDraw></Group>
-            <Group x="200" y="0" width="50" height="450" name="dial_marker_240" angle="240"><PartDraw x="21" y="24" width="8" height="19"><RoundRectangle x="0" y="0" width="8" height="19" cornerRadiusX="4" cornerRadiusY="4"><Fill color="#FFC7CDD5" /></RoundRectangle></PartDraw></Group>
-            <Group x="200" y="0" width="50" height="450" name="dial_marker_270" angle="270"><PartDraw x="21" y="24" width="8" height="19"><RoundRectangle x="0" y="0" width="8" height="19" cornerRadiusX="4" cornerRadiusY="4"><Fill color="#FFC7CDD5" /></RoundRectangle></PartDraw></Group>
-            <Group x="200" y="0" width="50" height="450" name="dial_marker_300" angle="300"><PartDraw x="21" y="24" width="8" height="19"><RoundRectangle x="0" y="0" width="8" height="19" cornerRadiusX="4" cornerRadiusY="4"><Fill color="#FFC7CDD5" /></RoundRectangle></PartDraw></Group>
-            <Group x="200" y="0" width="50" height="450" name="dial_marker_330" angle="330"><PartDraw x="21" y="24" width="8" height="19"><RoundRectangle x="0" y="0" width="8" height="19" cornerRadiusX="4" cornerRadiusY="4"><Fill color="#FFC7CDD5" /></RoundRectangle></PartDraw></Group>
+            <Group x="200" y="0" width="50" height="450" name="dial_marker_0" angle="0"><PartDraw x="21" y="7" width="8" height="19"><RoundRectangle x="0" y="0" width="8" height="19" cornerRadiusX="4" cornerRadiusY="4"><Fill color="[CONFIGURATION.palette.0]" /></RoundRectangle></PartDraw></Group>
+            <Group x="200" y="0" width="50" height="450" name="dial_marker_30" angle="30"><PartDraw x="21" y="7" width="8" height="19"><RoundRectangle x="0" y="0" width="8" height="19" cornerRadiusX="4" cornerRadiusY="4"><Fill color="#FFC7CDD5" /></RoundRectangle></PartDraw></Group>
+            <Group x="200" y="0" width="50" height="450" name="dial_marker_60" angle="60"><PartDraw x="21" y="7" width="8" height="19"><RoundRectangle x="0" y="0" width="8" height="19" cornerRadiusX="4" cornerRadiusY="4"><Fill color="#FFC7CDD5" /></RoundRectangle></PartDraw></Group>
+            <Group x="200" y="0" width="50" height="450" name="dial_marker_90" angle="90"><PartDraw x="21" y="7" width="8" height="19"><RoundRectangle x="0" y="0" width="8" height="19" cornerRadiusX="4" cornerRadiusY="4"><Fill color="#FFC7CDD5" /></RoundRectangle></PartDraw></Group>
+            <Group x="200" y="0" width="50" height="450" name="dial_marker_120" angle="120"><PartDraw x="21" y="7" width="8" height="19"><RoundRectangle x="0" y="0" width="8" height="19" cornerRadiusX="4" cornerRadiusY="4"><Fill color="#FFC7CDD5" /></RoundRectangle></PartDraw></Group>
+            <Group x="200" y="0" width="50" height="450" name="dial_marker_150" angle="150"><PartDraw x="21" y="7" width="8" height="19"><RoundRectangle x="0" y="0" width="8" height="19" cornerRadiusX="4" cornerRadiusY="4"><Fill color="#FFC7CDD5" /></RoundRectangle></PartDraw></Group>
+            <Group x="200" y="0" width="50" height="450" name="dial_marker_180" angle="180"><PartDraw x="21" y="7" width="8" height="19"><RoundRectangle x="0" y="0" width="8" height="19" cornerRadiusX="4" cornerRadiusY="4"><Fill color="#FFC7CDD5" /></RoundRectangle></PartDraw></Group>
+            <Group x="200" y="0" width="50" height="450" name="dial_marker_210" angle="210"><PartDraw x="21" y="7" width="8" height="19"><RoundRectangle x="0" y="0" width="8" height="19" cornerRadiusX="4" cornerRadiusY="4"><Fill color="#FFC7CDD5" /></RoundRectangle></PartDraw></Group>
+            <Group x="200" y="0" width="50" height="450" name="dial_marker_240" angle="240"><PartDraw x="21" y="7" width="8" height="19"><RoundRectangle x="0" y="0" width="8" height="19" cornerRadiusX="4" cornerRadiusY="4"><Fill color="#FFC7CDD5" /></RoundRectangle></PartDraw></Group>
+            <Group x="200" y="0" width="50" height="450" name="dial_marker_270" angle="270"><PartDraw x="21" y="7" width="8" height="19"><RoundRectangle x="0" y="0" width="8" height="19" cornerRadiusX="4" cornerRadiusY="4"><Fill color="#FFC7CDD5" /></RoundRectangle></PartDraw></Group>
+            <Group x="200" y="0" width="50" height="450" name="dial_marker_300" angle="300"><PartDraw x="21" y="7" width="8" height="19"><RoundRectangle x="0" y="0" width="8" height="19" cornerRadiusX="4" cornerRadiusY="4"><Fill color="#FFC7CDD5" /></RoundRectangle></PartDraw></Group>
+            <Group x="200" y="0" width="50" height="450" name="dial_marker_330" angle="330"><PartDraw x="21" y="7" width="8" height="19"><RoundRectangle x="0" y="0" width="8" height="19" cornerRadiusX="4" cornerRadiusY="4"><Fill color="#FFC7CDD5" /></RoundRectangle></PartDraw></Group>
         </Group>
-
-        <PartImage x="196" y="42" width="58" height="54" tintColor="[CONFIGURATION.palette.2]">
-            <Variant mode="AMBIENT" target="alpha" value="90" />
-            <Image resource="flow_glyph" />
-        </PartImage>
 
         <PartText x="120" y="101" width="210" height="36" alpha="230">
             <Variant mode="AMBIENT" target="alpha" value="150" />
@@ -120,6 +104,7 @@
 
         <ComplicationSlot x="50" y="170" width="118" height="118" slotId="200" displayName="left_complication" supportedTypes="SHORT_TEXT MONOCHROMATIC_IMAGE RANGED_VALUE GOAL_PROGRESS EMPTY">
             <Variant mode="AMBIENT" target="alpha" value="90" />
+            <DefaultProviderPolicy defaultSystemProvider="STEP_COUNT" defaultSystemProviderType="SHORT_TEXT" />
             <BoundingOval x="0" y="0" width="118" height="118" outlinePadding="6" />
             <Complication type="SHORT_TEXT">
                 <PartImage x="48" y="19" width="22" height="22" tintColor="[CONFIGURATION.palette.2]"><Image resource="[COMPLICATION.MONOCHROMATIC_IMAGE]" /></PartImage>
@@ -141,8 +126,9 @@
             </Complication>
         </ComplicationSlot>
 
-        <ComplicationSlot x="282" y="170" width="118" height="118" slotId="201" displayName="right_complication" supportedTypes="SHORT_TEXT MONOCHROMATIC_IMAGE RANGED_VALUE GOAL_PROGRESS EMPTY">
+        <ComplicationSlot x="282" y="170" width="118" height="118" slotId="201" displayName="calories_complication" supportedTypes="SHORT_TEXT MONOCHROMATIC_IMAGE RANGED_VALUE GOAL_PROGRESS EMPTY">
             <Variant mode="AMBIENT" target="alpha" value="90" />
+            <DefaultProviderPolicy defaultSystemProvider="EMPTY" defaultSystemProviderType="EMPTY" />
             <BoundingOval x="0" y="0" width="118" height="118" outlinePadding="6" />
             <Complication type="SHORT_TEXT">
                 <PartImage x="48" y="19" width="22" height="22" tintColor="[CONFIGURATION.palette.2]"><Image resource="[COMPLICATION.MONOCHROMATIC_IMAGE]" /></PartImage>
@@ -164,14 +150,29 @@
             </Complication>
         </ComplicationSlot>
 
-        <PartText x="181" y="326" width="88" height="48" alpha="235">
-            <Variant mode="AMBIENT" target="alpha" value="150" />
-            <Text align="CENTER" ellipsis="TRUE"><Font family="SYNC_TO_DEVICE" size="40" weight="MEDIUM" color="[CONFIGURATION.palette.2]"><Template><![CDATA[%02d]]><Parameter expression="[DAY]" /></Template></Font></Text>
-        </PartText>
-        <PartText x="181" y="371" width="88" height="28" alpha="220">
-            <Variant mode="AMBIENT" target="alpha" value="140" />
-            <Text align="CENTER" ellipsis="TRUE"><Font family="SYNC_TO_DEVICE" size="19" color="[CONFIGURATION.palette.2]"><Template><![CDATA[%s]]><Parameter expression="[MONTH_S]" /></Template></Font></Text>
-        </PartText>
+        <ComplicationSlot x="171" y="305" width="108" height="108" slotId="202" displayName="bottom_complication" supportedTypes="SHORT_TEXT MONOCHROMATIC_IMAGE RANGED_VALUE GOAL_PROGRESS EMPTY">
+            <Variant mode="AMBIENT" target="alpha" value="90" />
+            <DefaultProviderPolicy defaultSystemProvider="WATCH_BATTERY" defaultSystemProviderType="RANGED_VALUE" />
+            <BoundingOval x="0" y="0" width="108" height="108" outlinePadding="6" />
+            <Complication type="SHORT_TEXT">
+                <PartImage x="43" y="14" width="22" height="22" tintColor="[CONFIGURATION.palette.2]"><Image resource="[COMPLICATION.MONOCHROMATIC_IMAGE]" /></PartImage>
+                <PartText x="10" y="38" width="88" height="34" tintColor="[CONFIGURATION.palette.2]"><Text align="CENTER" ellipsis="TRUE"><Font family="SYNC_TO_DEVICE" size="26" weight="MEDIUM"><Template><![CDATA[%s]]><Parameter expression="[COMPLICATION.TEXT]" /></Template></Font></Text></PartText>
+                <PartText x="12" y="72" width="84" height="21" tintColor="[CONFIGURATION.palette.2]"><Text align="CENTER" ellipsis="TRUE"><Font family="SYNC_TO_DEVICE" size="14"><Template><![CDATA[%s]]><Parameter expression="[COMPLICATION.TITLE]" /></Template></Font></Text></PartText>
+            </Complication>
+            <Complication type="MONOCHROMATIC_IMAGE">
+                <PartImage x="30" y="30" width="48" height="48" tintColor="[CONFIGURATION.palette.2]"><Image resource="[COMPLICATION.MONOCHROMATIC_IMAGE]" /></PartImage>
+            </Complication>
+            <Complication type="RANGED_VALUE">
+                <PartImage x="43" y="14" width="22" height="22" tintColor="[CONFIGURATION.palette.2]"><Image resource="[COMPLICATION.MONOCHROMATIC_IMAGE]" /></PartImage>
+                <PartText x="10" y="38" width="88" height="34" tintColor="[CONFIGURATION.palette.2]"><Text align="CENTER" ellipsis="TRUE"><Font family="SYNC_TO_DEVICE" size="26" weight="MEDIUM"><Template><![CDATA[%.0f%%]]><Parameter expression="[COMPLICATION.RANGED_VALUE_VALUE]" /></Template></Font></Text></PartText>
+                <PartText x="12" y="72" width="84" height="21" tintColor="[CONFIGURATION.palette.2]"><Text align="CENTER" ellipsis="TRUE"><Font family="SYNC_TO_DEVICE" size="14"><Template><![CDATA[%s]]><Parameter expression="[COMPLICATION.TITLE]" /></Template></Font></Text></PartText>
+            </Complication>
+            <Complication type="GOAL_PROGRESS">
+                <PartImage x="43" y="14" width="22" height="22" tintColor="[CONFIGURATION.palette.2]"><Image resource="[COMPLICATION.MONOCHROMATIC_IMAGE]" /></PartImage>
+                <PartText x="10" y="38" width="88" height="34" tintColor="[CONFIGURATION.palette.2]"><Text align="CENTER" ellipsis="TRUE"><Font family="SYNC_TO_DEVICE" size="26" weight="MEDIUM"><Template><![CDATA[%.0f]]><Parameter expression="[COMPLICATION.GOAL_PROGRESS_VALUE]" /></Template></Font></Text></PartText>
+                <PartText x="12" y="72" width="84" height="21" tintColor="[CONFIGURATION.palette.2]"><Text align="CENTER" ellipsis="TRUE"><Font family="SYNC_TO_DEVICE" size="14"><Template><![CDATA[%s]]><Parameter expression="[COMPLICATION.TITLE]" /></Template></Font></Text></PartText>
+            </Complication>
+        </ComplicationSlot>
 
         <AnalogClock x="0" y="0" width="450" height="450">
             <HourHand resource="hour_hand" x="213" y="79" width="24" height="156" pivotX="0.5" pivotY="0.9359">

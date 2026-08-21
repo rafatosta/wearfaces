@@ -5,7 +5,7 @@
 - Nome: `Flow`
 - Slug: `flow`
 - Package ID: `com.rtosta.wearfaces.flow`
-- Estado: `implementado com identidade provisória Flow`
+- Estado: `implementado sem glifo`
 - Tipo de referência: `mockup`
 - Origem/autoria da referência: mockup fornecido pelo mantenedor no anexo
   `59a62ee0-e2d7-478a-8fbe-25a125079947.png`; autoria não comprovada.
@@ -14,17 +14,14 @@
   ou ícones GNOME não foram demonstradas.
 - Referência será commitada: `não`
 
-O mantenedor forneceu posteriormente um glifo Flow formado por dois arcos
-orgânicos e dois círculos, em gradiente azul, sobre base quadrada arredondada
-azul-marinho. Ele está aprovado como identidade provisória para implementar e
-avaliar o mostrador. O arquivo entregue serve como referência: para o APK, o
-glifo deve ser reconstruído em fonte editável e exportado com transparência,
-sem incorporar a base quadrada ou o fundo preto da imagem.
+Um glifo Flow chegou a ser implementado provisoriamente para avaliação, mas foi
+removido do mostrador e do APK por decisão do mantenedor para reduzir a poluição
+visual. O asset e sua fonte também foram removidos do repositório.
 
 O nome e o logotipo GNOME não podem integrar o APK enquanto não houver
 autorização escrita da GNOME Foundation e registro da licença/proveniência. Uma
-eventual substituição do glifo Flow pela marca GNOME será uma decisão posterior
-e não bloqueia a implementação atual.
+eventual adição da marca GNOME será uma decisão posterior e não bloqueia a
+implementação atual.
 
 ## 2. Leitura da referência
 
@@ -55,31 +52,29 @@ e não bloqueia a implementação atual.
 
 - preservar a hierarquia, o contraste, a grade circular e as quatro famílias
   cromáticas, mas redesenhar todos os recursos gráficos;
-- substituir o logotipo superior pelo glifo Flow provisório fornecido pelo
-  mantenedor, redesenhado como asset transparente adequado ao mostrador;
+- remover o logotipo e o glifo do topo, mantendo somente a data nesse eixo;
 - usar ícones monocromáticos fornecidos pelo provider nas complications, sem o
   ícone de pegada GNOME mostrado no exemplo;
 - omitir os quatro pontos inferiores no MVP, pois não há função comprovada;
-- usar fundo AMOLED escuro em todas as paletas; as paletas alteram apenas
+- usar preto AMOLED `#FF000000` sem gradiente em todas as paletas; elas alteram apenas
   destaques, anéis, segundos e pivô.
 
 ### Incertezas materiais
 
 - autorização escrita para nome, logotipo e ícones GNOME, somente caso o
   mantenedor decida usá-los posteriormente no lugar da identidade Flow;
-- confirmação da autoria e da licença de redistribuição do glifo fornecido antes
-  de uma publicação; isso não impede um build local de avaliação;
 - validação das estimativas de cor e dimensão em relógio físico;
-- confirmação de que a redundância entre a data superior e inferior é desejada.
+- disponibilidade de um provider de calorias no dispositivo, pois WFF 2 não
+  oferece calorias entre seus providers de sistema portáveis.
 
 ## 3. Intenção e não objetivos
 
 ### Intenção
 
 Criar um mostrador analógico leve, sóbrio e legível, com simetria clara: data no
-eixo vertical, duas informações configuráveis nas laterais e cor usada apenas
-como orientação visual. O resultado deve remeter a simplicidade e consistência,
-sem reproduzir a identidade de terceiros.
+eixo vertical, três informações configuráveis e cor usada apenas como orientação
+visual. O resultado deve remeter a simplicidade e consistência, sem reproduzir a
+identidade de terceiros.
 
 ### Não objetivos
 
@@ -87,7 +82,7 @@ sem reproduzir a identidade de terceiros.
 - não apresentar Flow como produto oficial, afiliado ou endossado pelo GNOME;
 - não elevar WFF/API;
 - não adicionar rede, telemetria ou coleta própria de saúde;
-- não fixar steps ou weather como providers;
+- não coletar diretamente passos, calorias ou bateria;
 - não oferecer tema claro no MVP.
 
 ## 4. Especificação visual
@@ -96,18 +91,18 @@ Canvas WFF: `450 × 450`; centro: `(225, 225)`.
 
 | Camada | Elemento | X | Y | Largura | Altura | Aparência/comportamento |
 | ---: | --- | ---: | ---: | ---: | ---: | --- |
-| 1 | Fundo | 0 | 0 | 450 | 450 | Preto `#FF05080D`, com gradiente radial até `#FF172230`; sem textura |
-| 2 | Escala periférica | 22 | 22 | 406 | 406 | 60 índices; 12 barras maiores e 48 pontos atenuados; ponto das 12h na primária |
-| 3 | Glifo Flow | 196 | 42 | 58 | 54 | Dois arcos e dois círculos do símbolo provisório, sem base; versão clara centralizada |
+| 1 | Fundo | 0 | 0 | 450 | 450 | Preto AMOLED puro `#FF000000`, sem gradiente ou textura |
+| 2 | Escala periférica | 0 | 0 | 450 | 450 | 60 índices ocupando a borda; 12 barras maiores e 48 pontos atenuados; ponto das 12h na primária |
 | 4 | Data superior | 120 | 101 | 210 | 40 | Dia da semana, dia e mês em uma linha, destaque claro |
 | 5 | Complication esquerda | 50 | 170 | 118 | 118 | Anel fino; ícone, valor e rótulo do provider centralizados |
 | 6 | Complication direita | 282 | 170 | 118 | 118 | Espelhada em relação ao eixo vertical |
-| 7 | Data inferior | 171 | 305 | 108 | 108 | Anel fino, dia grande e mês abreviado abaixo |
+| 7 | Complication inferior | 171 | 305 | 108 | 108 | Terceiro slot circular editável, com bateria como padrão |
 | 8 | Pivô | 210 | 210 | 30 | 30 | Disco primário com centro claro e contorno secundário |
 | final | Hora | 0 | 0 | 450 | 450 | Ponteiros acima de textos e complications; segundos acima de hora/minuto e abaixo do pivô |
 
-Área segura, clipping e pivôs: conteúdo essencial fica dentro do círculo de
-raio `203`; as três células circulares não podem interceptar os índices. Todos
+Área segura, clipping e pivôs: os índices decorativos podem alcançar a borda do
+canvas; conteúdo essencial fica dentro do círculo de raio `203`. As três células
+circulares não podem interceptar os índices. Todos
 os ponteiros giram em `(225, 225)`. Complications recortam seu conteúdo em um
 círculo inscrito com margem interna mínima de `10 px`.
 
@@ -120,33 +115,32 @@ em hardware.
 
 | Elemento visual | Construção WFF 2 | Recurso/expressão | Comportamento dinâmico |
 | --- | --- | --- | --- |
-| Fundo | `PartDraw` | círculo sólido e gradiente radial simples | gradiente oculto em `AMBIENT` |
+| Fundo | `Scene` | `backgroundColor="#FF000000"` | idêntico em modo ativo e `AMBIENT` |
 | Índices | `PartDraw` repetido | linhas/pontos vetoriais nas 60 posições | cor vinculada à paleta; alpha reduzido em AOD |
-| Glifo Flow | `PartImage` | PNG gerado de SVG original | versão monocromática atenuada em AOD |
 | Data superior | `PartText` | `[DAY_OF_WEEK_S]`, `[DAY]`, `[MONTH_S]` | atualização pelo calendário do sistema |
-| Data inferior | `PartText` | `[DAY]` e `[MONTH_S]` | dois tamanhos no círculo inferior |
-| Células laterais | `ComplicationSlot` | slots `200` e `201` | conteúdo escolhido pelo usuário |
+| Células de dados | `ComplicationSlot` | slots `200`, `201` e `202` | conteúdo escolhido pelo usuário |
 | Anéis | `PartDraw` | arco/anel decorativo, sem representar progresso | cores por `ColorConfiguration` |
 | Ponteiros | `AnalogClock` | PNGs originais para hora, minuto e segundos | segundos em varredura contínua a 15 Hz e ocultos em `AMBIENT` |
 
 - Relógio: `analógico`
-- Data: `EEE, d MMM` no topo e `d`/`MMM` no círculo inferior, respeitando a
-  localidade do dispositivo.
-- Ordem final de mãos/complications: fundo, índices, marca, data, anéis,
-  complications, data inferior, hora, minuto, segundos e pivô.
-- Simplificações impostas pelo WFF 2: substituir sombras e efeitos fotográficos
-  por gradiente e contornos simples; não reproduzir reflexos metálicos do mockup.
+- Data: `EEE, d MMM` no topo, respeitando a localidade do dispositivo.
+- Ordem final de mãos/complications: fundo, índices, data, anéis, três
+  complications, hora, minuto, segundos e pivô.
+- Simplificações impostas pelo WFF 2: usar contornos simples e não reproduzir
+  sombras ou reflexos metálicos fotográficos do mockup.
 
 ## 6. Complications
 
-| Nome | Slot ID | X | Y | Largura | Altura | Tipos suportados | Estado `EMPTY` |
+| Nome | Slot ID | X | Y | Largura | Altura | Tipos suportados | Padrão e estado `EMPTY` |
 | --- | ---: | ---: | ---: | ---: | ---: | --- | --- |
-| Esquerda | 200 | 50 | 170 | 118 | 118 | `SHORT_TEXT`, `MONOCHROMATIC_IMAGE`, `RANGED_VALUE`, `GOAL_PROGRESS`, `EMPTY` | manter apenas o anel decorativo, sem placeholder textual |
-| Direita | 201 | 282 | 170 | 118 | 118 | `SHORT_TEXT`, `MONOCHROMATIC_IMAGE`, `RANGED_VALUE`, `GOAL_PROGRESS`, `EMPTY` | manter apenas o anel decorativo, sem placeholder textual |
+| Esquerda | 200 | 50 | 170 | 118 | 118 | `SHORT_TEXT`, `MONOCHROMATIC_IMAGE`, `RANGED_VALUE`, `GOAL_PROGRESS`, `EMPTY` | `STEP_COUNT`/`SHORT_TEXT`; vazio mantém somente o anel |
+| Direita | 201 | 282 | 170 | 118 | 118 | `SHORT_TEXT`, `MONOCHROMATIC_IMAGE`, `RANGED_VALUE`, `GOAL_PROGRESS`, `EMPTY` | calorias desejadas; começa vazio por não existir default de sistema WFF 2 portável |
+| Inferior | 202 | 171 | 305 | 108 | 108 | `SHORT_TEXT`, `MONOCHROMATIC_IMAGE`, `RANGED_VALUE`, `GOAL_PROGRESS`, `EMPTY` | `WATCH_BATTERY`/`RANGED_VALUE`; vazio mantém somente o anel |
 
-Nenhum provider é fixado. Dados vêm exclusivamente de providers escolhidos
-pelo usuário. “Passos” e “clima” são exemplos do mockup, não defaults nem dados
-coletados pelo mostrador.
+Os três slots são editáveis. Passos e bateria usam providers de sistema somente
+como configuração inicial e podem ser substituídos. Para calorias, o usuário
+deve selecionar no relógio um provider compatível instalado. O mostrador não
+coleta esses dados.
 
 ## 7. Configurações e paletas
 
@@ -159,19 +153,19 @@ As cores são aproximações visuais e devem ser calibradas em hardware.
 | 2 | Roxo | `#FFC06BFF` | `#FF71369B` | `#FFF6E9FF` | `#FF493451` | mesmos elementos da paleta padrão |
 | 3 | Laranja | `#FFFF8A32` | `#FFA64A16` | `#FFFFEDDF` | `#FF593B2A` | mesmos elementos da paleta padrão |
 
-Outras configurações: duas escolhas independentes de complication. Não expor
+Outras configurações: três escolhas independentes de complication. Não expor
 opções cuja função seja somente imitar os quatro pontos indefinidos do mockup.
 
 ## 8. AOD
 
-- Elementos mantidos: fundo preto, índices de hora, glifo Flow, data superior,
-  hora/minuto, data inferior e conteúdo atual das duas complications;
-- Elementos ocultos: gradiente, pontos de minuto intermediários, ponteiro de
+- Elementos mantidos: fundo preto, índices de hora, data superior, hora/minuto
+  e conteúdo atual das três complications;
+- Elementos ocultos: pontos de minuto intermediários, ponteiro de
   segundos e efeitos de destaque;
-- Redução de brilho/alpha: textos e ponteiros em cinza `#FF8A8F96`; anéis,
-  glifo e complications com alpha máximo aproximado de `35%`;
+- Redução de brilho/alpha: textos e ponteiros em cinza `#FF8A8F96`; anéis e
+  complications com alpha máximo aproximado de `35%`;
 - Estratégia contra excesso de pixels acesos: fundo totalmente preto, traços
-  finos, remoção de gradiente e dos 48 pontos menores, sem animação por segundo;
+  finos e remoção dos 48 pontos menores, sem animação por segundo;
 - Legibilidade mínima: hora/minuto e data superior permanecem distinguíveis; a
   informação das complications é secundária e pode ser mais atenuada.
 
@@ -179,16 +173,14 @@ opções cuja função seja somente imitar os quatro pontos indefinidos do mocku
 
 | Asset | Fonte editável | Recurso no APK | Autoria/licença | Processo de geração |
 | --- | --- | --- | --- | --- |
-| Glifo Flow | `shared-source/artwork/flow/flow-glyph.svg` | `faces/flow/src/main/res/drawable-nodpi/flow_glyph.png` | referência fornecida pelo mantenedor; autoria/licença de publicação pendentes | reconstrução vetorial dos dois arcos e dois círculos; exportação SVG → PNG transparente |
 | Ponteiros | `shared-source/artwork/flow/hour_hand.svg`, `minute_hand.svg` e `second_hand.svg` | `faces/flow/src/main/res/drawable-nodpi/*_hand.png` | criação original, GPL-3.0-only | exportação determinística SVG → PNG transparente |
-| Preview | `shared-source/artwork/flow/preview.svg` | `faces/flow/src/main/res/drawable-nodpi/preview.png` | composição original GPL-3.0-only; componente do glifo com licença de publicação pendente | composição a partir dos assets aprovados |
+| Preview | `shared-source/artwork/flow/preview.svg` | `faces/flow/src/main/res/drawable-nodpi/preview.png` | criação original, GPL-3.0-only | composição a partir dos assets aprovados |
 | Índices e anéis | nenhum | construídos no XML WFF | criação original, GPL-3.0-only | primitivas WFF, sem bitmap externo |
 
 Elementos que devem ser recriados por risco de propriedade intelectual:
 logotipo e nome GNOME, pegada usada como ícone de passos, fonte não identificada
-e desenho exato dos ponteiros/ícones do mockup. O glifo Flow deve ser redesenhado
-em SVG, preservando a forma fornecida, mas removendo a base quadrada e o fundo
-preto. Mesmo com autorização para a marca GNOME, os termos dessa autorização
+e desenho exato dos ponteiros/ícones do mockup. Mesmo com autorização para a
+marca GNOME, os termos dessa autorização
 precisam acompanhar a proveniência do asset.
 
 ## 10. Acessibilidade e localização
@@ -210,17 +202,15 @@ Leia MASTER_SPEC.md, docs/REFERENCE_TO_SPEC.md e docs/watchfaces/FLOW.md por
 completo. Implemente Flow como um novo módulo em faces/flow/, usando package ID
 com.rtosta.wearfaces.flow, WFF 2 e API 34.
 
-Implemente com a identidade provisória Flow aprovada nesta especificação. Não
-use nome, logotipo, ícone de pegada ou outros assets GNOME sem autorização
-escrita e licença registradas. Reconstrua o glifo Flow fornecido como SVG
-editável composto por dois arcos orgânicos e dois círculos; exporte para PNG com
-fundo transparente e não inclua a base quadrada do arquivo de referência.
+Implemente sem glifo ou logotipo no visor. Não use nome, logotipo, ícone de
+pegada ou outros assets GNOME sem autorização escrita e licença registradas.
 
 Use esta especificação como fonte de verdade para composição 450 × 450,
 camadas, coordenadas, paletas, complications, AOD e assets. Mantenha o pacote
-resource-only, android:hasCode="false", offline e sem telemetria. Não fixe
-providers de passos ou clima e não trate os quatro pontos inferiores do mockup
-como requisito funcional.
+resource-only, android:hasCode="false", offline e sem telemetria. Configure três
+slots editáveis: passos à esquerda por `STEP_COUNT`, calorias à direita quando o
+usuário selecionar um provider instalado e bateria abaixo por `WATCH_BATTERY`.
+Não trate os quatro pontos inferiores do mockup como requisito funcional.
 
 Crie/atualize faces/flow/, shared-source/artwork/flow/, README principal,
 settings.gradle.kts, documentação, testes e CHANGELOG.md. Execute
@@ -229,25 +219,23 @@ de hardware físico.
 
 Não objetivos específicos: tema claro, rede, telemetria, coleta própria de
 saúde, cópia da identidade GNOME ou reprodução fotográfica do mockup.
-Decisões materiais já tomadas: duas complications configuráveis, data superior
-e inferior, quatro paletas de destaque, fundo sempre escuro, identidade Flow
-provisória aprovada para avaliação, omissão dos quatro pontos indefinidos e
-segundos ocultos no AOD. A eventual adoção da marca GNOME fica fora desta
-implementação e será decidida somente após a avaliação do mostrador pronto.
+Decisões materiais já tomadas: três complications configuráveis, data somente
+no topo, quatro paletas de destaque, fundo AMOLED preto puro, nenhum glifo,
+índices usando toda a borda, omissão dos quatro pontos indefinidos e segundos
+ocultos no AOD. A eventual adoção da marca GNOME fica fora desta implementação.
 ```
 
 ## 12. Critérios de aceite
 
 - [x] especificação validada antes da implementação;
-- [x] identidade provisória Flow confirmada para implementação e avaliação;
+- [x] visor sem glifo ou logotipo;
 - [x] WFF 2/API 34 e `android:hasCode="false"`;
 - [x] package ID e módulo independentes;
 - [x] hora e data conforme especificação;
-- [x] complications e estado vazio;
+- [x] três complications editáveis, defaults portáveis e estado vazio;
 - [x] quatro paletas;
 - [x] AOD próprio;
-- [ ] assets originais/licenciados;
-- [ ] autoria/licença do glifo formalizada antes de distribuição pública;
+- [x] assets originais/licenciados;
 - [x] Android Lint e schema WFF aprovados;
 - [x] memory footprint aprovado;
 - [x] APK debug produzido;
@@ -257,6 +245,7 @@ implementação e será decidida somente após a avaliação do mostrador pronto
 
 Permanecem pendentes até execução em relógio físico: instalação, picker,
 horários de referência (00:00, 03:15, 06:30, 09:45 e 12:00), virada da data,
-localidades pt-BR/en, complications vazias e configuradas, quatro paletas,
+localidades pt-BR/en, três complications vazias/configuradas e defaults
+passos/bateria, provider de calorias disponível, quatro paletas,
 entrada e saída do AOD, clipping em tela circular, brilho/legibilidade, reboot,
 troca/retorno de mostrador e atualização/reinstalação.

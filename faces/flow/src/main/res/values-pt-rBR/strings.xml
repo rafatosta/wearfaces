@@ -7,5 +7,6 @@
     <string name="palette_purple">Roxo</string>
     <string name="palette_orange">Laranja</string>
     <string name="left_complication">Complication esquerda</string>
-    <string name="right_complication">Complication direita</string>
+    <string name="calories_complication">Complication direita (calorias)</string>
+    <string name="bottom_complication">Complication inferior (bateria)</string>
 </resources>
