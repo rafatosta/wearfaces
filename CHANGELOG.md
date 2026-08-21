@@ -73,6 +73,8 @@ arquivo.
 -   Centralizado o conteúdo das três complications do **Flow** nos dois eixos,
     restaurando o arranjo de ícone sobre texto e a porcentagem da bateria.
 -   Ocultados completamente os três slots e seus anéis no modo AOD do **Flow**.
+-   Reforçada a ocultação dos aros do **Flow** no AOD diretamente em cada
+    elemento gráfico, sem depender apenas da transparência herdada pelo grupo.
 -   Corrigida a construção da imagem Podman ao reutilizar o UID/GID 1000 já
     presente na base Temurin, com `HOME` gravável e referência completa ao
     registry oficial.
