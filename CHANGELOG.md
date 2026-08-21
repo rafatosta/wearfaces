@@ -40,10 +40,6 @@ arquivo.
 -   Implementado o mostrador **Flow** como módulo WFF 2 independente, com data
     superior, quatro paletas, três complications configuráveis, segundos e AOD
     otimizado.
--   Implementado o mostrador digital esportivo **Stride** como módulo WFF 2
-    independente, com hora 12/24 h sincronizada ao dispositivo, data, quatro
-    paletas, cinco complications editáveis, progressos limitados a 100% e AOD
-    simplificado.
 
 ### Changed
 
@@ -73,17 +69,6 @@ arquivo.
 
 ### Fixed
 
--   Corrigido o recorte das barras dinâmicas do **Stride** pelos limites
-    elípticos dos slots, permitindo que os arcos de passos e bateria sejam
-    renderizados de acordo com os valores recebidos.
--   Priorizados providers numéricos nos slots externos do **Stride**, fazendo
-    as barras refletirem passos e bateria e restaurando a porcentagem ao
-    selecionar novamente a bateria do sistema.
--   Removidos do **Stride** os aros decorativos dos três slots esportivos
-    personalizáveis, preservando somente ícone, valor e rótulo do provider.
--   Refinado o **Stride** para posicionar a escala no limite circular da tela e
-    fazer as barras de passos e bateria cobrirem os índices externos, com valor
-    e porcentagem centralizados entre os respectivos segmentos.
 -   Sincronizado o preview do **Flow** com as dimensões, posições, opacidades e
     intervalos dos pontos e índices externos definidos no XML WFF.
 -   Persistida a chave de assinatura debug em um volume Podman dedicado,

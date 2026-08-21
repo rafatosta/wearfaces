@@ -15,8 +15,8 @@ ficam em `shared-source/`; somente recursos necessários ao APK ficam em `res/`.
 
 - WFF 2, Wear OS 5, `minSdk = compileSdk = targetSdk = 34`;
 - namespace coordenado `com.rtosta.wearfaces`;
-- package por módulo, como `com.rtosta.wearfaces.aurora`,
-  `com.rtosta.wearfaces.flow` e `com.rtosta.wearfaces.stride`;
+- package por módulo, como `com.rtosta.wearfaces.aurora` e
+  `com.rtosta.wearfaces.flow`;
 - SemVer coordenado, iniciado em 0.1.0.
 
 WFF 3/4 e Watch Face Push não entram no baseline. Uma elevação exige primeiro

@@ -6,7 +6,6 @@
 -   ambiente Podman;
 -   Aurora MVP;
 -   Flow MVP;
--   Stride MVP;
 -   testes/CI;
 -   instalação ADB Wi-Fi.
 

@@ -17,4 +17,3 @@ dependencyResolutionManagement {
 rootProject.name = "WearFaces"
 include(":faces:aurora")
 include(":faces:flow")
-include(":faces:stride")

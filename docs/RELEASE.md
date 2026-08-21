@@ -45,7 +45,6 @@ Exemplo:
 ``` text
 aurora-0.1.0.apk
 flow-0.1.0.apk
-stride-0.1.0.apk
 SHA256SUMS
 ```
 
