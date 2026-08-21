@@ -18,8 +18,16 @@ enquanto preservarem compatibilidade com WFF 2.
 | [Essential](faces/essential/) | MVP 0.1.0 | Digital/Analógico, data, bateria, 4 campos radiais editáveis sem aro, cores, marcadores e AOD |
 | [Flow](faces/flow/) | MVP 0.1.0 | Analógico, data, 3 complications editáveis, 4 paletas, AMOLED preto e AOD |
 
-Screenshots reais serão adicionadas depois da validação no dispositivo. O
-preview vetorial do APK é ilustrativo e não substitui essa evidência.
+### Previews
+
+| Aurora | Essential | Flow |
+| :---: | :---: | :---: |
+| [![Preview do Aurora](faces/aurora/src/main/res/drawable-nodpi/preview.png)](faces/aurora/) | [![Preview do Essential](faces/essential/src/main/res/drawable-nodpi/preview.png)](faces/essential/) | [![Preview do Flow](faces/flow/src/main/res/drawable-nodpi/preview.png)](faces/flow/) |
+
+Os previews representam o modo ativo e as configurações padrão. Valores de
+complications são ilustrativos; no Essential, os quatro campos opcionais não
+aparecem porque começam vazios. Screenshots reais serão adicionadas depois da
+validação no dispositivo e continuam sendo a evidência visual definitiva.
 
 ## Build e testes
 

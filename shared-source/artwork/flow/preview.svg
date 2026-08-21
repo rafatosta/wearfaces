@@ -1,4 +1,7 @@
-<svg xmlns="http://www.w3.org/2000/svg" width="450" height="450" viewBox="0 0 450 450">
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" width="450" height="450" viewBox="0 0 450 450" text-rendering="geometricPrecision">
+  <title>Flow preview</title>
+  <desc>Default blue Flow palette at 10:08:35 with illustrative complication values.</desc>
   <circle cx="225" cy="225" r="225" fill="#000"/>
   <defs>
     <circle id="minor-marker" cx="225" cy="10" r="2" fill="#b8c0ca" opacity=".608"/>
@@ -27,11 +30,13 @@
     <use href="#hour-marker" transform="rotate(300 225 225)"/><use href="#hour-marker" transform="rotate(330 225 225)"/>
   </g>
   <text x="225" y="126" fill="#eaf3ff" font-family="sans-serif" font-size="21" text-anchor="middle">Sat, 24 May</text>
-  <g fill="none" stroke="#215a96" stroke-width="3">
-    <circle cx="109" cy="229" r="57"/><circle cx="341" cy="229" r="57"/><circle cx="225" cy="359" r="52"/>
-  </g>
-  <g fill="none" stroke="#4a9bff" stroke-width="3" opacity=".9">
-    <path d="M74 184a57 57 0 0 1 69 0"/><path d="M306 184a57 57 0 0 1 69 0"/><path d="M193 318a52 52 0 0 1 64 0"/>
+  <g fill="none" stroke-width="3" opacity=".8431">
+    <g stroke="#31465f">
+      <circle cx="109" cy="229" r="57"/><circle cx="341" cy="229" r="57"/><circle cx="225" cy="359" r="52"/>
+    </g>
+    <g stroke="#215a96">
+      <circle cx="109" cy="229" r="54"/><circle cx="341" cy="229" r="54"/><circle cx="225" cy="359" r="49"/>
+    </g>
   </g>
   <g fill="#eaf3ff" font-family="sans-serif" text-anchor="middle">
     <g transform="translate(109 202)"><ellipse cx="0" cy="4" rx="7" ry="10"/><circle cx="-7" cy="-7" r="3"/><circle cx="0" cy="-10" r="3"/><circle cx="7" cy="-7" r="3"/></g>
@@ -53,6 +58,8 @@
             d="M9 2C5.5 2 3 4.5 3 8l2.5 145c0 10 1.5 21 3.5 33 2-12 3.5-23 3.5-33L15 8c0-3.5-2.5-6-6-6Z"/>
     </g>
   </g>
-  <line x1="225" y1="225" x2="161" y2="356" stroke="#4a9bff" stroke-width="2"/>
+  <g transform="rotate(210 225 225)">
+    <rect x="224" y="31" width="2" height="194" rx="1" fill="#4a9bff"/>
+  </g>
   <circle cx="225" cy="225" r="15" fill="#215a96"/><circle cx="225" cy="225" r="10" fill="#4a9bff"/><circle cx="225" cy="225" r="4" fill="#eaf3ff"/>
 </svg>

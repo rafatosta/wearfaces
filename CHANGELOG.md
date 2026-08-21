@@ -82,6 +82,9 @@ arquivo.
 -   Reorganizados os campos editáveis do **Essential** em quatro posições
     diagonais: dois alinhados às direções dos botões físicos à direita e dois
     espelhados à esquerda, todos compactos, vazios por padrão e sem aro.
+-   Revisados e reexportados os previews de **Aurora**, **Essential** e
+    **Flow** para refletir horários, geometria, opacidades e configurações
+    atuais; adicionada uma galeria dos três mostradores ao README principal.
 
 ### Fixed
 
