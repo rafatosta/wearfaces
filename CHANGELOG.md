@@ -75,6 +75,9 @@ arquivo.
 -   Ampliadas em aproximadamente 20% a hora e a data do Digital e a data do
     Analógico no **Essential**, removendo também o ponto de realce ao lado da
     bateria Digital.
+-   Ampliados os ponteiros analógicos do **Essential** e deslocados todos os
+    marcadores para o limite útil da tela; segundos alcançam a escala, minutos
+    mantêm folga e horas preservam a proporção.
 
 ### Fixed
 

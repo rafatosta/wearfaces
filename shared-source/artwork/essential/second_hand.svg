@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<svg xmlns="http://www.w3.org/2000/svg" width="6" height="220" viewBox="0 0 6 220">
+<svg xmlns="http://www.w3.org/2000/svg" width="6" height="256" viewBox="0 0 6 256">
   <title>Essential second hand</title>
   <desc>Original tintable second hand with a counterweight tail.</desc>
-  <path d="M3 1c1.1 0 1.5 1.1 1.5 2.5v213c0 1.4-.4 2.5-1.5 2.5s-1.5-1.1-1.5-2.5V3.5C1.5 2.1 1.9 1 3 1Z" fill="#ffffff"/>
+  <path d="M3 1c1.1 0 1.5 1.1 1.5 2.5v249c0 1.4-.4 2.5-1.5 2.5s-1.5-1.1-1.5-2.5V3.5C1.5 2.1 1.9 1 3 1Z" fill="#ffffff"/>
 </svg>

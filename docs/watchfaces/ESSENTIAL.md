@@ -73,19 +73,20 @@ Canvas WFF: `450 × 450`; centro: `(225, 225)`.
 | Camada | Elemento | X | Y | Largura | Altura | Aparência/comportamento |
 | ---: | --- | ---: | ---: | ---: | ---: | --- |
 | 1 | Fundo | 0 | 0 | 450 | 450 | preto AMOLED `#FF000000`, sem imagem ou efeito |
-| 2 | Marcadores analógicos | 0 | 0 | 450 | 450 | opção selecionada, próxima ao raio `205`, ausente no Digital |
+| 2 | Marcadores analógicos | 0 | 0 | 450 | 450 | opção selecionada, próxima ao raio `217–221`, ausente no Digital |
 | 3 | Hora Digital | 35 | 124 | 380 | 126 | `hh:mm` integralmente na Main Color; `98 px`, peso normal |
 | 4 | Data Digital | 100 | 247 | 250 | 41 | `%s | %02d | %s`, `23 px`, cinza e centralizada |
 | 5 | Bateria Digital | 150 | 347 | 150 | 38 | percentual simples, cinza, sem rótulo ou contorno |
-| 6 | Ponteiros analógicos | 0 | 0 | 450 | 450 | horas/minutos claros e estreitos; segundos finos com realce |
+| 6 | Ponteiros analógicos | 0 | 0 | 450 | 450 | horas até raio `145`, minutos `189` e segundos `221` com realce |
 | 7 | Pivô analógico | 217 | 217 | 16 | 16 | dois círculos pequenos, sem brilho |
 | 8 | Data Analógica | 105 | 295 | 240 | 38 | mesma data curta em `22 px`, abaixo do pivô |
 | 9 | Bateria Analógica | 160 | 337 | 130 | 32 | percentual simples abaixo da data |
 
 Área segura, clipping e pivôs: texto essencial fica no círculo de raio
-`185`; marcadores alcançam no máximo o raio `207`; mãos têm pivô em
-`(225, 225)` e não ultrapassam o canvas. As posições inferiores evitam a
-borda curva e preservam espaço negativo.
+`185`; marcadores alcançam no máximo o raio `221`; mãos têm pivô em
+`(225, 225)` e não ultrapassam o canvas. Segundos chegam ao limite do maior
+marcador, minutos preservam cerca de `7 px` de folga e horas mantêm proporção
+de aproximadamente `77%` do comprimento dos minutos.
 
 Tipografia: `SYNC_TO_DEVICE`, peso `NORMAL`; hora Digital `98 px`, data
 Digital `23 px`, data Analógica `22 px` e bateria `20–22 px`. Não incluir
@@ -101,8 +102,8 @@ fonte externa.
 | Data | `PartText` | `[DAY_OF_WEEK_S]`, `[DAY]`, `[MONTH_S]` | locale e calendário do sistema |
 | Bateria | `PartText` | `round([BATTERY_PERCENT])` | `0%` a `100%`, sem provider externo |
 | Marcadores | `ListConfiguration` e `PartDraw` | seis conjuntos originais e opção vazia | somente o grupo Analógico os revela |
-| Horas/minutos | `AnalogClock` | `hour_hand`, `minute_hand` | rotação do sistema |
-| Segundos | `AnalogClock` | `second_hand` | cor depende da intensidade; oculto em AOD |
+| Horas/minutos | `AnalogClock` | `hour_hand` raio `145`, `minute_hand` raio `189` | rotação do sistema |
+| Segundos | `AnalogClock` | `second_hand`, raio `221` | sobrepõe o maior marcador; oculto em AOD |
 | Cores | duas `ColorConfiguration` | `main_color`, `accent_color` | escolhas independentes |
 | Intensidade | `ListConfiguration` | None, Discrete, Full | controla segundos e pontos cardinais no Analógico |
 
