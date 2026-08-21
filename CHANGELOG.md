@@ -61,6 +61,8 @@ arquivo.
 -   Redesenhados os ponteiros de hora e minuto do **Flow** com corpo claro,
     extremidade externa arredondada e afilamento em direção ao pivô, conforme o
     mockup aprovado.
+-   Tornada obrigatória uma mensagem Conventional Commit sugerida em toda
+    resposta final do Codex que suceda modificações em arquivos do repositório.
 
 ### Fixed
 

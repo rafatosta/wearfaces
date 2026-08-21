@@ -1403,6 +1403,13 @@ Se o ambiente/sessão estiver autorizado a criar commits, o Codex pode
 efetivamente criá-los. Caso não esteja, deve fornecer as mensagens de
 commit propostas no relatório final.
 
+Toda resposta final referente a uma tarefa que tenha modificado arquivos do
+repositório deve incluir pelo menos uma mensagem de commit sugerida no formato
+Conventional Commits, mesmo quando a alteração for pequena. Quando houver mais
+de uma unidade lógica independente, sugerir uma mensagem para cada commit. Para
+alterações não triviais, incluir também um corpo opcional com contexto e os
+testes realmente executados.
+
 O Codex nunca deve alterar, reescrever, fazer squash, amend ou
 force-push de histórico publicado sem instrução explícita.
 

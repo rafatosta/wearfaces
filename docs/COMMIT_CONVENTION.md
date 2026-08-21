@@ -58,6 +58,10 @@ Tests:
 Ao concluir uma unidade lógica, o Codex deve revisar `git status` e
 `git diff`, executar os testes aplicáveis, atualizar `CHANGELOG.md`
 quando necessário e produzir uma mensagem Conventional Commit adequada.
+Toda resposta final após modificar arquivos do repositório deve incluir pelo
+menos uma mensagem de commit sugerida, mesmo para mudanças pequenas. Alterações
+independentes devem receber mensagens separadas; mudanças não triviais devem
+incluir também um corpo opcional com contexto e os testes realmente executados.
 Não deve reescrever histórico publicado sem instrução explícita.
 
 ## Validação
