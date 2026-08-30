@@ -22,6 +22,7 @@ chmod +x "$test_root/podman"
 
 PATH="$test_root:$PATH" \
   WEARFACES_KVM_DEVICE="$test_root/kvm" \
+  WEARFACES_KERNEL_RELEASE=6.19.10-300.fc44.x86_64 \
   DISPLAY= WAYLAND_DISPLAY= XDG_RUNTIME_DIR= \
   ./scripts/wearfaces doctor >/dev/null
 
@@ -32,8 +33,16 @@ if PATH="$test_root:$PATH" WEARFACES_DOCTOR_MISSING=podman \
 fi
 
 if PATH="$test_root:$PATH" WEARFACES_KVM_DEVICE="$test_root/missing-kvm" \
+  WEARFACES_KERNEL_RELEASE=6.19.10-300.fc44.x86_64 \
   ./scripts/wearfaces doctor >/dev/null 2>&1; then
   echo "Doctor accepted an environment without KVM" >&2
+  exit 1
+fi
+
+if PATH="$test_root:$PATH" WEARFACES_KVM_DEVICE="$test_root/kvm" \
+  WEARFACES_KERNEL_RELEASE=7.1.10-200.fc44.x86_64 \
+  ./scripts/wearfaces doctor >/dev/null 2>&1; then
+  echo "Doctor accepted the Fedora 44 kernel affected by the Emulator/KVM crash" >&2
   exit 1
 fi
 

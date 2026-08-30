@@ -81,6 +81,10 @@ ADB e Android SDK não são necessários no host. Um container persistente chama
 
 ## Troubleshooting
 
+- Fedora 44 com kernel `7.1.0` a `7.1.10`: essa série encerra o processo QEMU
+  do Android Emulator com `SIGSEGV` logo após o KVM iniciar o guest. Reinicie,
+  abra **Advanced options for Fedora Linux** no GRUB e selecione o kernel
+  `6.19.x`; `./scripts/wearfaces doctor` bloqueia antecipadamente essa combinação.
 - `podman: command not found`: instale Podman pelo Fedora.
 - `/dev/kvm` ausente ou sem permissão: habilite VT-x/AMD-V, instale KVM,
   adicione o usuário ao grupo `kvm` e entre novamente na sessão.

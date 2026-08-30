@@ -14,7 +14,7 @@ required=(
   templates/basic/build.gradle.kts templates/basic/src/main/AndroidManifest.xml
   templates/basic/src/main/res/raw/watchface.xml scripts/wearfaces
   containers/emulator/Containerfile containers/emulator/create-avd.sh
-  containers/emulator/start-emulator.sh
+  containers/emulator/start-emulator.sh containers/emulator/emulator-package.xml
   Containerfile .containerignore containers/README.md
   docs/ARCHITECTURE.md docs/DEVELOPMENT.md docs/TESTING.md
   docs/CONTAINER.md docs/ADB_WIFI.md docs/DESIGN_GUIDELINES.md
@@ -47,6 +47,18 @@ grep -Fq 'system-images\;android-34\;android-wear\;x86_64' containers/emulator/C
 }
 grep -Fq 'emulator-linux_x64-15917651.zip' containers/emulator/Containerfile || {
   echo "Emulator 37.1.11 archive must remain pinned" >&2
+  exit 1
+}
+grep -Fq '<localPackage path="emulator"' containers/emulator/emulator-package.xml || {
+  echo "Pinned emulator must be registered as an installed SDK package" >&2
+  exit 1
+}
+grep -Fq 'libxkbfile1' containers/emulator/Containerfile || {
+  echo "Emulator container must install libxkbfile1" >&2
+  exit 1
+}
+grep -Fq 'ANDROID_AVD_HOME=/home/wearfaces/.android/avd' containers/emulator/Containerfile || {
+  echo "Emulator container must persist AVDs in the mounted Android home" >&2
   exit 1
 }
 if grep -R -Fq -- '--privileged' scripts containers/emulator; then

@@ -5,7 +5,7 @@ repo_root=$(cd "$(dirname "${BASH_SOURCE[0]}")/.." && pwd)
 cd "$repo_root"
 
 build_image=${WEARFACES_IMAGE:-localhost/wearfaces-dev:0.1.0}
-emulator_image=${WEARFACES_EMULATOR_IMAGE:-localhost/wearfaces-emulator:wearos5-api34}
+emulator_image=${WEARFACES_EMULATOR_IMAGE:-localhost/wearfaces-emulator:wearos5-api34-emulator37.1.11}
 avd_volume=${WEARFACES_AVD_VOLUME:-wearfaces-avd-wearos5}
 emulator_container=${WEARFACES_EMULATOR_CONTAINER:-wearfaces-emulator}
 adb_container_name=${WEARFACES_ADB_CONTAINER:-wearfaces-adb}
@@ -42,6 +42,20 @@ require_podman() {
   }
 }
 
+emulator_kernel_release() {
+  printf '%s\n' "${WEARFACES_KERNEL_RELEASE:-$(uname -r)}"
+}
+
+is_unsupported_emulator_kernel() {
+  [[ $(emulator_kernel_release) =~ ^7\.1\.([0-9]|10)-.*\.fc44\. ]]
+}
+
+print_unsupported_kernel_guidance() {
+  echo "Fedora 44 kernel $(emulator_kernel_release) crashes the Android Emulator when KVM starts the guest." >&2
+  echo "Reboot and select kernel 6.19.x in GRUB: Advanced options for Fedora Linux." >&2
+  echo "Set WEARFACES_ALLOW_UNSUPPORTED_KERNEL=1 only to bypass this guard for diagnosis." >&2
+}
+
 ensure_emulator_image() {
   require_podman
   if ! podman image exists "$emulator_image"; then
@@ -53,16 +67,37 @@ ensure_adb_service() {
   ensure_emulator_image
   if podman container exists "$adb_container_name"; then
     if [[ $(podman inspect --format '{{.State.Running}}' "$adb_container_name") == true ]]; then
-      return 0
+      if [[ $(podman inspect --format '{{.ImageName}}' "$adb_container_name") == "$emulator_image" ]]; then
+        return 0
+      fi
+      podman stop "$adb_container_name" >/dev/null
     fi
     podman rm "$adb_container_name"
   fi
-  podman run --detach --rm \
+  podman run --detach \
     --name "$adb_container_name" \
     --userns=keep-id \
     --network host \
     --volume "$avd_volume:/home/wearfaces/.android:z" \
-    "$emulator_image" adb -L "tcp:127.0.0.1:$adb_server_port" server nodaemon >/dev/null
+    "$emulator_image" adb -L "tcp:localhost:$adb_server_port" server nodaemon >/dev/null
+
+  local ready=0
+  for _ in $(seq 1 20); do
+    if [[ $(podman inspect --format '{{.State.Running}}' "$adb_container_name" 2>/dev/null) != true ]]; then
+      echo "Containerized ADB server exited during startup:" >&2
+      podman logs "$adb_container_name" >&2
+      return 1
+    fi
+    if podman exec "$adb_container_name" adb -P "$adb_server_port" devices >/dev/null 2>&1; then
+      ready=1
+      break
+    fi
+    sleep 0.1
+  done
+  ((ready)) || {
+    echo "Containerized ADB server did not become ready on port $adb_server_port." >&2
+    return 1
+  }
 }
 
 adb_container() {
@@ -72,7 +107,7 @@ adb_container() {
   run+=(
     --volume "$repo_root:/workspace:Z"
     --volume "$avd_volume:/home/wearfaces/.android:z"
-    --workdir /workspace \
+    --workdir /workspace
     "$emulator_image" adb -P "$adb_server_port" "$@"
   )
   "${run[@]}"
@@ -226,6 +261,13 @@ command_doctor() {
     fail "The pinned Wear OS 5 emulator image requires an x86_64 Linux host"
   fi
 
+  if is_unsupported_emulator_kernel; then
+    fail "Fedora 44 kernel $(emulator_kernel_release) is incompatible with the Android Emulator/KVM"
+    info "Reboot through GRUB > Advanced options for Fedora Linux and select kernel 6.19.x"
+  else
+    ok "Host kernel compatible with the Android Emulator"
+  fi
+
   if [[ -n ${WAYLAND_DISPLAY:-} && -n ${XDG_RUNTIME_DIR:-} && -S ${XDG_RUNTIME_DIR}/${WAYLAND_DISPLAY} ]]; then
     ok "Wayland session"
   elif [[ -n ${DISPLAY:-} ]]; then
@@ -271,6 +313,11 @@ command_emulator() {
     shift
   done
 
+  if is_unsupported_emulator_kernel && [[ ${WEARFACES_ALLOW_UNSUPPORTED_KERNEL:-0} != 1 ]]; then
+    print_unsupported_kernel_guidance
+    return 1
+  fi
+
   [[ -c /dev/kvm && -r /dev/kvm && -w /dev/kvm ]] || {
     echo "/dev/kvm must exist and be readable/writable. Run ./scripts/wearfaces doctor." >&2
     return 1
@@ -278,8 +325,9 @@ command_emulator() {
   ensure_emulator_image
   ensure_adb_service
 
-  local run=(podman run --rm --userns=keep-id --group-add keep-groups --network host)
+  local run=(podman run --userns=keep-id --group-add keep-groups --network host)
   run+=(--env "ANDROID_ADB_SERVER_PORT=$adb_server_port")
+  run+=(--env "ADB_SERVER_SOCKET=tcp:localhost:$adb_server_port")
   run+=(--device /dev/kvm --volume "$avd_volume:/home/wearfaces/.android:z")
   [[ -d /dev/dri ]] && run+=(--device /dev/dri)
 
@@ -315,6 +363,8 @@ command_emulator() {
       podman rm "$emulator_container"
     fi
     run+=(--detach --name "$emulator_container")
+  else
+    run+=(--rm)
   fi
   run+=("$emulator_image" /opt/wearfaces/start-emulator.sh "${emulator_args[@]}")
   "${run[@]}"
@@ -357,6 +407,12 @@ command_preview() {
     echo "Waiting up to 240 seconds for Wear OS to boot..."
     local ready=0
     for _ in $(seq 1 120); do
+      if podman container exists "$emulator_container" &&
+        [[ $(podman inspect --format '{{.State.Running}}' "$emulator_container" 2>/dev/null) != true ]]; then
+        echo "Wear OS Emulator exited during startup:" >&2
+        podman logs "$emulator_container" >&2
+        exit 1
+      fi
       if [[ $(adb_container shell getprop sys.boot_completed 2>/dev/null | tr -d '\r') == 1 ]]; then ready=1; break; fi
       sleep 2
     done

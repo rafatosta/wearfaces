@@ -2,7 +2,7 @@ FROM docker.io/library/eclipse-temurin:17.0.16_8-jdk-noble
 
 ARG ANDROID_COMMAND_LINE_TOOLS=13114758
 ARG ANDROID_EMULATOR_ARCHIVE=emulator-linux_x64-15917651.zip
-ARG ANDROID_EMULATOR_SHA1=1b1f78891abf8ec268264356e1365c25519e8379
+ARG ANDROID_EMULATOR_SHA256=95771e0ae431897b2a4bd2d97fa095f29a8b0624a7b216baf529f9306161c266
 ARG ANDROID_PLATFORM_TOOLS_ARCHIVE=platform-tools_r37.0.1-linux.zip
 ARG ANDROID_PLATFORM_TOOLS_SHA1=477254aa5f903c15cf51001717bdf347fb6b53e0
 
@@ -20,7 +20,8 @@ RUN apt-get update \
         libgbm1 libgl1 libnss3 libpulse0 libwayland-client0 libwayland-cursor0 \
         libwayland-egl1 libx11-6 libxcb1 libxcb-cursor0 libxcomposite1 \
         libxcursor1 libxdamage1 libxfixes3 libxi6 libxkbcommon0 \
-        libxkbcommon-x11-0 libxrandr2 libxrender1 libxtst6 mesa-vulkan-drivers \
+        libxkbcommon-x11-0 libxkbfile1 libxrandr2 libxrender1 libxtst6 \
+        mesa-vulkan-drivers \
     && rm -rf /var/lib/apt/lists/* \
     && mkdir -p "$ANDROID_HOME/cmdline-tools" /tmp/android-downloads "$HOME/.android" /tmp/wearfaces-runtime \
     && curl -fsSL "https://dl.google.com/android/repository/commandlinetools-linux-${ANDROID_COMMAND_LINE_TOOLS}_latest.zip" -o /tmp/android-downloads/cmdline-tools.zip \
@@ -30,7 +31,7 @@ RUN apt-get update \
     && echo "${ANDROID_PLATFORM_TOOLS_SHA1}  /tmp/android-downloads/platform-tools.zip" | sha1sum --check - \
     && unzip -q /tmp/android-downloads/platform-tools.zip -d "$ANDROID_HOME" \
     && curl -fsSL "https://dl.google.com/android/repository/${ANDROID_EMULATOR_ARCHIVE}" -o /tmp/android-downloads/emulator.zip \
-    && echo "${ANDROID_EMULATOR_SHA1}  /tmp/android-downloads/emulator.zip" | sha1sum --check - \
+    && echo "${ANDROID_EMULATOR_SHA256}  /tmp/android-downloads/emulator.zip" | sha256sum --check - \
     && unzip -q /tmp/android-downloads/emulator.zip -d "$ANDROID_HOME" \
     && yes | sdkmanager --licenses >/dev/null \
     && sdkmanager "$WEARFACES_SYSTEM_IMAGE" \
@@ -39,6 +40,10 @@ RUN apt-get update \
 
 COPY --chown=1000:1000 containers/emulator/create-avd.sh /opt/wearfaces/create-avd.sh
 COPY --chown=1000:1000 containers/emulator/start-emulator.sh /opt/wearfaces/start-emulator.sh
+COPY containers/emulator/emulator-package.xml /opt/android-sdk/emulator/package.xml
+
+ENV ANDROID_USER_HOME=/home/wearfaces/.android \
+    ANDROID_AVD_HOME=/home/wearfaces/.android/avd
 
 USER 1000:1000
 WORKDIR /workspace
