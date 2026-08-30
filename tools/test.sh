@@ -6,8 +6,10 @@ cd "$repo_root"
 
 ./tools/validate.sh
 ./tools/validate-commit.sh --self-test
+./tools/test-doctor.sh
+./tools/test-template.sh
 ./tools/check-changelog.sh
-./gradlew check assembleDebug
+./gradlew check assembleDebug bundleRelease
 
 memory_jar=${WFF_MEMORY_JAR:-/opt/wff-tools/memory-footprint.jar}
 if [[ ! -f "$memory_jar" ]]; then

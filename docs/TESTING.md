@@ -1,9 +1,10 @@
 # Testes
 
 `./tools/dev.sh test` é a suíte canônica. Ela verifica árvore/scripts, XML,
-manifest resource-only, WFF 2, API 34, package ID, data, paletas, complications,
-AOD, schema WFF oficial, Conventional Commits, changelog, Gradle checks, build
-debug e limites oficiais de memória (10 MB ambiente, 100 MB interativo).
+manifest resource-only, WFF 2, SDK 35/35/34, package ID, data, paletas,
+complications, AOD, schema WFF oficial, Conventional Commits, doctor, geração e
+compilação do template, changelog, Gradle checks, APK debug, AAB release e
+limites oficiais de memória (10 MB ambiente, 100 MB interativo).
 
 `tools/validate-face-specs.sh` também verifica o template obrigatório e exige
 que cada módulo vincule uma especificação completa sob `docs/watchfaces/`, com
@@ -24,6 +25,11 @@ Em PR, `check-changelog.sh` compara com a base. Mudança relevante exige o
 arquivo; uma exceção administrativa precisa da linha documentada descrita em
 `CONTRIBUTING.md`. A CI valida todas as mensagens do range do PR e reutiliza os
 scripts, depois constrói o container e publica APKs debug.
+
+O emulador não roda na CI porque o runner atual não oferece KVM como contrato.
+Em host com KVM, teste `emulator --headless`, boot, `adb devices`, instalação e
+package instalado. Janela Wayland/X11 e renderização visual continuam testes de
+hardware/desktop, não inferências do build.
 
 ## Hardware pendente até execução real
 

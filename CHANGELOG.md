@@ -5,6 +5,19 @@ arquivo.
 
 ## [Unreleased]
 
+### Added
+
+-   Adicionados template e gerador de módulos, CLI unificada, diagnóstico do
+    host e ambiente containerizado separado para Wear OS 5/API 34 com KVM,
+    Wayland/X11 e modo headless.
+
+### Changed
+
+-   Atualizados `compileSdk` e `targetSdk` para 35, preservando `minSdk 34` e
+    WFF 2, e centralizada a configuração Android comum em convention plugin.
+-   Movidos ADB, instalação, preview, APK e AAB para o fluxo oficial
+    containerizado, mantendo Android Studio e SDK/JDK/Gradle opcionais no host.
+
 ## [0.1.0] - 2026-08-21
 
 ### Added

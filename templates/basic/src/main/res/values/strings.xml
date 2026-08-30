@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="watch_face_name">{{WATCH_FACE_NAME}}</string>
+    <string name="color_label">Color</string>
+    <string name="color_white">White</string>
+    <string name="color_blue">Blue</string>
+    <string name="color_warm">Warm</string>
+</resources>

@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="utf-8"?>
+<WatchFace width="450" height="450">
+    <Metadata key="CLOCK_TYPE" value="DIGITAL" />
+    <Metadata key="PREVIEW_TIME" value="10:08:00" />
+
+    <UserConfigurations>
+        <ColorConfiguration id="primary_color" displayName="color_label" screenReaderText="color_label" defaultValue="0">
+            <ColorOption id="0" displayName="color_white" colors="#FFFFFFFF" />
+            <ColorOption id="1" displayName="color_blue" colors="#FF66CCFF" />
+            <ColorOption id="2" displayName="color_warm" colors="#FFFFCC66" />
+        </ColorConfiguration>
+    </UserConfigurations>
+
+    <Scene backgroundColor="#FF000000">
+        <DigitalClock x="45" y="145" width="360" height="110">
+            <TimeText x="0" y="0" width="360" height="110" format="hh:mm" hourFormat="SYNC_TO_DEVICE" align="CENTER">
+                <Font family="SYNC_TO_DEVICE" size="86" weight="NORMAL" color="[CONFIGURATION.primary_color.0]" />
+            </TimeText>
+            <Variant mode="AMBIENT" target="alpha" value="170" />
+        </DigitalClock>
+
+        <PartText x="100" y="270" width="250" height="42" alpha="220">
+            <Variant mode="AMBIENT" target="alpha" value="120" />
+            <Text align="CENTER" ellipsis="TRUE">
+                <Font family="SYNC_TO_DEVICE" size="22" weight="NORMAL" color="[CONFIGURATION.primary_color.0]">
+                    <Template><![CDATA[%s, %02d]]>
+                        <Parameter expression="[DAY_OF_WEEK_S]" />
+                        <Parameter expression="[DAY]" />
+                    </Template>
+                </Font>
+            </Text>
+        </PartText>
+    </Scene>
+</WatchFace>

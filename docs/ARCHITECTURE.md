@@ -13,7 +13,7 @@ ficam em `shared-source/`; somente recursos necessários ao APK ficam em `res/`.
 
 ## Baseline e identidade
 
-- WFF 2, Wear OS 5, `minSdk = compileSdk = targetSdk = 34`;
+- WFF 2 e Wear OS 5, com `minSdk = 34`, `compileSdk = targetSdk = 35`;
 - namespace coordenado `com.rtosta.wearfaces`;
 - package por módulo, como `com.rtosta.wearfaces.aurora`,
   `com.rtosta.wearfaces.essential` e `com.rtosta.wearfaces.flow`;
@@ -25,18 +25,19 @@ documentos derivados.
 
 ## Build e execução
 
-Gradle descobre explicitamente cada módulo em `settings.gradle.kts`. Podman
-fornece JDK/SDK e os validadores; ADB permanece no host. GitHub Actions usa os
-mesmos scripts locais.
+Gradle descobre explicitamente cada módulo em `settings.gradle.kts`. O plugin
+`wearfaces.watch-face`, em `build-logic/`, centraliza SDKs, Build Tools,
+assinatura, tipos de build e lint; cada módulo mantém identidade e versão.
+Podman fornece JDK, SDK, validadores, ADB e Android Emulator. GitHub Actions usa
+os mesmos scripts locais.
 
-## Conferência com documentação oficial (2026-08-21)
+## Conferência com documentação oficial (2026-08-30)
 
-A documentação atual confirma WFF 2 ↔ Wear OS 5 ↔ API 34, o manifest
-resource-only e um bundle separado por watch face. O sample oficial passou a
-usar AGP 9.0.0 e `targetSdk` mais novo; WearFaces mantém 34 deliberadamente
-porque a especificação proíbe ampliar o baseline sem decisão explícita. O AGP
-9.0.0 exige Build Tools 36.0.0, que é usado como ferramenta de empacotamento sem
-alterar `compileSdk`, `targetSdk`, `minSdk` ou a versão WFF.
+A documentação confirma WFF 2 ↔ Wear OS 5 ↔ API 34, manifest resource-only e
+bundle separado por watch face. O requisito Google Play para novas submissões
+Wear OS passa a API 35 em 31/08/2026; por isso somente compile/target sobem a
+35. `minSdk 34` e WFF 2 preservam Wear OS 5. AGP 9.0.0, Gradle 9.1.0 e Build
+Tools 36.0.0 já eram adequados e permaneceram pinados.
 
 Fontes primárias: [visão geral](https://developer.android.com/training/wearables/wff),
 [setup](https://developer.android.com/training/wearables/wff/setup),

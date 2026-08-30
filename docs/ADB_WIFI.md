@@ -1,4 +1,10 @@
-# ADB por Wi-Fi — Xiaomi Watch 2 + Fedora
+# ADB por Wi-Fi — Xiaomi Watch 2 + Fedora (fallback opcional)
+
+O fluxo principal usa `./scripts/wearfaces adb <argumentos>` e
+`./scripts/wearfaces install`. Nos exemplos abaixo, substitua `adb` por
+`./scripts/wearfaces adb` para manter tudo containerizado. Os comandos curtos
+`adb` cobrem o fallback manual de quem já optou por instalar `android-tools`;
+ADB no host não é requisito do WearFaces.
 
 ## 1. Verificar ADB
 
@@ -106,7 +112,8 @@ adb -s SERIAL_OU_IP:PORTA <comando>
 ```
 
 O script de instalação nunca deve escolher silenciosamente o dispositivo
-errado. Consulte `adb devices` e use `./tools/install.sh aurora --device SERIAL`.
+errado. Consulte `adb devices` e use
+`./scripts/wearfaces install aurora --device SERIAL`.
 
 ## 11. Troubleshooting
 

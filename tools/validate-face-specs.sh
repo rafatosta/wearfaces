@@ -61,7 +61,8 @@ for module in faces/*; do
   }
 
   grep -Fq -- "- Slug: \`$slug\`" "$spec" || { echo "$spec has an incorrect slug" >&2; exit 1; }
-  package_id="com.rtosta.wearfaces.$slug"
+  package_id=$(sed -n 's/.*applicationId = "\([^"]*\)".*/\1/p' "$module/build.gradle.kts" | head -n1)
+  [[ -n "$package_id" ]] || { echo "$module/build.gradle.kts has no applicationId" >&2; exit 1; }
   grep -Fq -- "- Package ID: \`$package_id\`" "$spec" || { echo "$spec has an incorrect package ID" >&2; exit 1; }
   grep -Fq "$package_id" "$module/build.gradle.kts" || { echo "$module build file has an incorrect package ID" >&2; exit 1; }
 done

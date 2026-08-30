@@ -6,17 +6,16 @@ pluginManagement {
     }
 }
 
-includeBuild("build-logic")
-
 dependencyResolutionManagement {
-    repositoriesMode.set(RepositoriesMode.FAIL_ON_PROJECT_REPOS)
     repositories {
         google()
         mavenCentral()
     }
+    versionCatalogs {
+        create("libs") {
+            from(files("../gradle/libs.versions.toml"))
+        }
+    }
 }
 
-rootProject.name = "WearFaces"
-include(":faces:aurora")
-include(":faces:essential")
-include(":faces:flow")
+rootProject.name = "wearfaces-build-logic"

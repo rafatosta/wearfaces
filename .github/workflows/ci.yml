@@ -24,7 +24,7 @@ jobs:
           java-version: '17'
       - uses: android-actions/setup-android@v3
       - name: Install pinned Android SDK
-        run: sdkmanager 'platforms;android-34' 'build-tools;36.0.0'
+        run: sdkmanager 'platforms;android-35' 'build-tools;36.0.0'
       - uses: gradle/actions/setup-gradle@v4
       - name: Build official WFF tools
         env:

@@ -8,7 +8,7 @@
 
 - Nome: `<nome>`
 - Slug: `<slug>`
-- Package ID: `com.rtosta.wearfaces.<slug>`
+- Package ID: `com.rtosta.wearfaces.<segmento sem hífens>`
 - Estado: `rascunho | aprovado | implementado`
 - Tipo de referência: `foto | screenshot | desenho | mockup | nenhuma`
 - Origem/autoria da referência: `<origem>`
@@ -120,7 +120,7 @@ Elementos que devem ser recriados por risco de propriedade intelectual:
 ```text
 Leia MASTER_SPEC.md, docs/REFERENCE_TO_SPEC.md e esta especificação por
 completo. Implemente <NOME> como um novo módulo em faces/<slug>/, usando package
-ID com.rtosta.wearfaces.<slug>, WFF 2 e API 34.
+ID com.rtosta.wearfaces.<slug>, WFF 2, minSdk 34 e targetSdk 35.
 
 Use esta especificação como fonte de verdade para composição 450 × 450,
 camadas, coordenadas, paletas, complications, AOD e assets. Produza um design
@@ -139,7 +139,7 @@ Decisões materiais já tomadas: <resumo autocontido>.
 ## 12. Critérios de aceite
 
 - [ ] especificação validada antes da implementação;
-- [ ] WFF 2/API 34 e `android:hasCode="false"`;
+- [ ] WFF 2/minSdk 34/targetSdk 35 e `android:hasCode="false"`;
 - [ ] package ID e módulo independentes;
 - [ ] hora e data conforme especificação;
 - [ ] complications e estado vazio;

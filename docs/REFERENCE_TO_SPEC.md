@@ -61,7 +61,7 @@ A especificação deve conter um prompt autocontido para uma futura sessão do
 Codex. Ele deve citar o arquivo da especificação como fonte de verdade e conter:
 
 - resultado esperado e identidade;
-- baseline WFF 2/API 34 e package ID;
+- baseline WFF 2/minSdk 34, targetSdk 35 e package ID;
 - composição, coordenadas e ordem das camadas;
 - paletas, complications e AOD;
 - ativos a criar e limites de propriedade intelectual;
@@ -79,7 +79,7 @@ Antes de criar o módulo, confirmar:
 - todos os campos relevantes do template foram preenchidos;
 - incertezas materiais foram resolvidas ou claramente assumidas;
 - referência e assets possuem uso autorizado;
-- o design pode ser implementado em WFF 2/API 34;
+- o design pode ser implementado em WFF 2/minSdk 34/targetSdk 35;
 - há pelo menos três paletas quando personalização por cor fizer sentido;
 - o AOD está definido;
 - complications têm tipos, bounds e estado vazio;

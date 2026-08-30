@@ -2,7 +2,7 @@
 <lint>
     <!-- WFF references resources by declarative names that Android Lint cannot resolve. -->
     <issue id="UnusedResources" severity="ignore" />
-    <!-- Tool versions and API 34 are deliberately pinned by the project specification. -->
+    <!-- Tool versions are deliberately pinned for reproducible container builds. -->
     <issue id="AndroidGradlePluginVersion" severity="ignore" />
     <issue id="GradleDependency" severity="ignore" />
 </lint>

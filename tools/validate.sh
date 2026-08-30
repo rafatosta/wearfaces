@@ -8,6 +8,13 @@ required=(
   MASTER_SPEC.md README.md LICENSE CONTRIBUTING.md CHANGELOG.md
   settings.gradle.kts build.gradle.kts gradle.properties gradlew gradlew.bat
   gradle/libs.versions.toml gradle/wrapper/gradle-wrapper.jar
+  gradle/wearface-lint.xml build-logic/settings.gradle.kts
+  build-logic/build.gradle.kts
+  build-logic/src/main/kotlin/wearfaces.watch-face.gradle.kts
+  templates/basic/build.gradle.kts templates/basic/src/main/AndroidManifest.xml
+  templates/basic/src/main/res/raw/watchface.xml scripts/wearfaces
+  containers/emulator/Containerfile containers/emulator/create-avd.sh
+  containers/emulator/start-emulator.sh
   Containerfile .containerignore containers/README.md
   docs/ARCHITECTURE.md docs/DEVELOPMENT.md docs/TESTING.md
   docs/CONTAINER.md docs/ADB_WIFI.md docs/DESIGN_GUIDELINES.md
@@ -20,6 +27,11 @@ for path in "${required[@]}"; do
   [[ -e "$path" ]] || { echo "Missing required path: $path" >&2; exit 1; }
 done
 
+common_build=build-logic/src/main/kotlin/wearfaces.watch-face.gradle.kts
+grep -Eq 'minSdk[[:space:]]*=[[:space:]]*34' "$common_build" || { echo "minSdk must be 34" >&2; exit 1; }
+grep -Eq 'compileSdk[[:space:]]*=[[:space:]]*35' "$common_build" || { echo "compileSdk must be 35" >&2; exit 1; }
+grep -Eq 'targetSdk[[:space:]]*=[[:space:]]*35' "$common_build" || { echo "targetSdk must be 35" >&2; exit 1; }
+
 grep -q '^FROM docker.io/library/eclipse-temurin:17.0.16_8-jdk-noble' Containerfile || {
   echo "Container base image must be fully qualified and pinned" >&2
   exit 1
@@ -28,6 +40,19 @@ grep -q '^USER 1000:1000$' Containerfile || {
   echo "Container must reuse numeric UID/GID 1000 for keep-id" >&2
   exit 1
 }
+grep -Fq 'platforms;android-35' Containerfile || { echo "Build container must install Platform 35" >&2; exit 1; }
+grep -Fq 'system-images\;android-34\;android-wear\;x86_64' containers/emulator/Containerfile || {
+  echo "Emulator container must install the Wear OS 5/API 34 x86_64 image" >&2
+  exit 1
+}
+grep -Fq 'emulator-linux_x64-15917651.zip' containers/emulator/Containerfile || {
+  echo "Emulator 37.1.11 archive must remain pinned" >&2
+  exit 1
+}
+if grep -R -Fq -- '--privileged' scripts containers/emulator; then
+  echo "Emulator tooling must not use --privileged" >&2
+  exit 1
+fi
 if grep -Eq 'useradd.*(--uid|-u)[ =]?1000' Containerfile; then
   echo "Container must not create a duplicate UID 1000" >&2
   exit 1
@@ -42,6 +67,14 @@ grep -Fq '"$android_volume:/home/ubuntu/.android:Z"' tools/dev.sh || {
 }
 
 for script in tools/*.sh; do
+  [[ -x "$script" ]] || { echo "Script is not executable: $script" >&2; exit 1; }
+  head -n 5 "$script" | grep -q 'set -euo pipefail' || {
+    echo "Strict shell mode missing near top of $script" >&2
+    exit 1
+  }
+done
+
+for script in scripts/wearfaces containers/emulator/*.sh; do
   [[ -x "$script" ]] || { echo "Script is not executable: $script" >&2; exit 1; }
   head -n 5 "$script" | grep -q 'set -euo pipefail' || {
     echo "Strict shell mode missing near top of $script" >&2
@@ -86,10 +119,13 @@ for module in faces/*; do
     echo "$slug must declare WFF 2" >&2
     exit 1
   }
-  grep -Eq 'minSdk[[:space:]]*=[[:space:]]*34' "$build_file" || { echo "$slug minSdk must be 34" >&2; exit 1; }
-  grep -Eq 'compileSdk[[:space:]]*=[[:space:]]*34' "$build_file" || { echo "$slug compileSdk must be 34" >&2; exit 1; }
-  grep -Eq 'targetSdk[[:space:]]*=[[:space:]]*34' "$build_file" || { echo "$slug targetSdk must be 34" >&2; exit 1; }
-  grep -q "com.rtosta.wearfaces.$slug" "$build_file" || { echo "$slug package ID is incorrect" >&2; exit 1; }
+  grep -Fq 'id("wearfaces.watch-face")' "$build_file" || { echo "$slug must apply the common build configuration" >&2; exit 1; }
+  package_id=$(sed -n 's/.*applicationId = "\([^"]*\)".*/\1/p' "$build_file" | head -n1)
+  namespace=$(sed -n 's/.*namespace = "\([^"]*\)".*/\1/p' "$build_file" | head -n1)
+  [[ "$package_id" == com.rtosta.wearfaces.* && "$namespace" == "$package_id" ]] || {
+    echo "$slug namespace/applicationId is incorrect" >&2
+    exit 1
+  }
   grep -Fq "include(\":faces:$slug\")" settings.gradle.kts || { echo "$slug is missing from settings.gradle.kts" >&2; exit 1; }
   complication_count=$(grep -c '<ComplicationSlot ' "$watchface" || true)
   if [[ $slug == aurora || $slug == flow ]]; then

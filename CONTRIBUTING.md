@@ -28,12 +28,10 @@ README do módulo deve conter:
 - Especificação: [<NOME>](../../docs/watchfaces/<NOME>.md)
 ```
 
-Depois, crie `faces/<slug>/` e `shared-source/artwork/<slug>/`; inclua
-`:faces:<slug>` em
-`settings.gradle.kts`, adicione-o à tabela do README e mantenha package ID
-`com.rtosta.wearfaces.<slug>`. O módulo deve continuar resource-only,
-`android:hasCode="false"`, WFF 2 e `minSdk = 34`, salvo decisão anterior no
-`MASTER_SPEC.md`.
+Depois, use `./scripts/wearfaces create <slug> --name "Nome"`, adicione eventuais
+fontes editáveis em `shared-source/artwork/<slug>/` e inclua o produto na tabela
+do README. O módulo deve continuar resource-only, `android:hasCode="false"`,
+WFF 2, `minSdk 34` e `targetSdk 35`, salvo decisão anterior no `MASTER_SPEC.md`.
 
 Não copie configurações, imagens, fontes ou geometria proprietária. Documente
 origem/licença de cada asset e preserve o funcionamento offline, sem telemetria.

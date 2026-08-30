@@ -4,7 +4,7 @@ Podman é o ambiente oficial. O `Containerfile` fixa:
 
 - Eclipse Temurin JDK `17.0.16_8` sobre Ubuntu Noble;
 - Android Command-line Tools `13114758`;
-- Platform 34 e Build Tools 36.0.0;
+- Platform 35 e Build Tools 36.0.0;
 - ferramentas `google/watchface` no commit
   `44b1855d445686ac8de5dbc95003d6f8e6623643`;
 - WFF validator e memory-footprint evaluator construídos do código oficial.
@@ -15,6 +15,8 @@ Podman é o ambiente oficial. O `Containerfile` fixa:
 ./tools/dev.sh image
 ./tools/dev.sh test
 ./tools/dev.sh build aurora
+./tools/dev.sh lint aurora
+./tools/dev.sh bundle aurora
 ./tools/dev.sh rebuild
 ```
 
@@ -30,7 +32,8 @@ O checkout é montado com `:Z`, `--userns=keep-id` mantém a autoria dos arquivo
 de build e nenhum diretório amplo do home é exposto. A imagem-base Ubuntu já
 reserva o UID/GID 1000; por isso o container reutiliza numericamente
 `USER 1000:1000` e prepara `/home/wearfaces`, em vez de tentar criar um usuário
-duplicado. Não use `--privileged` nem desative SELinux. O cache Gradle e o
+duplicado. No container de build, não use `--privileged` nem desative o label
+SELinux. O cache Gradle e o
 diretório Android ficam em volumes nomeados distintos. O segundo é montado em
 `/home/ubuntu/.android`, pois esse é o `user.home` que a JVM obtém para o UID
 1000 fornecido pela imagem Temurin, mesmo com `HOME=/home/wearfaces`. Assim,
@@ -43,12 +46,46 @@ os APKs já instalados precisarão ser desinstalados antes da reinstalação. Pa
 desenvolvimento em várias máquinas, mantenha uma cópia segura desse volume ou
 configure um keystore explícito fora do Git.
 
-ADB/Wireless debugging fica no host. Isso reduz permissões do container e evita
-encaminhar USB/rede de desenvolvimento sem necessidade.
+## Emulador Wear OS separado
+
+`containers/emulator/Containerfile` não altera nem aumenta a imagem de build.
+Ele fixa Command-line Tools `13114758`, Platform Tools `37.0.1`, Emulator
+`37.1.11`, system image `system-images;android-34;android-wear;x86_64` revisão 1
+e perfil redondo `wearos_large_round`; portanto, o host de emulação precisa ser
+Linux x86_64. O catálogo foi conferido com
+`sdkmanager --list` em 2026-08-30.
+
+```bash
+./scripts/wearfaces emulator
+./scripts/wearfaces emulator --headless
+./scripts/wearfaces emulator --x11
+./scripts/wearfaces emulator --recreate --wipe-data
+```
+
+O AVD `wearfaces-wearos5` fica no volume `wearfaces-avd-wearos5`; o SDK e a
+system image ficam na imagem. A execução rootless passa somente `/dev/kvm`,
+preserva os grupos suplementares com `--group-add keep-groups` e passa
+`/dev/dri` quando disponível. `--privileged` não é usado. Para sockets gráficos
+do usuário, o container desativa apenas o label SELinux dessa execução; o
+checkout continua usando relabel `:Z` nos containers de build/ADB.
+
+Wayland direto é preferido; X11/XWayland é o fallback. Headless usa
+`-no-window`. Fechar o processo encerra o emulador, mas preserva o AVD. Use
+`podman volume rm wearfaces-avd-wearos5` somente quando quiser perder
+deliberadamente os dados do dispositivo virtual.
+
+ADB e Android SDK não são necessários no host. Um container persistente chamado
+`wearfaces-adb` mantém o servidor e as chaves no mesmo volume do AVD, limitado a
+`127.0.0.1:5038` para não conflitar com um ADB nativo na porta 5037. `install`,
+`preview` e `adb` usam esse servidor para emuladores e dispositivos Wi-Fi.
 
 ## Troubleshooting
 
 - `podman: command not found`: instale Podman pelo Fedora.
+- `/dev/kvm` ausente ou sem permissão: habilite VT-x/AMD-V, instale KVM,
+  adicione o usuário ao grupo `kvm` e entre novamente na sessão.
+- janela Wayland falha: confirme o socket em `$XDG_RUNTIME_DIR` e tente uma
+  sessão XWayland; para isolar o problema, use `--headless`.
 - erro de relabel: confirme que o checkout pode ser rotulado e não remova `:Z`.
 - download/SDK: verifique proxy, DNS e espaço; use `rebuild` após falha parcial.
 - permissão em `build/`: confira `--userns=keep-id` e o UID do host.

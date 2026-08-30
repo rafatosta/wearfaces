@@ -1,0 +1,397 @@
+#!/usr/bin/env bash
+set -euo pipefail
+
+repo_root=$(cd "$(dirname "${BASH_SOURCE[0]}")/.." && pwd)
+cd "$repo_root"
+
+build_image=${WEARFACES_IMAGE:-localhost/wearfaces-dev:0.1.0}
+emulator_image=${WEARFACES_EMULATOR_IMAGE:-localhost/wearfaces-emulator:wearos5-api34}
+avd_volume=${WEARFACES_AVD_VOLUME:-wearfaces-avd-wearos5}
+emulator_container=${WEARFACES_EMULATOR_CONTAINER:-wearfaces-emulator}
+adb_container_name=${WEARFACES_ADB_CONTAINER:-wearfaces-adb}
+adb_server_port=${WEARFACES_ADB_SERVER_PORT:-5038}
+
+usage() {
+  cat <<'EOF'
+Usage: ./scripts/wearfaces <command> [options]
+
+Commands:
+  doctor                         Diagnose host build and emulator requirements
+  create <slug> [--name NAME]    Create a watch face from templates/basic
+  validate [face]                Validate WFF/XML and run Android lint
+  build <face>                   Build a debug APK in the build container
+  build-all                      Build debug APKs for every face
+  bundle <face>                  Build a release AAB
+  emulator [options]             Start Wear OS 5/API 34 (-h for options)
+  adb <arguments>                Run containerized ADB (pair/connect/devices/...)
+  install <face>                 Build and install a debug APK through container ADB
+  preview <face>                 Validate, build, boot, install and activate a face
+EOF
+}
+
+require_face() {
+  local face=${1:-}
+  [[ -n "$face" ]] || { echo "A watch face slug is required." >&2; exit 2; }
+  [[ -f "faces/$face/build.gradle.kts" ]] || { echo "Unknown watch face: $face" >&2; exit 2; }
+}
+
+require_podman() {
+  command -v podman >/dev/null || {
+    echo "Podman is required. Run ./scripts/wearfaces doctor for installation guidance." >&2
+    exit 1
+  }
+}
+
+ensure_emulator_image() {
+  require_podman
+  if ! podman image exists "$emulator_image"; then
+    podman build --file containers/emulator/Containerfile --tag "$emulator_image" .
+  fi
+}
+
+ensure_adb_service() {
+  ensure_emulator_image
+  if podman container exists "$adb_container_name"; then
+    if [[ $(podman inspect --format '{{.State.Running}}' "$adb_container_name") == true ]]; then
+      return 0
+    fi
+    podman rm "$adb_container_name"
+  fi
+  podman run --detach --rm \
+    --name "$adb_container_name" \
+    --userns=keep-id \
+    --network host \
+    --volume "$avd_volume:/home/wearfaces/.android:z" \
+    "$emulator_image" adb -L "tcp:127.0.0.1:$adb_server_port" server nodaemon >/dev/null
+}
+
+adb_container() {
+  ensure_adb_service
+  local run=(podman run --rm --userns=keep-id --network host)
+  [[ -t 0 ]] && run+=(--interactive)
+  run+=(
+    --volume "$repo_root:/workspace:Z"
+    --volume "$avd_volume:/home/wearfaces/.android:z"
+    --workdir /workspace \
+    "$emulator_image" adb -P "$adb_server_port" "$@"
+  )
+  "${run[@]}"
+}
+
+connected_device() {
+  local serial=${1:-}
+  local devices=()
+  mapfile -t devices < <(adb_container devices | awk 'NR > 1 && $2 == "device" {print $1}')
+  if [[ -n "$serial" ]]; then
+    printf '%s\n' "${devices[@]}" | grep -Fxq "$serial" || {
+      echo "ADB device is not connected: $serial" >&2
+      return 1
+    }
+    printf '%s\n' "$serial"
+  elif (( ${#devices[@]} == 1 )); then
+    printf '%s\n' "${devices[0]}"
+  elif (( ${#devices[@]} == 0 )); then
+    echo "No online ADB device found. Start ./scripts/wearfaces emulator first." >&2
+    return 1
+  else
+    echo "Multiple ADB devices found; select one with --device SERIAL:" >&2
+    printf '  %s\n' "${devices[@]}" >&2
+    return 1
+  fi
+}
+
+command_create() {
+  local slug=${1:-}
+  [[ -n "$slug" ]] || { echo "Usage: ./scripts/wearfaces create <slug> [--name NAME]" >&2; exit 2; }
+  shift
+  [[ "$slug" =~ ^[a-z][a-z0-9]*(-[a-z0-9]+)*$ ]] || {
+    echo "Invalid slug '$slug': use lowercase letters, digits and single hyphens." >&2
+    exit 2
+  }
+
+  local display_name=${slug//-/ }
+  display_name=${display_name^}
+  while (($#)); do
+    case "$1" in
+      --name)
+        shift
+        [[ $# -gt 0 && -n "$1" ]] || { echo "--name requires a value" >&2; exit 2; }
+        display_name=$1
+        ;;
+      -h|--help)
+        echo "Usage: ./scripts/wearfaces create <slug> [--name NAME]"
+        exit 0
+        ;;
+      *) echo "Unknown create option: $1" >&2; exit 2 ;;
+    esac
+    shift
+  done
+
+  local package_suffix=${slug//-/}
+  local package_name="com.rtosta.wearfaces.$package_suffix"
+  local spec_file=${slug^^}
+  local target="faces/$slug"
+  local spec="docs/watchfaces/$spec_file.md"
+  [[ ! -e "$target" ]] || { echo "Watch face already exists: $target" >&2; exit 1; }
+  [[ ! -e "$spec" ]] || { echo "Specification already exists: $spec" >&2; exit 1; }
+  [[ "$display_name" != *['<>&']* ]] || {
+    echo "Watch face name cannot contain XML metacharacters: < > &" >&2
+    exit 2
+  }
+  if grep -R -Fq --include='build.gradle.kts' "applicationId = \"$package_name\"" faces; then
+    echo "Application ID is already used: $package_name" >&2
+    exit 1
+  fi
+  ! grep -Fq "include(\":faces:$slug\")" settings.gradle.kts || {
+    echo "Module is already registered: :faces:$slug" >&2
+    exit 1
+  }
+
+  cp -R templates/basic "$target"
+  mv "$target/watchface-spec.md" "$spec"
+
+  local file content
+  while IFS= read -r -d '' file; do
+    content=$(<"$file")
+    content=${content//'{{WATCH_FACE_NAME}}'/"$display_name"}
+    content=${content//'{{PACKAGE_NAME}}'/"$package_name"}
+    content=${content//'{{MODULE_NAME}}'/"$slug"}
+    content=${content//'{{VERSION_NAME}}'/"0.1.0"}
+    content=${content//'{{SPEC_FILE}}'/"$spec_file"}
+    printf '%s\n' "$content" > "$file"
+  done < <(find "$target" "$spec" -type f -print0)
+
+  printf '\ninclude(":faces:%s")\n' "$slug" >> settings.gradle.kts
+
+  echo "Created watch face:"
+  echo "  module:      $target"
+  echo "  Gradle path: :faces:$slug"
+  echo "  package:     $package_name"
+  echo "  name:        $display_name"
+  echo "  spec:        $spec (complete and approve before final design work)"
+  echo "Next: ./scripts/wearfaces validate $slug"
+}
+
+command_doctor() {
+  local failures=0
+  local warnings=0
+  local missing=${WEARFACES_DOCTOR_MISSING:-}
+
+  has_command() {
+    local name=$1
+    [[ ",${missing}," != *",${name},"* ]] && command -v "$name" >/dev/null
+  }
+  ok() { printf '[OK]   %s\n' "$*"; }
+  info() { printf '[INFO] %s\n' "$*"; }
+  warn() { printf '[WARN] %s\n' "$*"; ((warnings += 1)); }
+  fail() { printf '[FAIL] %s\n' "$*"; ((failures += 1)); }
+
+  echo "WearFaces development environment"
+  echo
+  for command_name in git podman bash; do
+    if has_command "$command_name"; then ok "$command_name"; else fail "$command_name not found"; fi
+  done
+
+  if has_command podman; then
+    if [[ $(podman info --format '{{.Host.Security.Rootless}}' 2>/dev/null) == true ]]; then
+      ok "Podman rootless"
+    else
+      fail "Podman is not running rootless; configure a rootless user session"
+    fi
+  else
+    info "Install Podman with: sudo dnf install podman"
+  fi
+
+  local kvm_device=${WEARFACES_KVM_DEVICE:-/dev/kvm}
+  if [[ -e "$kvm_device" ]]; then
+    ok "$kvm_device"
+    if [[ -r "$kvm_device" && -w "$kvm_device" ]]; then
+      ok "KVM read/write permission"
+    else
+      fail "$kvm_device is not readable and writable; add the user to the kvm group and log in again"
+    fi
+  else
+    fail "$kvm_device is missing; enable virtualization in firmware and install KVM"
+  fi
+
+  if grep -Eqm1 '(vmx|svm)' /proc/cpuinfo 2>/dev/null; then
+    ok "Hardware virtualization flag"
+  else
+    warn "CPU virtualization flag not visible (common inside a VM)"
+  fi
+
+  if [[ $(uname -m) == x86_64 ]]; then
+    ok "x86_64 host for the Wear OS system image"
+  else
+    fail "The pinned Wear OS 5 emulator image requires an x86_64 Linux host"
+  fi
+
+  if [[ -n ${WAYLAND_DISPLAY:-} && -n ${XDG_RUNTIME_DIR:-} && -S ${XDG_RUNTIME_DIR}/${WAYLAND_DISPLAY} ]]; then
+    ok "Wayland session"
+  elif [[ -n ${DISPLAY:-} ]]; then
+    ok "X11/XWayland session"
+  else
+    warn "No graphical session detected; use emulator --headless"
+  fi
+
+  if [[ -d /dev/dri ]]; then ok "Graphics device /dev/dri"; else warn "/dev/dri unavailable; software graphics may be used"; fi
+
+  if has_command adb; then info "Host ADB detected but not used"; else info "Android SDK/ADB absent on host — expected"; fi
+  if has_command java; then info "Host Java detected but not used"; else info "Java absent on host — expected"; fi
+  if has_command gradle; then info "Host Gradle detected but not used"; else info "Global Gradle absent on host — expected"; fi
+
+  echo
+  if ((failures == 0)); then
+    echo "Environment ready for containerized build and emulation ($warnings warning(s))."
+  else
+    echo "Environment is not ready: $failures failure(s), $warnings warning(s)."
+    return 1
+  fi
+}
+
+command_emulator() {
+  local headless=0
+  local recreate=0
+  local wipe_data=0
+  local detach=0
+  local force_x11=0
+  while (($#)); do
+    case "$1" in
+      --headless) headless=1 ;;
+      --recreate) recreate=1 ;;
+      --wipe-data) wipe_data=1 ;;
+      --detach) detach=1 ;;
+      --x11) force_x11=1 ;;
+      -h|--help)
+        echo "Usage: ./scripts/wearfaces emulator [--headless|--x11] [--detach] [--recreate] [--wipe-data]"
+        return 0
+        ;;
+      *) echo "Unknown emulator option: $1" >&2; return 2 ;;
+    esac
+    shift
+  done
+
+  [[ -c /dev/kvm && -r /dev/kvm && -w /dev/kvm ]] || {
+    echo "/dev/kvm must exist and be readable/writable. Run ./scripts/wearfaces doctor." >&2
+    return 1
+  }
+  ensure_emulator_image
+  ensure_adb_service
+
+  local run=(podman run --rm --userns=keep-id --group-add keep-groups --network host)
+  run+=(--env "ANDROID_ADB_SERVER_PORT=$adb_server_port")
+  run+=(--device /dev/kvm --volume "$avd_volume:/home/wearfaces/.android:z")
+  [[ -d /dev/dri ]] && run+=(--device /dev/dri)
+
+  if ((headless)); then
+    run+=(--env WEARFACES_HEADLESS=1)
+  elif ((force_x11 == 0)) && [[ -n ${WAYLAND_DISPLAY:-} && -n ${XDG_RUNTIME_DIR:-} && -S ${XDG_RUNTIME_DIR}/${WAYLAND_DISPLAY} ]]; then
+    run+=(--security-opt label=disable)
+    run+=(--env "WAYLAND_DISPLAY=$WAYLAND_DISPLAY" --env XDG_RUNTIME_DIR=/tmp/wearfaces-runtime)
+    run+=(--env QT_QPA_PLATFORM=wayland)
+    run+=(--volume "${XDG_RUNTIME_DIR}/${WAYLAND_DISPLAY}:/tmp/wearfaces-runtime/${WAYLAND_DISPLAY}")
+  elif [[ -n ${DISPLAY:-} && -d /tmp/.X11-unix ]]; then
+    run+=(--security-opt label=disable)
+    run+=(--env "DISPLAY=$DISPLAY" --env QT_QPA_PLATFORM=xcb)
+    run+=(--volume /tmp/.X11-unix:/tmp/.X11-unix:ro)
+    if [[ -n ${XAUTHORITY:-} && -f ${XAUTHORITY} ]]; then
+      run+=(--env XAUTHORITY=/tmp/wearfaces.Xauthority --volume "${XAUTHORITY}:/tmp/wearfaces.Xauthority:ro")
+    fi
+  else
+    echo "No graphical session found; pass --headless." >&2
+    return 1
+  fi
+
+  local emulator_args=()
+  ((headless)) && emulator_args+=(--headless)
+  ((recreate)) && emulator_args+=(--recreate)
+  ((wipe_data)) && emulator_args+=(--wipe-data)
+  if ((detach)); then
+    if podman container exists "$emulator_container"; then
+      if [[ $(podman inspect --format '{{.State.Running}}' "$emulator_container") == true ]]; then
+        echo "Emulator container is already running: $emulator_container"
+        return 0
+      fi
+      podman rm "$emulator_container"
+    fi
+    run+=(--detach --name "$emulator_container")
+  fi
+  run+=("$emulator_image" /opt/wearfaces/start-emulator.sh "${emulator_args[@]}")
+  "${run[@]}"
+}
+
+command_install() {
+  local face=${1:-}
+  require_face "$face"
+  shift
+  local serial=""
+  local no_build=0
+  while (($#)); do
+    case "$1" in
+      --no-build) no_build=1 ;;
+      --device|-s) shift; [[ $# -gt 0 ]] || { echo "--device requires a serial" >&2; exit 2; }; serial=$1 ;;
+      *) echo "Unknown install option: $1" >&2; exit 2 ;;
+    esac
+    shift
+  done
+  ((no_build)) || ./tools/dev.sh build "$face"
+  serial=$(connected_device "$serial")
+  local apk
+  local apk_dir="faces/$face/build/outputs/apk/debug"
+  [[ -d "$apk_dir" ]] || { echo "No debug APK directory found for $face" >&2; exit 1; }
+  apk=$(find "$apk_dir" -maxdepth 1 -type f -name '*.apk' -printf '%T@ %p\n' | sort -rn | head -n1 | cut -d' ' -f2-)
+  [[ -n "$apk" ]] || { echo "No debug APK found for $face" >&2; exit 1; }
+  adb_container -s "$serial" install -r "/workspace/$apk"
+  echo "Installed $face from $apk on $serial"
+}
+
+command_preview() {
+  local face=${1:-}
+  require_face "$face"
+  ./scripts/wearfaces validate "$face"
+  ./scripts/wearfaces build "$face"
+  if ! connected_device >/dev/null 2>&1; then
+    local -a emulator_start=(--detach)
+    if [[ -z ${DISPLAY:-} && -z ${WAYLAND_DISPLAY:-} ]]; then emulator_start+=(--headless); fi
+    ./scripts/wearfaces emulator "${emulator_start[@]}"
+    echo "Waiting up to 240 seconds for Wear OS to boot..."
+    local ready=0
+    for _ in $(seq 1 120); do
+      if [[ $(adb_container shell getprop sys.boot_completed 2>/dev/null | tr -d '\r') == 1 ]]; then ready=1; break; fi
+      sleep 2
+    done
+    ((ready)) || { echo "Wear OS did not finish booting in time." >&2; exit 1; }
+  fi
+  ./scripts/wearfaces install "$face" --no-build
+  local package_id
+  package_id=$(sed -n 's/.*applicationId = "\([^"]*\)".*/\1/p' "faces/$face/build.gradle.kts" | head -n1)
+  local serial
+  serial=$(connected_device)
+  adb_container -s "$serial" shell am broadcast \
+    -a com.google.android.wearable.app.DEBUG_SURFACE \
+    --es operation set-watchface \
+    --es watchFaceId "$package_id"
+  echo "Activated $package_id. If the development broadcast is unavailable on this image, select it in the Wear OS picker."
+}
+
+command_name=${1:-help}
+shift || true
+case "$command_name" in
+  doctor) command_doctor "$@" ;;
+  create) command_create "$@" ;;
+  validate)
+    face=${1:-}
+    [[ -z "$face" ]] || require_face "$face"
+    ./tools/dev.sh validate
+    ./tools/dev.sh lint "$face"
+    ;;
+  build) require_face "${1:-}"; ./tools/dev.sh build "$1" ;;
+  build-all) ./tools/dev.sh build ;;
+  bundle) require_face "${1:-}"; ./tools/dev.sh bundle "$1" ;;
+  emulator) command_emulator "$@" ;;
+  adb) adb_container "$@" ;;
+  install) command_install "$@" ;;
+  preview) command_preview "$@" ;;
+  help|-h|--help) usage ;;
+  *) echo "Unknown command: $command_name" >&2; usage >&2; exit 2 ;;
+esac

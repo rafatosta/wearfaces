@@ -32,7 +32,6 @@ if ((install_all)); then
   mapfile -t faces < <(find faces -mindepth 2 -maxdepth 2 -name build.gradle.kts -printf '%h\n' | sed 's#^faces/##' | sort)
 fi
 (( ${#faces[@]} > 0 )) || { echo "Select a face or use --all" >&2; exit 2; }
-(( install_all == 0 || ${#faces[@]} > 0 )) || { echo "No face modules found" >&2; exit 1; }
 
 for face in "${faces[@]}"; do
   [[ -f "faces/$face/build.gradle.kts" ]] || { echo "Unknown face: $face" >&2; exit 2; }
@@ -48,28 +47,8 @@ if ((no_build == 0)); then
   fi
 fi
 
-command -v adb >/dev/null || { echo "adb is not available on the host" >&2; exit 1; }
-mapfile -t devices < <(adb devices | awk 'NR > 1 && $2 == "device" {print $1}')
-if [[ -n "$serial" ]]; then
-  printf '%s\n' "${devices[@]}" | grep -Fxq "$serial" || { echo "ADB device is not connected: $serial" >&2; exit 1; }
-elif (( ${#devices[@]} == 1 )); then
-  serial=${devices[0]}
-elif (( ${#devices[@]} == 0 )); then
-  echo "No online ADB device found. Run adb connect first." >&2
-  exit 1
-else
-  echo "Multiple ADB devices found; select one with --device SERIAL:" >&2
-  printf '  %s\n' "${devices[@]}" >&2
-  exit 1
-fi
-
 for face in "${faces[@]}"; do
-  mapfile -t apks < <(find "faces/$face/build/outputs/apk/debug" -maxdepth 1 -type f -name '*.apk' -printf '%T@ %p\n' 2>/dev/null | sort -rn | cut -d' ' -f2-)
-  (( ${#apks[@]} > 0 )) || { echo "No debug APK found for $face" >&2; exit 1; }
-  apk=${apks[0]}
-  package_id=$(sed -n 's/.*applicationId = "\([^"]*\)".*/\1/p' "faces/$face/build.gradle.kts" | head -n1)
-  adb -s "$serial" install -r "$apk"
-  echo "Installed $package_id from $apk on $serial"
+  args=("$face" --no-build)
+  [[ -z "$serial" ]] || args+=(--device "$serial")
+  ./scripts/wearfaces install "${args[@]}"
 done
-
-echo "Select the installed watch face using the normal Wear OS picker."

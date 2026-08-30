@@ -17,9 +17,9 @@ rode `./tools/check-release.sh vX.Y.Z` e a suíte completa.
 1. checkout e ambiente JDK/Android;
 2. coerência tag, módulos e changelog;
 3. suíte completa;
-4. build release assinado;
+4. build release assinado de APK e AAB;
 5. nomes previsíveis e `SHA256SUMS`;
-6. GitHub Release com APKs.
+6. GitHub Release com APKs/AABs.
 
 ## Assinatura
 
@@ -46,6 +46,9 @@ Exemplo:
 aurora-0.1.0.apk
 essential-0.1.0.apk
 flow-0.1.0.apk
+aurora-0.1.0.aab
+essential-0.1.0.aab
+flow-0.1.0.aab
 SHA256SUMS
 ```
 

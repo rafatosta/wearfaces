@@ -10,7 +10,7 @@ Descreva a alteração e seu impacto observável.
 
 ## Checklist
 
-- [ ] Mantive WFF 2/API 34 e `hasCode=false`
+- [ ] Mantive WFF 2, minSdk 34, targetSdk 35 e `hasCode=false`
 - [ ] Documentei autoria/licença de assets
 - [ ] Atualizei `[Unreleased]` no changelog
 - [ ] Usei Conventional Commits

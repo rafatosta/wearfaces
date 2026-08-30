@@ -31,7 +31,7 @@ RUN apt-get update \
     && mv /tmp/android-tools/cmdline-tools "$ANDROID_HOME/cmdline-tools/latest" \
     && rm /tmp/cmdline-tools.zip \
     && yes | sdkmanager --licenses >/dev/null \
-    && sdkmanager "platform-tools" "platforms;android-34" "build-tools;36.0.0" \
+    && sdkmanager "platform-tools" "platforms;android-35" "build-tools;36.0.0" \
     && install -d -o 1000 -g 1000 "$HOME" "$GRADLE_USER_HOME" /home/ubuntu/.android
 
 COPY --from=wff-builder /src/watchface/third_party/wff/specification/validator/build/libs/wff-validator.jar /opt/wff-tools/wff-validator.jar

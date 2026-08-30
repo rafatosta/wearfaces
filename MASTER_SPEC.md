@@ -17,6 +17,10 @@ Alvo inicial obrigatório:
 -   Android API 34
 -   WFF 2
 
+Baseline de build/publicação vigente: `minSdk 34`, `compileSdk 35` e
+`targetSdk 35`. API 34 acima descreve o runtime mínimo Wear OS 5, não o
+`targetSdk`.
+
 O primeiro mostrador será **Aurora**, uma criação original inspirada
 apenas na ideia de um mostrador AMOLED analógico com luz difusa. Não
 copiar APKs, imagens, fontes, ícones, geometria ou outros ativos
@@ -35,7 +39,7 @@ proprietários da Xiaomi.
 7.  Não usar WFF 3 ou 4 no baseline.
 8.  Não usar Watch Face Push no baseline, pois o alvo é Wear OS 5/API
     34. 
-9.  Não elevar `minSdk` ou versão WFF sem decisão explícita documentada.
+9.  Não elevar `minSdk` 34 ou versão WFF 2 sem decisão explícita documentada.
 10. Não adicionar dependências sem necessidade concreta.
 
 ## 3. Árvore obrigatória
@@ -450,7 +454,7 @@ O bootstrap só está concluído quando:
 Além do bootstrap:
 
 -   WFF 2 válido;
--   API 34;
+-   `minSdk 34`, `compileSdk 35` e `targetSdk 35`;
 -   resource-only;
 -   hora analógica funcional;
 -   data;
@@ -578,25 +582,12 @@ Fedora sem consultar fontes externas.
 O `README.md` e `docs/DEVELOPMENT.md` devem apontar para
 `docs/ADB_WIFI.md`.
 
-### 20.1 Pré-requisitos no Fedora
+### 20.1 ADB containerizado e fallback no Fedora
 
-O usuário normalmente já possui Android Studio/Android SDK Platform
-Tools. Primeiro verificar:
-
-``` bash
-adb version
-```
-
-Se `adb` estiver no PATH, não instalar nada.
-
-Se não estiver, documentar duas alternativas:
-
-1.  localizar/utilizar o `adb` do Android SDK Platform Tools já
-    instalado;
-2.  opcionalmente instalar o pacote Fedora correspondente
-    (`android-tools`) caso o usuário prefira o pacote do sistema.
-
-Nunca exigir uma segunda instalação se o ADB funcional já existir.
+O fluxo oficial usa `./scripts/wearfaces adb`, fornecido pela imagem do
+emulador e com chaves persistidas em volume. Android SDK Platform Tools não é
+pré-requisito do host. Se o usuário já possuir ADB nativo, ele pode usá-lo como
+fallback de diagnóstico; nunca exigir uma segunda instalação.
 
 ### 20.2 Rede
 
@@ -901,11 +892,12 @@ O Fedora host deve precisar, idealmente, apenas de:
 
 -   Git;
 -   Podman;
--   ADB funcional.
+-   Bash;
+-   KVM e sessão gráfica, somente para emulação acelerada com janela.
 
-O ADB pode vir do Android SDK Platform Tools já instalado pelo Android
-Studio ou do pacote `android-tools` do Fedora. Não instalar uma segunda
-cópia se `adb version` já funcionar.
+ADB, Android SDK, Java, Gradle e Android Studio pertencem aos containers e não
+são requisitos do host. Um ADB nativo pode existir como fallback opcional para
+diagnóstico de hardware físico, sem interferir no fluxo oficial.
 
 Android Studio permanece opcional para edição, inspeção e
 desenvolvimento interativo.
@@ -916,7 +908,7 @@ O container deve fornecer e fixar as versões necessárias de:
 
 -   JDK;
 -   Android SDK Command-line Tools;
--   Android SDK Platform 34;
+-   Android SDK Platform 35 para build;
 -   Android SDK Build Tools;
 -   ferramentas WFF;
 -   validadores oficiais necessários;
@@ -941,6 +933,15 @@ docs/
 
 tools/
 └── dev.sh
+
+scripts/
+└── wearfaces
+
+containers/
+└── emulator/
+    ├── Containerfile
+    ├── create-avd.sh
+    └── start-emulator.sh
 ```
 
 ### 22.4 Fluxo
@@ -1544,6 +1545,9 @@ Cada mostrador possui package ID próprio:
 com.rtosta.wearfaces.<slug>
 ```
 
+Quando o slug do diretório contiver hífen, o segmento Java/package remove os
+hífens (por exemplo, `my-new-face` → `com.rtosta.wearfaces.mynewface`).
+
 Primeiro mostrador:
 
 ``` text
@@ -1581,6 +1585,10 @@ Wear OS 5   / API 34 → suportado; baseline oficial
 Wear OS 5.1 / API 35 → suportado enquanto compatível com WFF 2
 Wear OS 6   / API 36 → suportado enquanto compatível com WFF 2
 ```
+
+Configuração Android comum: `minSdk 34`, `compileSdk 35`, `targetSdk 35` e WFF
+2. A elevação de compile/target atende à publicação e não altera o runtime
+mínimo Wear OS 5/API 34.
 
 Nenhum recurso novo pode elevar silenciosamente o baseline global.
 

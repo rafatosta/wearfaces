@@ -24,7 +24,7 @@ jobs:
           distribution: temurin
           java-version: '17'
       - uses: android-actions/setup-android@v3
-      - run: sdkmanager 'platforms;android-34' 'build-tools;36.0.0'
+      - run: sdkmanager 'platforms;android-35' 'build-tools;36.0.0'
       - uses: gradle/actions/setup-gradle@v4
       - name: Build official WFF tools
         env:
@@ -46,13 +46,13 @@ jobs:
         run: |
           test -n "$KEYSTORE_BASE64"
           printf '%s' "$KEYSTORE_BASE64" | base64 --decode > "$RUNNER_TEMP/wearfaces-release.jks"
-      - name: Build signed release APKs
+      - name: Build signed release APKs and AABs
         env:
           WEARFACES_KEYSTORE: ${{ runner.temp }}/wearfaces-release.jks
           WEARFACES_STORE_PASSWORD: ${{ secrets.ANDROID_STORE_PASSWORD }}
           WEARFACES_KEY_ALIAS: ${{ secrets.ANDROID_KEY_ALIAS }}
           WEARFACES_KEY_PASSWORD: ${{ secrets.ANDROID_KEY_PASSWORD }}
-        run: ./gradlew assembleRelease
+        run: ./gradlew assembleRelease bundleRelease
       - name: Prepare release assets
         run: |
           version=${GITHUB_REF_NAME#v}
@@ -61,7 +61,11 @@ jobs:
             face=$(cut -d/ -f2 <<<"$apk")
             cp "$apk" "release-assets/${face}-${version}.apk"
           done < <(find faces -path '*/build/outputs/apk/release/*.apk' -type f | sort)
-          (cd release-assets && ../tools/checksums.sh ./*.apk > SHA256SUMS)
+          while IFS= read -r aab; do
+            face=$(cut -d/ -f2 <<<"$aab")
+            cp "$aab" "release-assets/${face}-${version}.aab"
+          done < <(find faces -path '*/build/outputs/bundle/release/*.aab' -type f | sort)
+          (cd release-assets && ../tools/checksums.sh ./*.apk ./*.aab > SHA256SUMS)
           test -s release-assets/SHA256SUMS
       - name: Publish GitHub Release
         uses: softprops/action-gh-release@v2

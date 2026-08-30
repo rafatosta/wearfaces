@@ -6,9 +6,10 @@ mostrador é um módulo Android resource-only e gera seu próprio APK/AAB.
 
 ## Compatibilidade
 
-O baseline é **Wear OS 5 / Android API 34 / WFF 2**, com o Xiaomi Watch 2 como
-primeiro alvo físico. Wear OS 4 não é suportado. Wear OS 5.1 e 6 são aceitos
-enquanto preservarem compatibilidade com WFF 2.
+O baseline de execução é **Wear OS 5 / Android 14 / API 34 / WFF 2**, com o
+Xiaomi Watch 2 como primeiro alvo físico. Os módulos usam `minSdk 34`,
+`compileSdk 35` e `targetSdk 35`, preservando Wear OS 5 e atendendo ao requisito
+de publicação Wear OS vigente a partir de 31 de agosto de 2026.
 
 ## Mostradores
 
@@ -29,46 +30,54 @@ complications são ilustrativos; no Essential, os quatro campos opcionais não
 aparecem porque começam vazios. Screenshots reais serão adicionadas depois da
 validação no dispositivo e continuam sendo a evidência visual definitiva.
 
-## Build e testes
+## Início rápido
 
-Podman é o ambiente oficial e reproduzível:
+Android Studio é opcional. O ambiente oficial fornece build, validação, ADB e
+emulação Wear OS em containers; qualquer editor ou IDE pode ser usado. No host,
+instale somente Git, Bash e Podman. Emulação acelerada também requer KVM e, para
+a janela nativa, Wayland ou X11/XWayland.
 
 ```bash
-./tools/dev.sh test
-./tools/dev.sh build aurora
-./tools/dev.sh build essential
-./tools/dev.sh build flow
+./scripts/wearfaces doctor
+./scripts/wearfaces build-all
+./scripts/wearfaces emulator
+# Em outro terminal:
+./scripts/wearfaces preview essential
 ```
 
-O fallback nativo, para quem já possui JDK 17 e Android SDK 34, é:
+Comandos principais:
 
 ```bash
-./gradlew assembleDebug
-./gradlew :faces:aurora:assembleDebug
-./gradlew :faces:essential:assembleDebug
-./gradlew :faces:flow:assembleDebug
-./tools/build-all.sh
+./scripts/wearfaces validate [face]
+./scripts/wearfaces build <face>
+./scripts/wearfaces bundle <face>
+./scripts/wearfaces install <face>
+./scripts/wearfaces emulator --headless
+./scripts/wearfaces adb devices
 ```
 
 Consulte [desenvolvimento](docs/DEVELOPMENT.md),
-[container](docs/CONTAINER.md) e [testes](docs/TESTING.md).
+[container](docs/CONTAINER.md), [testes](docs/TESTING.md) e o fallback de
+[ADB por Wi-Fi em relógio físico](docs/ADB_WIFI.md).
 
-## Instalação ADB
+## Criar um mostrador
 
-Depois de conectar o relógio (`adb devices` deve mostrá-lo como `device`):
+O gerador valida o slug, cria módulo e especificação, configura identidade e
+registra o Gradle automaticamente:
 
 ```bash
-./tools/install.sh aurora
+./scripts/wearfaces create minimal01 --name "Minimal 01"
+./scripts/wearfaces validate minimal01
+./scripts/wearfaces build minimal01
 ```
 
-Use `--no-build` para reaproveitar um APK ou `--device SERIAL` quando houver
-mais de um alvo. A seleção do mostrador é feita pelo picker normal do Wear OS.
-O guia autocontido para Fedora e Xiaomi Watch 2 está em
-[ADB por Wi-Fi](docs/ADB_WIFI.md).
+Complete primeiro `docs/watchfaces/MINIMAL01.md`; depois edite
+`faces/minimal01/src/main/res/raw/watchface.xml`. O template contém apenas um
+mostrador digital neutro, preview vetorial e estrutura WFF 2 mínima.
 
 ## Releases e contribuição
 
-Releases seguem SemVer coordenado e publicam um APK por módulo com checksums;
+Releases seguem SemVer coordenado e publicam APK e AAB por módulo com checksums;
 veja [RELEASE.md](docs/RELEASE.md). Contribuições são bem-vindas conforme
 [CONTRIBUTING.md](CONTRIBUTING.md).
 

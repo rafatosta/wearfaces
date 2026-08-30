@@ -31,8 +31,17 @@ case "$command_name" in
     face=${1:-}
     if [[ -n "$face" ]]; then inner=(./gradlew ":faces:${face}:assembleDebug"); else inner=(./tools/build-all.sh); fi
     ;;
+  lint)
+    face=${1:-}
+    if [[ -n "$face" ]]; then inner=(./gradlew ":faces:${face}:lint"); else inner=(./gradlew lint); fi
+    ;;
+  bundle)
+    face=${1:-}
+    [[ -n "$face" ]] || { echo "bundle requires a face slug" >&2; exit 2; }
+    inner=(./gradlew ":faces:${face}:bundleRelease")
+    ;;
   shell) inner=(bash "$@") ;;
-  *) echo "Usage: $0 {validate|test|build [face]|image|rebuild|shell}" >&2; exit 2 ;;
+  *) echo "Usage: $0 {validate|test|build [face]|lint [face]|bundle <face>|image|rebuild|shell}" >&2; exit 2 ;;
 esac
 
 exec podman run --rm \
