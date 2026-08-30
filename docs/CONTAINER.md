@@ -83,12 +83,13 @@ ADB e Android SDK não são necessários no host. Um container persistente chama
 
 ## Troubleshooting
 
-- `KVM PMU virtualization is disabled`: confira
-  `cat /sys/module/kvm/parameters/enable_pmu`. O valor `N` faz o guest acessar
-  MSRs de performance não virtualizados e, neste host, encerra o QEMU com
-  `SIGSEGV`. No Fedora, execute
-  `sudo grubby --update-kernel=ALL --args='kvm.enable_pmu=1'`, reinicie e
-  confirme o valor `Y` com `./scripts/wearfaces doctor`.
+- `KVM PMU unavailable and unhandled guest MSRs are not ignored`: em CPUs Intel
+  híbridas, o Linux desabilita intencionalmente a PMU virtual mesmo que
+  `kvm.enable_pmu=1` esteja na linha de boot. O guest Wear OS ainda escreve
+  nesses MSRs e o QEMU do Emulator encerra com `SIGSEGV`. Para o boot atual,
+  execute `echo 1 | sudo tee /sys/module/kvm/parameters/ignore_msrs`; a mudança
+  vale globalmente para VMs KVM e é revertida com o valor `0` ou no próximo
+  reboot. O launcher não aplica essa configuração privilegiada automaticamente.
 - Fedora 44 com kernel `7.1.0` a `7.1.10`: essa série encerra o processo QEMU
   do Android Emulator com `SIGSEGV` logo após o KVM iniciar o guest. Reinicie,
   abra **Advanced options for Fedora Linux** no GRUB e selecione o kernel

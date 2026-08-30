@@ -61,11 +61,21 @@ kvm_pmu_enabled() {
   [[ ! -r "$state_file" ]] || [[ $(<"$state_file") == Y ]]
 }
 
-print_disabled_kvm_pmu_guidance() {
-  echo "KVM PMU virtualization is disabled; this host makes the Android Emulator exit with SIGSEGV." >&2
-  echo "For an accelerated emulator, add kvm.enable_pmu=1 to the kernel command line and reboot." >&2
-  echo "On Fedora: sudo grubby --update-kernel=ALL --args='kvm.enable_pmu=1'" >&2
-  echo "Run ./scripts/wearfaces doctor after reboot to confirm the value is Y." >&2
+kvm_ignores_unhandled_msrs() {
+  local state_file=${WEARFACES_KVM_IGNORE_MSRS_STATE_FILE:-/sys/module/kvm/parameters/ignore_msrs}
+  [[ -r "$state_file" && $(<"$state_file") == Y ]]
+}
+
+kvm_supports_emulator_guest_msrs() {
+  kvm_pmu_enabled || kvm_ignores_unhandled_msrs
+}
+
+print_kvm_msr_guidance() {
+  echo "KVM virtual PMU is unavailable and unhandled guest MSRs are not ignored." >&2
+  echo "On Intel hybrid CPUs, Linux intentionally disables the virtual PMU." >&2
+  echo "Enable the reversible Android Emulator workaround for this boot:" >&2
+  echo "  echo 1 | sudo tee /sys/module/kvm/parameters/ignore_msrs" >&2
+  echo "Reset it with 0 after using the emulator, or simply reboot." >&2
 }
 
 ensure_emulator_image() {
@@ -282,9 +292,11 @@ command_doctor() {
 
   if kvm_pmu_enabled; then
     ok "KVM PMU virtualization"
+  elif kvm_ignores_unhandled_msrs; then
+    warn "KVM PMU unavailable; unhandled guest MSRs are being ignored"
   else
-    warn "KVM PMU virtualization is disabled; accelerated Emulator startup will crash"
-    info "Enable it with kvm.enable_pmu=1, reboot and run doctor again"
+    fail "KVM PMU unavailable and unhandled guest MSRs are not ignored"
+    info "For this boot: echo 1 | sudo tee /sys/module/kvm/parameters/ignore_msrs"
   fi
 
   if [[ -n ${DISPLAY:-} && -d /tmp/.X11-unix ]]; then
@@ -340,8 +352,8 @@ command_emulator() {
     return 1
   fi
 
-  if ! kvm_pmu_enabled; then
-    print_disabled_kvm_pmu_guidance
+  if ! kvm_supports_emulator_guest_msrs; then
+    print_kvm_msr_guidance
     return 1
   fi
 
