@@ -60,6 +60,30 @@ Consulte [desenvolvimento](docs/DEVELOPMENT.md),
 [container](docs/CONTAINER.md), [testes](docs/TESTING.md) e o fallback de
 [ADB por Wi-Fi em relógio físico](docs/ADB_WIFI.md).
 
+### Kernel Fedora e KVM
+
+Em CPUs Intel híbridas, `cat /sys/module/kvm/parameters/enable_pmu` pode retornar
+`N`. Isso é esperado, não impede o Android Emulator e não deve ser contornado
+com `ignore_msrs=1` nem forçando `kvm.enable_pmu=1`.
+
+Os kernels Fedora 44 `7.1.0` a `7.1.10`, por outro lado, têm uma regressão que
+encerra o QEMU do Emulator durante o boot. O projeto não possui um workaround
+seguro para essa série. Se `./scripts/wearfaces doctor` identificar uma dessas
+versões, reinicie pelo GRUB, abra **Advanced options for Fedora Linux** e use o
+kernel `6.19.x`. Uma versão posterior somente deve ser adotada depois de passar
+no `doctor` e iniciar uma prévia normalmente:
+
+```bash
+uname -r
+cat /sys/module/kvm/parameters/enable_pmu
+cat /sys/module/kvm/parameters/ignore_msrs
+./scripts/wearfaces doctor
+./scripts/wearfaces preview essential
+```
+
+O estado recomendado neste host é kernel `6.19.x` com `ignore_msrs=N`; a PMU
+virtual pode continuar aparecendo como indisponível.
+
 ## Criar um mostrador
 
 O gerador valida o slug, cria módulo e especificação, configura identidade e
