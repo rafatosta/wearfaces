@@ -5,7 +5,7 @@ repo_root=$(cd "$(dirname "${BASH_SOURCE[0]}")/.." && pwd)
 cd "$repo_root"
 
 build_image=${WEARFACES_IMAGE:-localhost/wearfaces-dev:0.1.0}
-emulator_image=${WEARFACES_EMULATOR_IMAGE:-localhost/wearfaces-emulator:wearos5-api34-emulator37.1.11}
+emulator_image=${WEARFACES_EMULATOR_IMAGE:-localhost/wearfaces-emulator:wearos5-api34-emulator37.1.11-r4}
 avd_volume=${WEARFACES_AVD_VOLUME:-wearfaces-avd-wearos5}
 emulator_container=${WEARFACES_EMULATOR_CONTAINER:-wearfaces-emulator}
 adb_container_name=${WEARFACES_ADB_CONTAINER:-wearfaces-adb}
@@ -54,6 +54,18 @@ print_unsupported_kernel_guidance() {
   echo "Fedora 44 kernel $(emulator_kernel_release) crashes the Android Emulator when KVM starts the guest." >&2
   echo "Reboot and select kernel 6.19.x in GRUB: Advanced options for Fedora Linux." >&2
   echo "Set WEARFACES_ALLOW_UNSUPPORTED_KERNEL=1 only to bypass this guard for diagnosis." >&2
+}
+
+kvm_pmu_enabled() {
+  local state_file=${WEARFACES_KVM_PMU_STATE_FILE:-/sys/module/kvm/parameters/enable_pmu}
+  [[ ! -r "$state_file" ]] || [[ $(<"$state_file") == Y ]]
+}
+
+print_disabled_kvm_pmu_guidance() {
+  echo "KVM PMU virtualization is disabled; this host makes the Android Emulator exit with SIGSEGV." >&2
+  echo "For an accelerated emulator, add kvm.enable_pmu=1 to the kernel command line and reboot." >&2
+  echo "On Fedora: sudo grubby --update-kernel=ALL --args='kvm.enable_pmu=1'" >&2
+  echo "Run ./scripts/wearfaces doctor after reboot to confirm the value is Y." >&2
 }
 
 ensure_emulator_image() {
@@ -268,10 +280,21 @@ command_doctor() {
     ok "Host kernel compatible with the Android Emulator"
   fi
 
-  if [[ -n ${WAYLAND_DISPLAY:-} && -n ${XDG_RUNTIME_DIR:-} && -S ${XDG_RUNTIME_DIR}/${WAYLAND_DISPLAY} ]]; then
-    ok "Wayland session"
-  elif [[ -n ${DISPLAY:-} ]]; then
-    ok "X11/XWayland session"
+  if kvm_pmu_enabled; then
+    ok "KVM PMU virtualization"
+  else
+    warn "KVM PMU virtualization is disabled; accelerated Emulator startup will crash"
+    info "Enable it with kvm.enable_pmu=1, reboot and run doctor again"
+  fi
+
+  if [[ -n ${DISPLAY:-} && -d /tmp/.X11-unix ]]; then
+    if [[ -n ${WAYLAND_DISPLAY:-} ]]; then
+      ok "Wayland session with XWayland bridge"
+    else
+      ok "X11 session"
+    fi
+  elif [[ -n ${WAYLAND_DISPLAY:-} ]]; then
+    warn "Wayland detected without XWayland; Emulator 37 requires the Qt xcb plugin"
   else
     warn "No graphical session detected; use emulator --headless"
   fi
@@ -296,14 +319,13 @@ command_emulator() {
   local recreate=0
   local wipe_data=0
   local detach=0
-  local force_x11=0
   while (($#)); do
     case "$1" in
       --headless) headless=1 ;;
       --recreate) recreate=1 ;;
       --wipe-data) wipe_data=1 ;;
       --detach) detach=1 ;;
-      --x11) force_x11=1 ;;
+      --x11) ;;
       -h|--help)
         echo "Usage: ./scripts/wearfaces emulator [--headless|--x11] [--detach] [--recreate] [--wipe-data]"
         return 0
@@ -315,6 +337,11 @@ command_emulator() {
 
   if is_unsupported_emulator_kernel && [[ ${WEARFACES_ALLOW_UNSUPPORTED_KERNEL:-0} != 1 ]]; then
     print_unsupported_kernel_guidance
+    return 1
+  fi
+
+  if ! kvm_pmu_enabled; then
+    print_disabled_kvm_pmu_guidance
     return 1
   fi
 
@@ -333,11 +360,6 @@ command_emulator() {
 
   if ((headless)); then
     run+=(--env WEARFACES_HEADLESS=1)
-  elif ((force_x11 == 0)) && [[ -n ${WAYLAND_DISPLAY:-} && -n ${XDG_RUNTIME_DIR:-} && -S ${XDG_RUNTIME_DIR}/${WAYLAND_DISPLAY} ]]; then
-    run+=(--security-opt label=disable)
-    run+=(--env "WAYLAND_DISPLAY=$WAYLAND_DISPLAY" --env XDG_RUNTIME_DIR=/tmp/wearfaces-runtime)
-    run+=(--env QT_QPA_PLATFORM=wayland)
-    run+=(--volume "${XDG_RUNTIME_DIR}/${WAYLAND_DISPLAY}:/tmp/wearfaces-runtime/${WAYLAND_DISPLAY}")
   elif [[ -n ${DISPLAY:-} && -d /tmp/.X11-unix ]]; then
     run+=(--security-opt label=disable)
     run+=(--env "DISPLAY=$DISPLAY" --env QT_QPA_PLATFORM=xcb)
@@ -346,11 +368,11 @@ command_emulator() {
       run+=(--env XAUTHORITY=/tmp/wearfaces.Xauthority --volume "${XAUTHORITY}:/tmp/wearfaces.Xauthority:ro")
     fi
   else
-    echo "No graphical session found; pass --headless." >&2
+    echo "No X11/XWayland session found; pass --headless or enable XWayland." >&2
     return 1
   fi
 
-  local emulator_args=()
+  local emulator_args=(--clean-stale-locks)
   ((headless)) && emulator_args+=(--headless)
   ((recreate)) && emulator_args+=(--recreate)
   ((wipe_data)) && emulator_args+=(--wipe-data)
@@ -402,11 +424,12 @@ command_preview() {
   ./scripts/wearfaces build "$face"
   if ! connected_device >/dev/null 2>&1; then
     local -a emulator_start=(--detach)
-    if [[ -z ${DISPLAY:-} && -z ${WAYLAND_DISPLAY:-} ]]; then emulator_start+=(--headless); fi
+    if [[ -z ${DISPLAY:-} || ! -d /tmp/.X11-unix ]]; then emulator_start+=(--headless); fi
     ./scripts/wearfaces emulator "${emulator_start[@]}"
-    echo "Waiting up to 240 seconds for Wear OS to boot..."
+    local boot_attempts=120
+    echo "Waiting up to $((boot_attempts * 2)) seconds for Wear OS to boot..."
     local ready=0
-    for _ in $(seq 1 120); do
+    for _ in $(seq 1 "$boot_attempts"); do
       if podman container exists "$emulator_container" &&
         [[ $(podman inspect --format '{{.State.Running}}' "$emulator_container" 2>/dev/null) != true ]]; then
         echo "Wear OS Emulator exited during startup:" >&2

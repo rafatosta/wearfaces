@@ -69,8 +69,10 @@ preserva os grupos suplementares com `--group-add keep-groups` e passa
 do usuário, o container desativa apenas o label SELinux dessa execução; o
 checkout continua usando relabel `:Z` nos containers de build/ADB.
 
-Wayland direto é preferido; X11/XWayland é o fallback. Headless usa
-`-no-window`. Fechar o processo encerra o emulador, mas preserva o AVD. Use
+O Emulator 37 distribuído para Linux não inclui o plugin Qt Wayland. Em uma
+sessão Wayland, a janela usa automaticamente a ponte XWayland com o plugin
+`xcb`; X11 nativo usa o mesmo caminho. Headless usa `-no-window`. Fechar o
+processo encerra o emulador, mas preserva o AVD. Use
 `podman volume rm wearfaces-avd-wearos5` somente quando quiser perder
 deliberadamente os dados do dispositivo virtual.
 
@@ -81,15 +83,26 @@ ADB e Android SDK não são necessários no host. Um container persistente chama
 
 ## Troubleshooting
 
+- `KVM PMU virtualization is disabled`: confira
+  `cat /sys/module/kvm/parameters/enable_pmu`. O valor `N` faz o guest acessar
+  MSRs de performance não virtualizados e, neste host, encerra o QEMU com
+  `SIGSEGV`. No Fedora, execute
+  `sudo grubby --update-kernel=ALL --args='kvm.enable_pmu=1'`, reinicie e
+  confirme o valor `Y` com `./scripts/wearfaces doctor`.
 - Fedora 44 com kernel `7.1.0` a `7.1.10`: essa série encerra o processo QEMU
   do Android Emulator com `SIGSEGV` logo após o KVM iniciar o guest. Reinicie,
   abra **Advanced options for Fedora Linux** no GRUB e selecione o kernel
   `6.19.x`; `./scripts/wearfaces doctor` bloqueia antecipadamente essa combinação.
+- `Running multiple emulators with the same AVD`: o launcher oficial remove
+  automaticamente locks órfãos do AVD depois de confirmar que o contêiner
+  gerenciado não está ativo; não execute uma segunda instância manual no mesmo
+  volume.
 - `podman: command not found`: instale Podman pelo Fedora.
 - `/dev/kvm` ausente ou sem permissão: habilite VT-x/AMD-V, instale KVM,
   adicione o usuário ao grupo `kvm` e entre novamente na sessão.
-- janela Wayland falha: confirme o socket em `$XDG_RUNTIME_DIR` e tente uma
-  sessão XWayland; para isolar o problema, use `--headless`.
+- erro `Could not find the Qt platform plugin "wayland"`: reconstrua a imagem;
+  o launcher atual seleciona `xcb` e monta o socket X11/XWayland. Se `$DISPLAY`
+  não estiver definido, habilite XWayland ou use `--headless`.
 - erro de relabel: confirme que o checkout pode ser rotulado e não remova `:Z`.
 - download/SDK: verifique proxy, DNS e espaço; use `rebuild` após falha parcial.
 - permissão em `build/`: confira `--userns=keep-id` e o UID do host.

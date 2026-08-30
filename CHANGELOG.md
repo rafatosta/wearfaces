@@ -106,8 +106,9 @@ arquivo.
 -   Corrigida a inicialização do emulador containerizado com registro do pacote
     Emulator no SDK, dependência nativa `libxkbfile1`, listener compatível com
     ADB 37, diretório persistente explícito do AVD, preservação dos logs quando
-    um contêiner encerra durante o boot e diagnóstico da regressão KVM dos
-    kernels 7.1.0–7.1.10 do Fedora 44.
+    um contêiner encerra durante o boot, limpeza de locks órfãos, uso de XWayland
+    pelo plugin Qt `xcb` e diagnóstico de PMU desabilitada e da regressão KVM
+    dos kernels 7.1.0–7.1.10 do Fedora 44.
 -   Corrigidos os workflows de CI e release ao instalar `xmllint` nos runners
     Ubuntu, indicar explicitamente o `Containerfile` no build Docker e executar
     a suíte em uma cópia gravável do checkout dentro do contêiner.

@@ -61,6 +61,12 @@ grep -Fq 'ANDROID_AVD_HOME=/home/wearfaces/.android/avd' containers/emulator/Con
   echo "Emulator container must persist AVDs in the mounted Android home" >&2
   exit 1
 }
+for launcher_path in scripts/wearfaces containers/emulator/start-emulator.sh; do
+  grep -Fq -- '--clean-stale-locks' "$launcher_path" || {
+    echo "$launcher_path must support stale AVD lock cleanup" >&2
+    exit 1
+  }
+done
 if grep -R -Fq -- '--privileged' scripts containers/emulator; then
   echo "Emulator tooling must not use --privileged" >&2
   exit 1

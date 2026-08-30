@@ -35,7 +35,7 @@ validação no dispositivo e continuam sendo a evidência visual definitiva.
 Android Studio é opcional. O ambiente oficial fornece build, validação, ADB e
 emulação Wear OS em containers; qualquer editor ou IDE pode ser usado. No host,
 instale somente Git, Bash e Podman. Emulação acelerada também requer KVM e, para
-a janela nativa, Wayland ou X11/XWayland.
+a janela nativa, X11 ou XWayland em uma sessão Wayland.
 
 ```bash
 ./scripts/wearfaces doctor
