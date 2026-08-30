@@ -28,7 +28,7 @@ volume `wearfaces-gradle-cache`; a assinatura debug usa o volume separado
 
 ## SELinux, usuário e cache
 
-O checkout é montado com `:Z`, `--userns=keep-id` mantém a autoria dos arquivos
+O checkout é montado com `:z`, `--userns=keep-id` mantém a autoria dos arquivos
 de build e nenhum diretório amplo do home é exposto. A imagem-base Ubuntu já
 reserva o UID/GID 1000; por isso o container reutiliza numericamente
 `USER 1000:1000` e prepara `/home/wearfaces`, em vez de tentar criar um usuário
@@ -66,8 +66,9 @@ O AVD `wearfaces-wearos5` fica no volume `wearfaces-avd-wearos5`; o SDK e a
 system image ficam na imagem. A execução rootless passa somente `/dev/kvm`,
 preserva os grupos suplementares com `--group-add keep-groups` e passa
 `/dev/dri` quando disponível. `--privileged` não é usado. Para sockets gráficos
-do usuário, o container desativa apenas o label SELinux dessa execução; o
-checkout continua usando relabel `:Z` nos containers de build/ADB.
+do usuário, o container desativa apenas o label SELinux dessa execução. O
+checkout usa o rótulo compartilhado `:z` porque build e ADB podem acessá-lo ao
+mesmo tempo; caches e material de assinatura continuam privados com `:Z`.
 
 O Emulator 37 distribuído para Linux não inclui o plugin Qt Wayland. Em uma
 sessão Wayland, a janela usa automaticamente a ponte XWayland com o plugin
@@ -83,13 +84,13 @@ ADB e Android SDK não são necessários no host. Um container persistente chama
 
 ## Troubleshooting
 
-- `KVM PMU unavailable and unhandled guest MSRs are not ignored`: em CPUs Intel
-  híbridas, o Linux desabilita intencionalmente a PMU virtual mesmo que
-  `kvm.enable_pmu=1` esteja na linha de boot. O guest Wear OS ainda escreve
-  nesses MSRs e o QEMU do Emulator encerra com `SIGSEGV`. Para o boot atual,
-  execute `echo 1 | sudo tee /sys/module/kvm/parameters/ignore_msrs`; a mudança
-  vale globalmente para VMs KVM e é revertida com o valor `0` ou no próximo
-  reboot. O launcher não aplica essa configuração privilegiada automaticamente.
+- Em CPUs Intel híbridas, `enable_pmu=N` é esperado: o Linux desabilita
+  intencionalmente a PMU virtual. Essa condição não impede o Emulator e não
+  exige `ignore_msrs=1`.
+- `SIGSEGV` em `libGLESv2.so` durante o boot: o SwiftShader 37.1.11 falha neste
+  host. Quando `/dev/dri` e X11/XWayland estão disponíveis, o launcher força
+  OpenGL do host e desabilita Vulkan; inclusive o modo `--headless` monta o
+  display somente para obter um contexto EGL, sem criar janela.
 - Fedora 44 com kernel `7.1.0` a `7.1.10`: essa série encerra o processo QEMU
   do Android Emulator com `SIGSEGV` logo após o KVM iniciar o guest. Reinicie,
   abra **Advanced options for Fedora Linux** no GRUB e selecione o kernel
@@ -104,7 +105,7 @@ ADB e Android SDK não são necessários no host. Um container persistente chama
 - erro `Could not find the Qt platform plugin "wayland"`: reconstrua a imagem;
   o launcher atual seleciona `xcb` e monta o socket X11/XWayland. Se `$DISPLAY`
   não estiver definido, habilite XWayland ou use `--headless`.
-- erro de relabel: confirme que o checkout pode ser rotulado e não remova `:Z`.
+- erro de relabel: confirme que o checkout pode ser rotulado e não remova `:z`.
 - download/SDK: verifique proxy, DNS e espaço; use `rebuild` após falha parcial.
 - permissão em `build/`: confira `--userns=keep-id` e o UID do host.
 - `UID 1000 is not unique`: reconstrua a imagem atual; versões antigas do

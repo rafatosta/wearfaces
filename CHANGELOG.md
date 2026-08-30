@@ -107,8 +107,11 @@ arquivo.
     Emulator no SDK, dependência nativa `libxkbfile1`, listener compatível com
     ADB 37, diretório persistente explícito do AVD, preservação dos logs quando
     um contêiner encerra durante o boot, limpeza de locks órfãos, uso de XWayland
-    pelo plugin Qt `xcb`, diagnóstico de PMU indisponível em CPUs híbridas e da
-    regressão KVM dos kernels 7.1.0–7.1.10 do Fedora 44.
+    pelo plugin Qt `xcb`, OpenGL do host para evitar a falha do SwiftShader e
+    diagnóstico da regressão KVM dos kernels 7.1.0–7.1.10 do Fedora 44.
+-   Evitada a disputa de relabel SELinux entre validação e ADB ao compartilhar
+    somente o rótulo do checkout; caches e material de assinatura permanecem
+    privados.
 -   Corrigidos os workflows de CI e release ao instalar `xmllint` nos runners
     Ubuntu, indicar explicitamente o `Containerfile` no build Docker e executar
     a suíte em uma cópia gravável do checkout dentro do contêiner.

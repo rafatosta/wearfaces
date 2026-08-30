@@ -46,7 +46,7 @@ esac
 
 exec podman run --rm \
   --userns=keep-id \
-  --volume "$repo_root:/workspace:Z" \
+  --volume "$repo_root:/workspace:z" \
   --volume "$gradle_volume:/home/wearfaces/.gradle:Z" \
   --volume "$android_volume:/home/ubuntu/.android:Z" \
   --workdir /workspace \

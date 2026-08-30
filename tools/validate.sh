@@ -26,6 +26,11 @@ required=(
 for path in "${required[@]}"; do
   [[ -e "$path" ]] || { echo "Missing required path: $path" >&2; exit 1; }
 done
+grep -Fq 'WEARFACES_GPU_MODE=host' scripts/wearfaces &&
+  grep -Fq -- '-feature -Vulkan' containers/emulator/start-emulator.sh || {
+    echo "Emulator launcher must avoid the unstable SwiftShader path when host graphics are available" >&2
+    exit 1
+  }
 
 common_build=build-logic/src/main/kotlin/wearfaces.watch-face.gradle.kts
 grep -Eq 'minSdk[[:space:]]*=[[:space:]]*34' "$common_build" || { echo "minSdk must be 34" >&2; exit 1; }
@@ -61,6 +66,12 @@ grep -Fq 'ANDROID_AVD_HOME=/home/wearfaces/.android/avd' containers/emulator/Con
   echo "Emulator container must persist AVDs in the mounted Android home" >&2
   exit 1
 }
+for container_launcher in tools/dev.sh scripts/wearfaces; do
+  grep -Fq '"$repo_root:/workspace:z"' "$container_launcher" || {
+    echo "$container_launcher must use the shared checkout SELinux label" >&2
+    exit 1
+  }
+done
 for launcher_path in scripts/wearfaces containers/emulator/start-emulator.sh; do
   grep -Fq -- '--clean-stale-locks' "$launcher_path" || {
     echo "$launcher_path must support stale AVD lock cleanup" >&2

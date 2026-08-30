@@ -46,13 +46,13 @@ args=(
   -no-boot-anim
   -no-metrics
   -no-snapshot-save
+  -gpu "${WEARFACES_GPU_MODE:-auto}"
 )
+[[ ${WEARFACES_GPU_MODE:-auto} == host ]] && args+=(-feature -Vulkan)
 ((wipe_data)) && args+=(-wipe-data)
 
 if ((headless)); then
-  args+=(-no-window -gpu swiftshader_indirect)
-else
-  args+=(-gpu auto)
+  args+=(-no-window)
 fi
 
 exec emulator "${args[@]}"

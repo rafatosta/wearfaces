@@ -5,7 +5,7 @@ repo_root=$(cd "$(dirname "${BASH_SOURCE[0]}")/.." && pwd)
 cd "$repo_root"
 
 build_image=${WEARFACES_IMAGE:-localhost/wearfaces-dev:0.1.0}
-emulator_image=${WEARFACES_EMULATOR_IMAGE:-localhost/wearfaces-emulator:wearos5-api34-emulator37.1.11-r4}
+emulator_image=${WEARFACES_EMULATOR_IMAGE:-localhost/wearfaces-emulator:wearos5-api34-emulator37.1.11-r6}
 avd_volume=${WEARFACES_AVD_VOLUME:-wearfaces-avd-wearos5}
 emulator_container=${WEARFACES_EMULATOR_CONTAINER:-wearfaces-emulator}
 adb_container_name=${WEARFACES_ADB_CONTAINER:-wearfaces-adb}
@@ -54,28 +54,6 @@ print_unsupported_kernel_guidance() {
   echo "Fedora 44 kernel $(emulator_kernel_release) crashes the Android Emulator when KVM starts the guest." >&2
   echo "Reboot and select kernel 6.19.x in GRUB: Advanced options for Fedora Linux." >&2
   echo "Set WEARFACES_ALLOW_UNSUPPORTED_KERNEL=1 only to bypass this guard for diagnosis." >&2
-}
-
-kvm_pmu_enabled() {
-  local state_file=${WEARFACES_KVM_PMU_STATE_FILE:-/sys/module/kvm/parameters/enable_pmu}
-  [[ ! -r "$state_file" ]] || [[ $(<"$state_file") == Y ]]
-}
-
-kvm_ignores_unhandled_msrs() {
-  local state_file=${WEARFACES_KVM_IGNORE_MSRS_STATE_FILE:-/sys/module/kvm/parameters/ignore_msrs}
-  [[ -r "$state_file" && $(<"$state_file") == Y ]]
-}
-
-kvm_supports_emulator_guest_msrs() {
-  kvm_pmu_enabled || kvm_ignores_unhandled_msrs
-}
-
-print_kvm_msr_guidance() {
-  echo "KVM virtual PMU is unavailable and unhandled guest MSRs are not ignored." >&2
-  echo "On Intel hybrid CPUs, Linux intentionally disables the virtual PMU." >&2
-  echo "Enable the reversible Android Emulator workaround for this boot:" >&2
-  echo "  echo 1 | sudo tee /sys/module/kvm/parameters/ignore_msrs" >&2
-  echo "Reset it with 0 after using the emulator, or simply reboot." >&2
 }
 
 ensure_emulator_image() {
@@ -127,7 +105,7 @@ adb_container() {
   local run=(podman run --rm --userns=keep-id --network host)
   [[ -t 0 ]] && run+=(--interactive)
   run+=(
-    --volume "$repo_root:/workspace:Z"
+    --volume "$repo_root:/workspace:z"
     --volume "$avd_volume:/home/wearfaces/.android:z"
     --workdir /workspace
     "$emulator_image" adb -P "$adb_server_port" "$@"
@@ -290,13 +268,8 @@ command_doctor() {
     ok "Host kernel compatible with the Android Emulator"
   fi
 
-  if kvm_pmu_enabled; then
-    ok "KVM PMU virtualization"
-  elif kvm_ignores_unhandled_msrs; then
-    warn "KVM PMU unavailable; unhandled guest MSRs are being ignored"
-  else
-    fail "KVM PMU unavailable and unhandled guest MSRs are not ignored"
-    info "For this boot: echo 1 | sudo tee /sys/module/kvm/parameters/ignore_msrs"
+  if [[ -r /sys/module/kvm/parameters/enable_pmu && $(</sys/module/kvm/parameters/enable_pmu) == N ]]; then
+    info "KVM virtual PMU unavailable — expected on Intel hybrid CPUs"
   fi
 
   if [[ -n ${DISPLAY:-} && -d /tmp/.X11-unix ]]; then
@@ -352,11 +325,6 @@ command_emulator() {
     return 1
   fi
 
-  if ! kvm_supports_emulator_guest_msrs; then
-    print_kvm_msr_guidance
-    return 1
-  fi
-
   [[ -c /dev/kvm && -r /dev/kvm && -w /dev/kvm ]] || {
     echo "/dev/kvm must exist and be readable/writable. Run ./scripts/wearfaces doctor." >&2
     return 1
@@ -368,20 +336,28 @@ command_emulator() {
   run+=(--env "ANDROID_ADB_SERVER_PORT=$adb_server_port")
   run+=(--env "ADB_SERVER_SOCKET=tcp:localhost:$adb_server_port")
   run+=(--device /dev/kvm --volume "$avd_volume:/home/wearfaces/.android:z")
-  [[ -d /dev/dri ]] && run+=(--device /dev/dri)
+  local have_x11=0
+  [[ -n ${DISPLAY:-} && -d /tmp/.X11-unix ]] && have_x11=1
+  if [[ -d /dev/dri && $have_x11 == 1 ]]; then
+    run+=(--device /dev/dri --env WEARFACES_GPU_MODE=host)
+  else
+    run+=(--env WEARFACES_GPU_MODE=swiftshader_indirect)
+  fi
 
   if ((headless)); then
     run+=(--env WEARFACES_HEADLESS=1)
-  elif [[ -n ${DISPLAY:-} && -d /tmp/.X11-unix ]]; then
+  elif ((have_x11 == 0)); then
+    echo "No X11/XWayland session found; pass --headless or enable XWayland." >&2
+    return 1
+  fi
+
+  if ((have_x11)) && { ((headless == 0)) || [[ -d /dev/dri ]]; }; then
     run+=(--security-opt label=disable)
     run+=(--env "DISPLAY=$DISPLAY" --env QT_QPA_PLATFORM=xcb)
     run+=(--volume /tmp/.X11-unix:/tmp/.X11-unix:ro)
     if [[ -n ${XAUTHORITY:-} && -f ${XAUTHORITY} ]]; then
       run+=(--env XAUTHORITY=/tmp/wearfaces.Xauthority --volume "${XAUTHORITY}:/tmp/wearfaces.Xauthority:ro")
     fi
-  else
-    echo "No X11/XWayland session found; pass --headless or enable XWayland." >&2
-    return 1
   fi
 
   local emulator_args=(--clean-stale-locks)
