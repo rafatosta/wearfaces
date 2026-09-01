@@ -95,6 +95,8 @@ ADB e Android SDK não são necessários no host. Um container persistente chama
   do Android Emulator com `SIGSEGV` logo após o KVM iniciar o guest. Reinicie,
   abra **Advanced options for Fedora Linux** no GRUB e selecione o kernel
   `6.19.x`; `./scripts/wearfaces doctor` bloqueia antecipadamente essa combinação.
+  O kernel `7.1.12-200.fc44.x86_64` foi validado com sucesso; o `7.1.11` não foi
+  testado.
 - `Running multiple emulators with the same AVD`: o launcher oficial remove
   automaticamente locks órfãos do AVD depois de confirmar que o contêiner
   gerenciado não está ativo; não execute uma segunda instância manual no mesmo

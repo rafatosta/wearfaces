@@ -70,8 +70,8 @@ Os kernels Fedora 44 `7.1.0` a `7.1.10`, por outro lado, têm uma regressão que
 encerra o QEMU do Emulator durante o boot. O projeto não possui um workaround
 seguro para essa série. Se `./scripts/wearfaces doctor` identificar uma dessas
 versões, reinicie pelo GRUB, abra **Advanced options for Fedora Linux** e use o
-kernel `6.19.x`. Uma versão posterior somente deve ser adotada depois de passar
-no `doctor` e iniciar uma prévia normalmente:
+kernel `6.19.x` como fallback. O kernel `7.1.12-200.fc44.x86_64` foi validado
+com sucesso no host de desenvolvimento; o estado do `7.1.11` não foi confirmado.
 
 ```bash
 uname -r
@@ -81,8 +81,10 @@ cat /sys/module/kvm/parameters/ignore_msrs
 ./scripts/wearfaces preview essential
 ```
 
-O estado recomendado neste host é kernel `6.19.x` com `ignore_msrs=N`; a PMU
-virtual pode continuar aparecendo como indisponível.
+O estado recomendado neste host é kernel `7.1.12-200.fc44.x86_64` ou posterior
+que passe no `doctor` e inicie uma prévia normalmente, com `6.19.x` como
+fallback. Mantenha `ignore_msrs=N`; a PMU virtual pode continuar aparecendo como
+indisponível.
 
 ## Criar um mostrador
 
