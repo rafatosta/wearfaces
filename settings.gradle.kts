@@ -20,3 +20,4 @@ rootProject.name = "WearFaces"
 include(":faces:aurora")
 include(":faces:essential")
 include(":faces:flow")
+include(":faces:minimal")

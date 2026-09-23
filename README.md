@@ -18,6 +18,7 @@ de publicação Wear OS vigente a partir de 31 de agosto de 2026.
 | [Aurora](faces/aurora/) | MVP 0.1.0 | Analógico, data, 2 complications, 4 paletas e AOD |
 | [Essential](faces/essential/) | MVP 0.1.0 | Digital/Analógico, data, bateria, 4 campos radiais editáveis sem aro, cores, marcadores e AOD |
 | [Flow](faces/flow/) | MVP 0.1.0 | Analógico, data, 3 complications editáveis, 4 paletas, AMOLED preto e AOD |
+| [Minimal](faces/minimal/) | MVP 0.1.0 | Digital, data, aro visual vermelho de 75%, 3 cores de texto e AOD |
 
 ### Previews
 

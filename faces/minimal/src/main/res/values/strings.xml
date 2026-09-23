@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="watch_face_name">Minimal</string>
+    <string name="color_label">Text color</string>
+    <string name="color_amoled">AMOLED white</string>
+    <string name="color_silver">Silver</string>
+    <string name="color_warm">Warm white</string>
+</resources>

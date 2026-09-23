@@ -7,6 +7,8 @@ arquivo.
 
 ### Added
 
+-   Adicionado o mostrador **Minimal**, digital e minimalista para AMOLED, com
+    data, aro visual vermelho de 75%, três cores de texto e AOD econômico.
 -   Adicionados template e gerador de módulos, CLI unificada, diagnóstico do
     host e ambiente containerizado separado para Wear OS 5/API 34 com KVM,
     Wayland/X11 e modo headless.

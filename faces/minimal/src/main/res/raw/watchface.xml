@@ -1,0 +1,111 @@
+<?xml version="1.0" encoding="utf-8"?>
+<WatchFace width="450" height="450">
+    <Metadata key="CLOCK_TYPE" value="DIGITAL" />
+    <Metadata key="PREVIEW_TIME" value="05:30:00" />
+
+    <UserConfigurations>
+        <ColorConfiguration id="text_color" displayName="color_label" screenReaderText="color_label" defaultValue="0">
+            <ColorOption id="0" displayName="color_amoled" colors="#FFF2F2F2 #FFB8B8BD" />
+            <ColorOption id="1" displayName="color_silver" colors="#FFE1E1E5 #FF9EA0A6" />
+            <ColorOption id="2" displayName="color_warm" colors="#FFF4EEE9 #FFC8BDB5" />
+        </ColorConfiguration>
+    </UserConfigurations>
+
+    <Scene backgroundColor="#FF000000">
+        <Group x="0" y="0" width="450" height="450" name="battery_ring" alpha="235">
+            <Variant mode="AMBIENT" target="alpha" value="135" />
+            <Group name="ring_00" x="200" y="0" width="50" height="450" angle="0"><PartDraw x="15" y="16" width="20" height="6"><RoundRectangle x="0" y="0" width="20" height="6" cornerRadiusX="3" cornerRadiusY="3"><Fill color="#FFFF3B30" /></RoundRectangle></PartDraw></Group>
+            <Group name="ring_05" x="200" y="0" width="50" height="450" angle="5"><PartDraw x="15" y="16" width="20" height="6"><RoundRectangle x="0" y="0" width="20" height="6" cornerRadiusX="3" cornerRadiusY="3"><Fill color="#FFFF3B30" /></RoundRectangle></PartDraw></Group>
+            <Group name="ring_10" x="200" y="0" width="50" height="450" angle="10"><PartDraw x="15" y="16" width="20" height="6"><RoundRectangle x="0" y="0" width="20" height="6" cornerRadiusX="3" cornerRadiusY="3"><Fill color="#FFFF3B30" /></RoundRectangle></PartDraw></Group>
+            <Group name="ring_15" x="200" y="0" width="50" height="450" angle="15"><PartDraw x="15" y="16" width="20" height="6"><RoundRectangle x="0" y="0" width="20" height="6" cornerRadiusX="3" cornerRadiusY="3"><Fill color="#FFFF3B30" /></RoundRectangle></PartDraw></Group>
+            <Group name="ring_20" x="200" y="0" width="50" height="450" angle="20"><PartDraw x="15" y="16" width="20" height="6"><RoundRectangle x="0" y="0" width="20" height="6" cornerRadiusX="3" cornerRadiusY="3"><Fill color="#FFFF3B30" /></RoundRectangle></PartDraw></Group>
+            <Group name="ring_25" x="200" y="0" width="50" height="450" angle="25"><PartDraw x="15" y="16" width="20" height="6"><RoundRectangle x="0" y="0" width="20" height="6" cornerRadiusX="3" cornerRadiusY="3"><Fill color="#FFFF3B30" /></RoundRectangle></PartDraw></Group>
+            <Group name="ring_30" x="200" y="0" width="50" height="450" angle="30"><PartDraw x="15" y="16" width="20" height="6"><RoundRectangle x="0" y="0" width="20" height="6" cornerRadiusX="3" cornerRadiusY="3"><Fill color="#FFFF3B30" /></RoundRectangle></PartDraw></Group>
+            <Group name="ring_35" x="200" y="0" width="50" height="450" angle="35"><PartDraw x="15" y="16" width="20" height="6"><RoundRectangle x="0" y="0" width="20" height="6" cornerRadiusX="3" cornerRadiusY="3"><Fill color="#FFFF3B30" /></RoundRectangle></PartDraw></Group>
+            <Group name="ring_40" x="200" y="0" width="50" height="450" angle="40"><PartDraw x="15" y="16" width="20" height="6"><RoundRectangle x="0" y="0" width="20" height="6" cornerRadiusX="3" cornerRadiusY="3"><Fill color="#FFFF3B30" /></RoundRectangle></PartDraw></Group>
+            <Group name="ring_45" x="200" y="0" width="50" height="450" angle="45"><PartDraw x="15" y="16" width="20" height="6"><RoundRectangle x="0" y="0" width="20" height="6" cornerRadiusX="3" cornerRadiusY="3"><Fill color="#FFFF3B30" /></RoundRectangle></PartDraw></Group>
+            <Group name="ring_50" x="200" y="0" width="50" height="450" angle="50"><PartDraw x="15" y="16" width="20" height="6"><RoundRectangle x="0" y="0" width="20" height="6" cornerRadiusX="3" cornerRadiusY="3"><Fill color="#FFFF3B30" /></RoundRectangle></PartDraw></Group>
+            <Group name="ring_55" x="200" y="0" width="50" height="450" angle="55"><PartDraw x="15" y="16" width="20" height="6"><RoundRectangle x="0" y="0" width="20" height="6" cornerRadiusX="3" cornerRadiusY="3"><Fill color="#FFFF3B30" /></RoundRectangle></PartDraw></Group>
+            <Group name="ring_60" x="200" y="0" width="50" height="450" angle="60"><PartDraw x="15" y="16" width="20" height="6"><RoundRectangle x="0" y="0" width="20" height="6" cornerRadiusX="3" cornerRadiusY="3"><Fill color="#FFFF3B30" /></RoundRectangle></PartDraw></Group>
+            <Group name="ring_65" x="200" y="0" width="50" height="450" angle="65"><PartDraw x="15" y="16" width="20" height="6"><RoundRectangle x="0" y="0" width="20" height="6" cornerRadiusX="3" cornerRadiusY="3"><Fill color="#FFFF3B30" /></RoundRectangle></PartDraw></Group>
+            <Group name="ring_70" x="200" y="0" width="50" height="450" angle="70"><PartDraw x="15" y="16" width="20" height="6"><RoundRectangle x="0" y="0" width="20" height="6" cornerRadiusX="3" cornerRadiusY="3"><Fill color="#FFFF3B30" /></RoundRectangle></PartDraw></Group>
+            <Group name="ring_75" x="200" y="0" width="50" height="450" angle="75"><PartDraw x="15" y="16" width="20" height="6"><RoundRectangle x="0" y="0" width="20" height="6" cornerRadiusX="3" cornerRadiusY="3"><Fill color="#FFFF3B30" /></RoundRectangle></PartDraw></Group>
+            <Group name="ring_80" x="200" y="0" width="50" height="450" angle="80"><PartDraw x="15" y="16" width="20" height="6"><RoundRectangle x="0" y="0" width="20" height="6" cornerRadiusX="3" cornerRadiusY="3"><Fill color="#FFFF3B30" /></RoundRectangle></PartDraw></Group>
+            <Group name="ring_85" x="200" y="0" width="50" height="450" angle="85"><PartDraw x="15" y="16" width="20" height="6"><RoundRectangle x="0" y="0" width="20" height="6" cornerRadiusX="3" cornerRadiusY="3"><Fill color="#FFFF3B30" /></RoundRectangle></PartDraw></Group>
+            <Group name="ring_90" x="200" y="0" width="50" height="450" angle="90"><PartDraw x="15" y="16" width="20" height="6"><RoundRectangle x="0" y="0" width="20" height="6" cornerRadiusX="3" cornerRadiusY="3"><Fill color="#FFFF3B30" /></RoundRectangle></PartDraw></Group>
+            <Group name="ring_95" x="200" y="0" width="50" height="450" angle="95"><PartDraw x="15" y="16" width="20" height="6"><RoundRectangle x="0" y="0" width="20" height="6" cornerRadiusX="3" cornerRadiusY="3"><Fill color="#FFFF3B30" /></RoundRectangle></PartDraw></Group>
+            <Group name="ring_100" x="200" y="0" width="50" height="450" angle="100"><PartDraw x="15" y="16" width="20" height="6"><RoundRectangle x="0" y="0" width="20" height="6" cornerRadiusX="3" cornerRadiusY="3"><Fill color="#FFFF3B30" /></RoundRectangle></PartDraw></Group>
+            <Group name="ring_105" x="200" y="0" width="50" height="450" angle="105"><PartDraw x="15" y="16" width="20" height="6"><RoundRectangle x="0" y="0" width="20" height="6" cornerRadiusX="3" cornerRadiusY="3"><Fill color="#FFFF3B30" /></RoundRectangle></PartDraw></Group>
+            <Group name="ring_110" x="200" y="0" width="50" height="450" angle="110"><PartDraw x="15" y="16" width="20" height="6"><RoundRectangle x="0" y="0" width="20" height="6" cornerRadiusX="3" cornerRadiusY="3"><Fill color="#FFFF3B30" /></RoundRectangle></PartDraw></Group>
+            <Group name="ring_115" x="200" y="0" width="50" height="450" angle="115"><PartDraw x="15" y="16" width="20" height="6"><RoundRectangle x="0" y="0" width="20" height="6" cornerRadiusX="3" cornerRadiusY="3"><Fill color="#FFFF3B30" /></RoundRectangle></PartDraw></Group>
+            <Group name="ring_120" x="200" y="0" width="50" height="450" angle="120"><PartDraw x="15" y="16" width="20" height="6"><RoundRectangle x="0" y="0" width="20" height="6" cornerRadiusX="3" cornerRadiusY="3"><Fill color="#FFFF3B30" /></RoundRectangle></PartDraw></Group>
+            <Group name="ring_125" x="200" y="0" width="50" height="450" angle="125"><PartDraw x="15" y="16" width="20" height="6"><RoundRectangle x="0" y="0" width="20" height="6" cornerRadiusX="3" cornerRadiusY="3"><Fill color="#FFFF3B30" /></RoundRectangle></PartDraw></Group>
+            <Group name="ring_130" x="200" y="0" width="50" height="450" angle="130"><PartDraw x="15" y="16" width="20" height="6"><RoundRectangle x="0" y="0" width="20" height="6" cornerRadiusX="3" cornerRadiusY="3"><Fill color="#FFFF3B30" /></RoundRectangle></PartDraw></Group>
+            <Group name="ring_135" x="200" y="0" width="50" height="450" angle="135"><PartDraw x="15" y="16" width="20" height="6"><RoundRectangle x="0" y="0" width="20" height="6" cornerRadiusX="3" cornerRadiusY="3"><Fill color="#FFFF3B30" /></RoundRectangle></PartDraw></Group>
+            <Group name="ring_140" x="200" y="0" width="50" height="450" angle="140"><PartDraw x="15" y="16" width="20" height="6"><RoundRectangle x="0" y="0" width="20" height="6" cornerRadiusX="3" cornerRadiusY="3"><Fill color="#FFFF3B30" /></RoundRectangle></PartDraw></Group>
+            <Group name="ring_145" x="200" y="0" width="50" height="450" angle="145"><PartDraw x="15" y="16" width="20" height="6"><RoundRectangle x="0" y="0" width="20" height="6" cornerRadiusX="3" cornerRadiusY="3"><Fill color="#FFFF3B30" /></RoundRectangle></PartDraw></Group>
+            <Group name="ring_150" x="200" y="0" width="50" height="450" angle="150"><PartDraw x="15" y="16" width="20" height="6"><RoundRectangle x="0" y="0" width="20" height="6" cornerRadiusX="3" cornerRadiusY="3"><Fill color="#FFFF3B30" /></RoundRectangle></PartDraw></Group>
+            <Group name="ring_155" x="200" y="0" width="50" height="450" angle="155"><PartDraw x="15" y="16" width="20" height="6"><RoundRectangle x="0" y="0" width="20" height="6" cornerRadiusX="3" cornerRadiusY="3"><Fill color="#FFFF3B30" /></RoundRectangle></PartDraw></Group>
+            <Group name="ring_160" x="200" y="0" width="50" height="450" angle="160"><PartDraw x="15" y="16" width="20" height="6"><RoundRectangle x="0" y="0" width="20" height="6" cornerRadiusX="3" cornerRadiusY="3"><Fill color="#FFFF3B30" /></RoundRectangle></PartDraw></Group>
+            <Group name="ring_165" x="200" y="0" width="50" height="450" angle="165"><PartDraw x="15" y="16" width="20" height="6"><RoundRectangle x="0" y="0" width="20" height="6" cornerRadiusX="3" cornerRadiusY="3"><Fill color="#FFFF3B30" /></RoundRectangle></PartDraw></Group>
+            <Group name="ring_170" x="200" y="0" width="50" height="450" angle="170"><PartDraw x="15" y="16" width="20" height="6"><RoundRectangle x="0" y="0" width="20" height="6" cornerRadiusX="3" cornerRadiusY="3"><Fill color="#FFFF3B30" /></RoundRectangle></PartDraw></Group>
+            <Group name="ring_175" x="200" y="0" width="50" height="450" angle="175"><PartDraw x="15" y="16" width="20" height="6"><RoundRectangle x="0" y="0" width="20" height="6" cornerRadiusX="3" cornerRadiusY="3"><Fill color="#FFFF3B30" /></RoundRectangle></PartDraw></Group>
+            <Group name="ring_180" x="200" y="0" width="50" height="450" angle="180"><PartDraw x="15" y="16" width="20" height="6"><RoundRectangle x="0" y="0" width="20" height="6" cornerRadiusX="3" cornerRadiusY="3"><Fill color="#FFFF3B30" /></RoundRectangle></PartDraw></Group>
+            <Group name="ring_185" x="200" y="0" width="50" height="450" angle="185"><PartDraw x="15" y="16" width="20" height="6"><RoundRectangle x="0" y="0" width="20" height="6" cornerRadiusX="3" cornerRadiusY="3"><Fill color="#FFFF3B30" /></RoundRectangle></PartDraw></Group>
+            <Group name="ring_190" x="200" y="0" width="50" height="450" angle="190"><PartDraw x="15" y="16" width="20" height="6"><RoundRectangle x="0" y="0" width="20" height="6" cornerRadiusX="3" cornerRadiusY="3"><Fill color="#FFFF3B30" /></RoundRectangle></PartDraw></Group>
+            <Group name="ring_195" x="200" y="0" width="50" height="450" angle="195"><PartDraw x="15" y="16" width="20" height="6"><RoundRectangle x="0" y="0" width="20" height="6" cornerRadiusX="3" cornerRadiusY="3"><Fill color="#FFFF3B30" /></RoundRectangle></PartDraw></Group>
+            <Group name="ring_200" x="200" y="0" width="50" height="450" angle="200"><PartDraw x="15" y="16" width="20" height="6"><RoundRectangle x="0" y="0" width="20" height="6" cornerRadiusX="3" cornerRadiusY="3"><Fill color="#FFFF3B30" /></RoundRectangle></PartDraw></Group>
+            <Group name="ring_205" x="200" y="0" width="50" height="450" angle="205"><PartDraw x="15" y="16" width="20" height="6"><RoundRectangle x="0" y="0" width="20" height="6" cornerRadiusX="3" cornerRadiusY="3"><Fill color="#FFFF3B30" /></RoundRectangle></PartDraw></Group>
+            <Group name="ring_210" x="200" y="0" width="50" height="450" angle="210"><PartDraw x="15" y="16" width="20" height="6"><RoundRectangle x="0" y="0" width="20" height="6" cornerRadiusX="3" cornerRadiusY="3"><Fill color="#FFFF3B30" /></RoundRectangle></PartDraw></Group>
+            <Group name="ring_215" x="200" y="0" width="50" height="450" angle="215"><PartDraw x="15" y="16" width="20" height="6"><RoundRectangle x="0" y="0" width="20" height="6" cornerRadiusX="3" cornerRadiusY="3"><Fill color="#FFFF3B30" /></RoundRectangle></PartDraw></Group>
+            <Group name="ring_220" x="200" y="0" width="50" height="450" angle="220"><PartDraw x="15" y="16" width="20" height="6"><RoundRectangle x="0" y="0" width="20" height="6" cornerRadiusX="3" cornerRadiusY="3"><Fill color="#FFFF3B30" /></RoundRectangle></PartDraw></Group>
+            <Group name="ring_225" x="200" y="0" width="50" height="450" angle="225"><PartDraw x="15" y="16" width="20" height="6"><RoundRectangle x="0" y="0" width="20" height="6" cornerRadiusX="3" cornerRadiusY="3"><Fill color="#FFFF3B30" /></RoundRectangle></PartDraw></Group>
+            <Group name="ring_230" x="200" y="0" width="50" height="450" angle="230"><PartDraw x="15" y="16" width="20" height="6"><RoundRectangle x="0" y="0" width="20" height="6" cornerRadiusX="3" cornerRadiusY="3"><Fill color="#FFFF3B30" /></RoundRectangle></PartDraw></Group>
+            <Group name="ring_235" x="200" y="0" width="50" height="450" angle="235"><PartDraw x="15" y="16" width="20" height="6"><RoundRectangle x="0" y="0" width="20" height="6" cornerRadiusX="3" cornerRadiusY="3"><Fill color="#FFFF3B30" /></RoundRectangle></PartDraw></Group>
+            <Group name="ring_240" x="200" y="0" width="50" height="450" angle="240"><PartDraw x="15" y="16" width="20" height="6"><RoundRectangle x="0" y="0" width="20" height="6" cornerRadiusX="3" cornerRadiusY="3"><Fill color="#FFFF3B30" /></RoundRectangle></PartDraw></Group>
+            <Group name="ring_245" x="200" y="0" width="50" height="450" angle="245"><PartDraw x="15" y="16" width="20" height="6"><RoundRectangle x="0" y="0" width="20" height="6" cornerRadiusX="3" cornerRadiusY="3"><Fill color="#FFFF3B30" /></RoundRectangle></PartDraw></Group>
+            <Group name="ring_250" x="200" y="0" width="50" height="450" angle="250"><PartDraw x="15" y="16" width="20" height="6"><RoundRectangle x="0" y="0" width="20" height="6" cornerRadiusX="3" cornerRadiusY="3"><Fill color="#FFFF3B30" /></RoundRectangle></PartDraw></Group>
+            <Group name="ring_255" x="200" y="0" width="50" height="450" angle="255"><PartDraw x="15" y="16" width="20" height="6"><RoundRectangle x="0" y="0" width="20" height="6" cornerRadiusX="3" cornerRadiusY="3"><Fill color="#FFFF3B30" /></RoundRectangle></PartDraw></Group>
+            <Group name="ring_260" x="200" y="0" width="50" height="450" angle="260"><PartDraw x="15" y="16" width="20" height="6"><RoundRectangle x="0" y="0" width="20" height="6" cornerRadiusX="3" cornerRadiusY="3"><Fill color="#FFFF3B30" /></RoundRectangle></PartDraw></Group>
+            <Group name="ring_265" x="200" y="0" width="50" height="450" angle="265"><PartDraw x="15" y="16" width="20" height="6"><RoundRectangle x="0" y="0" width="20" height="6" cornerRadiusX="3" cornerRadiusY="3"><Fill color="#FFFF3B30" /></RoundRectangle></PartDraw></Group>
+            <Group name="ring_270" x="200" y="0" width="50" height="450" angle="270"><PartDraw x="15" y="16" width="20" height="6"><RoundRectangle x="0" y="0" width="20" height="6" cornerRadiusX="3" cornerRadiusY="3"><Fill color="#FF252529" /></RoundRectangle></PartDraw></Group>
+            <Group name="ring_275" x="200" y="0" width="50" height="450" angle="275"><PartDraw x="15" y="16" width="20" height="6"><RoundRectangle x="0" y="0" width="20" height="6" cornerRadiusX="3" cornerRadiusY="3"><Fill color="#FF252529" /></RoundRectangle></PartDraw></Group>
+            <Group name="ring_280" x="200" y="0" width="50" height="450" angle="280"><PartDraw x="15" y="16" width="20" height="6"><RoundRectangle x="0" y="0" width="20" height="6" cornerRadiusX="3" cornerRadiusY="3"><Fill color="#FF252529" /></RoundRectangle></PartDraw></Group>
+            <Group name="ring_285" x="200" y="0" width="50" height="450" angle="285"><PartDraw x="15" y="16" width="20" height="6"><RoundRectangle x="0" y="0" width="20" height="6" cornerRadiusX="3" cornerRadiusY="3"><Fill color="#FF252529" /></RoundRectangle></PartDraw></Group>
+            <Group name="ring_290" x="200" y="0" width="50" height="450" angle="290"><PartDraw x="15" y="16" width="20" height="6"><RoundRectangle x="0" y="0" width="20" height="6" cornerRadiusX="3" cornerRadiusY="3"><Fill color="#FF252529" /></RoundRectangle></PartDraw></Group>
+            <Group name="ring_295" x="200" y="0" width="50" height="450" angle="295"><PartDraw x="15" y="16" width="20" height="6"><RoundRectangle x="0" y="0" width="20" height="6" cornerRadiusX="3" cornerRadiusY="3"><Fill color="#FF252529" /></RoundRectangle></PartDraw></Group>
+            <Group name="ring_300" x="200" y="0" width="50" height="450" angle="300"><PartDraw x="15" y="16" width="20" height="6"><RoundRectangle x="0" y="0" width="20" height="6" cornerRadiusX="3" cornerRadiusY="3"><Fill color="#FF252529" /></RoundRectangle></PartDraw></Group>
+            <Group name="ring_305" x="200" y="0" width="50" height="450" angle="305"><PartDraw x="15" y="16" width="20" height="6"><RoundRectangle x="0" y="0" width="20" height="6" cornerRadiusX="3" cornerRadiusY="3"><Fill color="#FF252529" /></RoundRectangle></PartDraw></Group>
+            <Group name="ring_310" x="200" y="0" width="50" height="450" angle="310"><PartDraw x="15" y="16" width="20" height="6"><RoundRectangle x="0" y="0" width="20" height="6" cornerRadiusX="3" cornerRadiusY="3"><Fill color="#FF252529" /></RoundRectangle></PartDraw></Group>
+            <Group name="ring_315" x="200" y="0" width="50" height="450" angle="315"><PartDraw x="15" y="16" width="20" height="6"><RoundRectangle x="0" y="0" width="20" height="6" cornerRadiusX="3" cornerRadiusY="3"><Fill color="#FF252529" /></RoundRectangle></PartDraw></Group>
+            <Group name="ring_320" x="200" y="0" width="50" height="450" angle="320"><PartDraw x="15" y="16" width="20" height="6"><RoundRectangle x="0" y="0" width="20" height="6" cornerRadiusX="3" cornerRadiusY="3"><Fill color="#FF252529" /></RoundRectangle></PartDraw></Group>
+            <Group name="ring_325" x="200" y="0" width="50" height="450" angle="325"><PartDraw x="15" y="16" width="20" height="6"><RoundRectangle x="0" y="0" width="20" height="6" cornerRadiusX="3" cornerRadiusY="3"><Fill color="#FF252529" /></RoundRectangle></PartDraw></Group>
+            <Group name="ring_330" x="200" y="0" width="50" height="450" angle="330"><PartDraw x="15" y="16" width="20" height="6"><RoundRectangle x="0" y="0" width="20" height="6" cornerRadiusX="3" cornerRadiusY="3"><Fill color="#FF252529" /></RoundRectangle></PartDraw></Group>
+            <Group name="ring_335" x="200" y="0" width="50" height="450" angle="335"><PartDraw x="15" y="16" width="20" height="6"><RoundRectangle x="0" y="0" width="20" height="6" cornerRadiusX="3" cornerRadiusY="3"><Fill color="#FF252529" /></RoundRectangle></PartDraw></Group>
+            <Group name="ring_340" x="200" y="0" width="50" height="450" angle="340"><PartDraw x="15" y="16" width="20" height="6"><RoundRectangle x="0" y="0" width="20" height="6" cornerRadiusX="3" cornerRadiusY="3"><Fill color="#FF252529" /></RoundRectangle></PartDraw></Group>
+            <Group name="ring_345" x="200" y="0" width="50" height="450" angle="345"><PartDraw x="15" y="16" width="20" height="6"><RoundRectangle x="0" y="0" width="20" height="6" cornerRadiusX="3" cornerRadiusY="3"><Fill color="#FF252529" /></RoundRectangle></PartDraw></Group>
+            <Group name="ring_350" x="200" y="0" width="50" height="450" angle="350"><PartDraw x="15" y="16" width="20" height="6"><RoundRectangle x="0" y="0" width="20" height="6" cornerRadiusX="3" cornerRadiusY="3"><Fill color="#FF252529" /></RoundRectangle></PartDraw></Group>
+            <Group name="ring_355" x="200" y="0" width="50" height="450" angle="355"><PartDraw x="15" y="16" width="20" height="6"><RoundRectangle x="0" y="0" width="20" height="6" cornerRadiusX="3" cornerRadiusY="3"><Fill color="#FF252529" /></RoundRectangle></PartDraw></Group>
+        </Group>
+
+        <DigitalClock x="45" y="150" width="360" height="108">
+            <TimeText x="0" y="0" width="360" height="108" format="hh:mm" hourFormat="SYNC_TO_DEVICE" align="CENTER">
+                <Font family="SYNC_TO_DEVICE" size="94" weight="NORMAL" color="[CONFIGURATION.text_color.0]" />
+            </TimeText>
+            <Variant mode="AMBIENT" target="alpha" value="175" />
+        </DigitalClock>
+
+        <PartText x="75" y="272" width="300" height="36" alpha="225">
+            <Variant mode="AMBIENT" target="alpha" value="120" />
+            <Text align="CENTER" ellipsis="TRUE">
+                <Font family="SYNC_TO_DEVICE" size="20" weight="NORMAL" color="[CONFIGURATION.text_color.1]">
+                    <Template><![CDATA[%s, %s %d]]>
+                        <Parameter expression="[DAY_OF_WEEK_S]" />
+                        <Parameter expression="[MONTH_S]" />
+                        <Parameter expression="[DAY]" />
+                    </Template>
+                </Font>
+            </Text>
+        </PartText>
+    </Scene>
+</WatchFace>
